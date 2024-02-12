@@ -1,0 +1,134 @@
+.main-blog-product-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+.all-blog-product-container{
+  width: 70%;
+  display: flex;
+}
+
+.blog-image-product img{
+ height: 400px;
+ width: 400px; 
+ background-color: white;
+ padding: 2.5rem;
+ box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.blog-text-info-product{
+  margin-left: 1.8rem;
+}
+.blog-firstTitle{
+  font-size: 40px;
+}
+.blog-secondTitle{
+  font-size: 22px;
+  color: #2596be;
+  font-weight: 600;
+  margin: .2rem;
+  margin-top: .5rem;
+}
+#blog-rating-star{
+  margin-top: .7rem;
+}
+.blog-price-p{
+  font-size: 32px;
+  margin-top: .5rem;
+}
+.blog-super-tag{
+  color: gray;
+  font-size: 13px;
+}
+.blog-desc-paragraph{
+  margin-top: .5rem;
+}
+.blog-quantity-div{
+  display: flex;
+  margin-top: 1.5rem;
+}
+.blog-quantity-div p{
+  font-size: 20px;
+}
+.blog-quantity-div button{
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+#blog-minus_btn{
+  margin-left: 1rem;
+  padding: .3rem 1rem;
+  background: none;
+  outline: none;
+  border-right: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  font-size: 20px;
+}
+
+#blog-count_btn{
+  padding: .3rem 1rem;
+  background: none;
+  outline: none;
+  border-right: none;
+  border-left: none;
+  background-color: rgb(209, 214, 216);
+  font-size: 18px;
+}
+#blog-plus_btn{
+  padding: .3rem 1rem;
+  background: none;
+  outline: none;
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-size: 18px;
+}
+.blog-add-tocart-and-buy-now-btns{
+  margin-top: 2rem;
+}
+
+#blog-buy-now_btn{
+  padding: .8rem 2.4rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: #2596be;
+  color: white;
+  font-family: "Poppins";
+  cursor: pointer;
+}
+
+#blog-add-tocart_btn{
+  padding: .8rem 2.4rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  margin-left: 1rem;
+  font-family: "Poppins";
+  cursor: pointer;
+}
+#blog-buy-now_btn:hover{
+  padding: .8rem 2.4rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: #4d9dbd;
+  color: white;
+  font-family: "Poppins";
+  cursor: pointer;
+}
+
+#blog-add-tocart_btn:hover{
+  padding: .8rem 2.4rem;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: rgb(51, 50, 50);
+  color: white;
+  margin-left: 1rem;
+  font-family: "Poppins";
+  cursor: pointer;
+}

@@ -1,0 +1,96 @@
+.topproducts-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    width: 90%;
+    margin-left: 3rem;
+    }
+    
+    .mainGrid{
+        justify-content: center;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .albox{
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 1rem;
+        
+    }
+    .albox img{
+        height: 250px;  
+        cursor: pointer;
+    }
+    .mainHeadingDiv{
+        display: flex;
+        justify-content: center;
+        margin-top: 6rem;
+    
+    }
+    .headingD h1{
+        font-size: 20px;
+        font-family: "Poppins";
+        color: #ffbe4a;
+    }
+    .headingD{
+        width: 87%;
+    }
+    .overlay{
+        position: absolute;
+        height: 0%;
+        bottom: 0%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        transition: all 1s ease-in-out;
+    }
+    .albox:hover .overlay{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        bottom: 0%;
+        background-color: rgba(0, 0, 0, 0.7);
+        transition: all 1s ease-in-out;
+        border-radius: 4px;
+    }
+    .albox:hover .overlay-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 6rem;
+        font-family: "Poppins";
+        color: white;
+        font-size: 16px;
+    }
+    
+    .overlay-info {
+        display: none;
+    }
+    .overlay-info p{
+        font-family: "Poppins";
+        color: white;
+        font-size: 16px;
+        margin-bottom: .5rem;
+        
+    }
+    .overlay-info button{
+        font-family: "Poppins";
+        padding: .5rem 2rem;
+        outline: none;
+        border: none;
+        background-color: #ffbe4a;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .overlay-info button:hover{
+        font-family: "Poppins";
+        padding: .5rem 2rem;
+        outline: none;
+        border: none;
+        background-color: #ffa203;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    

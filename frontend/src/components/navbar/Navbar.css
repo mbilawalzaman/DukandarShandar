@@ -1,0 +1,55 @@
+.navbar {
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo{
+    margin-top: 0.5rem;
+}
+.logo img{
+    height: 60px;
+}
+.links a{
+    font-family: "Poppins";
+    text-decoration: none;
+    margin-left: 1rem;
+}
+a:hover {
+    color: #ffbe4a;
+    transition: all .5s ease-in-out;
+}
+.icons{
+    cursor: pointer;
+}
+.icons sup{
+    position: absolute;
+    background-color: #ffbe4a;
+    color: #fff;
+    font-family: "Poppins";
+    padding: 0rem .3rem;
+    border-radius: 50%;
+    font-size: 11px;
+    right: 35%
+}
+
+.authBtns button{
+    padding: .5rem 1rem;
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    background-color: #febe4c;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+.authBtns :hover{
+    background-color: #f99f04;
+    color: white;
+    transition: all .1s ease-in-out;
+    margin-left: 1rem;
+    border-radius: 6px;
+
+}

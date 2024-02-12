@@ -1,0 +1,23 @@
+.mainherosection-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+.herosection{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;   
+}
+.iconAndHeading{
+    display: flex;
+}
+.iconAndHeading h2{
+    font-family: "Poppins";
+    font-size: 17px;
+    line-height: 32px;
+    margin-left: .5rem;
+}
+.box-1 p, .box-2 p, .box-3 p, .box-4 p{
+    font-family: "Poppins";
+    font-size: 13px;
+}

@@ -1,0 +1,52 @@
+
+.about-hero-txt h1{
+    font-family: 'Poppins';
+    color: #58575c;
+}
+.about-hero-sec-container{
+    display: flex;
+    justify-content: center;
+    margin: 8rem 0rem 4rem 0rem;
+
+}
+.about-hero-sec{
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.about-hero-txt {
+    font-family: 'Poppins';
+    width: 40%;
+
+}
+
+.about-hero-txt p {
+    font-family: 'Poppins';
+    font-size: 16px;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+    color: rgb(39, 39, 39);
+    margin-bottom: .5rem;
+
+}
+
+.about-hero-img img{
+    height: 500px;
+    width: 750px;
+    border-radius: 6px;
+    margin-right: 2rem; 
+}
+
+.about-hero-txt button{
+    padding: .7rem 3rem;
+    font-family: "Poppins";
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: .5rem;
+}
