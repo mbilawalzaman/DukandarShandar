@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./cartSection.css";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { removeCartItem } from '../../features/cartSlice';
 
 const CartSection = () => {
   const cart = useSelector((state) => state.cart.cartData)
   const cart_price = useSelector((state) => state.cart.cartTotalPrice)
+  const cart_total_price = useSelector((state) => state.cart.cartTotal)
   const cart_quantity = useSelector((state) => state.cart.quantity)
-  const [prices, setPrices] =useState([]);
+
   const navigate = useNavigate();
   const continueShopping =() => { navigate("/")}
+  const dispatch = useDispatch();
 
   const totalAmount = () => {
    let my__tp = cart_price.length > 0 ? cart_price.reduce((accum , curVal) => {
       return accum + curVal
     }) : ""
-    setPrices(my__tp)
+  }
+
+  const deleteCartItem = (index) => {
+    dispatch(removeCartItem(index))
   }
   
   useEffect (()=> {
@@ -37,7 +43,7 @@ const CartSection = () => {
         </div>
       </div>
       {
-          cart.map((ele) => 
+          cart.map((ele, index) => 
           {
             return (
               <>
@@ -56,7 +62,8 @@ const CartSection = () => {
             <button id="cart-plus_btn">+</button>
         </div>
         <div className='cart-data-fourth-div'>
-        <button><DeleteIcon sx={{color:"#df4223"}}/></button>
+        <DeleteIcon sx={{color:"#df4223"}}
+        onClick={() => deleteCartItem(index)}/>
         </div>
         </div>
         </div>
@@ -66,7 +73,7 @@ const CartSection = () => {
           )
         }  
         <div className='cart-price-container'>
-          <div className='cartPrice'> <p>Total Price: <span className='cart-price-total'>PKR{prices}.00</span></p> </div>
+          <div className='cartPrice'> <p>Total Price: <span className='cart-price-total'>PKR{cart_total_price}.00</span></p> </div>
           <button> CheckOut </button>
         </div>
          

@@ -14,6 +14,7 @@ import Admin from './admin/admin';
 import SingleProduct from './pages/single/singleProduct';
 import AllBlogProducts from './pages/allblogprodutcs/allBlogProducts';
 import AllProduct from './pages/allprodutcs/allprodutcs';
+import MainCheckout from './pages/mainCheckout/mainCheckout';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/shop' element={<Shop/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/checkout' elemant={<MainCheckout/>}/>
         <Route path='/singleproduct/:id' element={<SingleProduct/>}/>
         <Route path='/allproduct/:id' element={<AllProduct/>}/>
         <Route path='/blogproduct/:id' element={<AllBlogProducts/>}/>

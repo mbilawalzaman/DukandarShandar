@@ -3,7 +3,7 @@ import {useDispatch } from 'react-redux'
 import "./singleP.css"
 import Rating from '@mui/material/Rating';
 import { useNavigate, useParams } from 'react-router-dom';
-import { add_To_CART , cart_total_price, qtt} from '../../features/cartSlice';
+import { add_To_CART , cart_total_price, qtt , cartTotal} from '../../features/cartSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,8 +15,8 @@ const SingleP = () => {
   const  [quantity , setQuantity] = useState (1)
   
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-const navigate = useNavigate()
 
 const params = useParams();
 
@@ -37,6 +37,7 @@ const addtocart = (image , title, price) => {
   dispatch(add_To_CART(cData))
   dispatch(cart_total_price(cData.price))
   dispatch(qtt(quantity))
+  dispatch(cartTotal(cData.price*quantity))
   toast.success("Product added to Cart!")
   navigate("/cart")
 }
