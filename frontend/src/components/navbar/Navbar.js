@@ -3,8 +3,12 @@ import "./Navbar.css"
 import logo from "../../assets/logo.jpg"
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+
+  const cart = useSelector((state) => state.cart.cartData)
+
   return (
     <>
       <div className='navbarContainer'>
@@ -20,7 +24,7 @@ const Navbar = () => {
             <Link to='/contact'>Contact</Link>
         </div>
         <div className='icons'>
-        <sup>2</sup>
+        <sup>{cart.length}</sup>
           <Link to='/cart'><ShoppingBagOutlinedIcon sx={{fontSize:"28px"}}/></Link>
         </div>
 
