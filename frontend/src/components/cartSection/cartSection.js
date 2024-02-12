@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./cartSection.css";
 import { useSelector } from 'react-redux';
@@ -6,14 +6,22 @@ import { useNavigate } from 'react-router-dom';
 
 const CartSection = () => {
   const cart = useSelector((state) => state.cart.cartData)
+  const cart_price = useSelector((state) => state.cart.cartTotalPrice)
+  const [prices, setPrices] =useState([]);
   const navigate = useNavigate();
+  const continueShopping =() => { navigate("/")}
 
-  const continueShopping =() => {
-
-    navigate("/")
-
+  const totalAmount = () => {
+   let my__tp = cart_price.length > 0 ? cart_price.reduce((accum , curVal) => {
+      return accum + curVal
+    }) : ""
+    setPrices(my__tp)
   }
   
+  useEffect (()=> {
+    totalAmount()
+  })
+
   return (
     <>
     {
@@ -55,7 +63,12 @@ const CartSection = () => {
             )
           }
           )
-        }    
+        }  
+        <div className='cart-price-container'>
+          <div className='cartPrice'> <p>Total Price: <span className='cart-price-total'>PKR{prices}.00</span></p> </div>
+          <button> CheckOut </button>
+        </div>
+         
     </div> : <div className='empty-cart'> <h1> Your Cart in Empty </h1>
     <div className='continue-shoping'><button onClick={continueShopping}> Continue Shoping </button></div>
     </div>

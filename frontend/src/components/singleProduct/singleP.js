@@ -3,7 +3,9 @@ import {useDispatch } from 'react-redux'
 import "./singleP.css"
 import Rating from '@mui/material/Rating';
 import { useNavigate, useParams } from 'react-router-dom';
-import { add_To_CART } from '../../features/cartSlice';
+import { add_To_CART , cart_total_price} from '../../features/cartSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -31,8 +33,9 @@ const getProductD = async () => {
 
 const addtocart = (image , title, price) => {
   let cData = {image: image, title:title, price :price}
-  dispatch(add_To_CART(cData)) 
-  alert("Product added to Cart!")
+  dispatch(add_To_CART(cData))
+  dispatch(cart_total_price(cData.price))
+  toast.success("Product added to Cart!")
   navigate("/cart")
 }
 

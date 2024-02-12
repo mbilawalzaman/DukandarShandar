@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 // import imageToBase64 from 'image-to-base64/browser';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import("./addProduct.css");
 
 const AddProduct = () => {
@@ -98,7 +100,7 @@ const AddProduct = () => {
       const responseData = await res.text(); // Read the response only once as text
 
       if (res.ok) {
-        alert("Data Successfully Added");
+        toast.success("Data Successfully Added");
         setAddProductData({
           title: "",
           description: "",
@@ -107,12 +109,12 @@ const AddProduct = () => {
         });
         console.log(responseData); // Log the response data
       } else {
-        alert("Failed to add data. Please check console for details.");
+        toast.error("Failed to add data. Please check console for details.");
         console.error(responseData); // Log the error response data
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("An error occurred. Please check the console for details.");
+      toast.error("An error occurred. Please check the console for details.");
     }
   };
   const addallProduct = async (event) => {
@@ -136,7 +138,7 @@ const AddProduct = () => {
       const responseallData = await response.text(); // Read the response only once as text
 
       if (response.ok) {
-        alert("Data Successfully Added");
+        toast.success("Data Successfully Added");
         setAllAddProductData({
           alltitle: "",
           alldescription: "",
@@ -145,12 +147,12 @@ const AddProduct = () => {
         });
         console.log(responseallData); // Log the response data
       } else {
-        alert("Failed to add data. Please check console for details.");
+        toast.error("Failed to add data. Please check console for details.");
         console.error("Error",responseallData); // Log the error response data
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("An error occurred. Please check the console for details.");
+      toast.error("An error occurred. Please check the console for details.");
     }
   };
 
@@ -175,7 +177,7 @@ const AddProduct = () => {
       const responseBlogData = await blogRes.text(); 
 
       if (blogRes.ok) {
-        alert("Data Successfully Added");
+        toast.success("Data Successfully Added");
         setAddBlogProductData({
           blogTitle: "",
           blogDescription: "",
@@ -184,12 +186,12 @@ const AddProduct = () => {
         });
         console.log("Data==>",responseBlogData);
       } else {
-        alert("Failed to add data. Please check console for details.");
+        toast.error("Failed to add data. Please check console for details.");
         console.error("Error",responseBlogData); 
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("An error occurred. Please check the console for details.");
+      toast.error("An error occurred. Please check the console for details.");
     }
   };
 

@@ -116,3 +116,36 @@ font-weight: bold;
   .image-inside-title{
     margin-left: 1rem;
   }
+
+
+  .cart-price-container{
+    display: flex;
+    justify-content: center;
+  }
+
+  .cartPrice{
+    width: 78%;
+    margin: 1rem 0rem 1rem 0rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart-price-total{
+    color: #2596be;
+  }
+
+  .cartPrice p{
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .cartPrice button{
+    padding: 0.4rem 1rem;
+    border: none;
+    outline: none;
+    background-color: #2596be;
+    color: black;
+    font-weight: bold;
+    font-family: "Poppins";
+    border-radius: 3px;
+  }
