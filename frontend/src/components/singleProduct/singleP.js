@@ -3,7 +3,7 @@ import {useDispatch } from 'react-redux'
 import "./singleP.css"
 import Rating from '@mui/material/Rating';
 import { useNavigate, useParams } from 'react-router-dom';
-import { add_To_CART , cart_total_price} from '../../features/cartSlice';
+import { add_To_CART , cart_total_price, qtt} from '../../features/cartSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -36,6 +36,7 @@ const addtocart = (image , title, price) => {
   let cData = {image: image, title:title, price :price}
   dispatch(add_To_CART(cData))
   dispatch(cart_total_price(cData.price))
+  dispatch(qtt(quantity))
   toast.success("Product added to Cart!")
   navigate("/cart")
 }
@@ -46,7 +47,7 @@ const increment = () => {
 
 const decrement = () => {
   setQuantity(quantity-1)
-  if (quantity == 1) {
+  if (quantity === 1) {
     setQuantity(1)
     toast.error("Product Quantity can not be less than One")
   }

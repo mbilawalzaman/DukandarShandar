@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const CartSection = () => {
   const cart = useSelector((state) => state.cart.cartData)
   const cart_price = useSelector((state) => state.cart.cartTotalPrice)
+  const cart_quantity = useSelector((state) => state.cart.quantity)
   const [prices, setPrices] =useState([]);
   const navigate = useNavigate();
   const continueShopping =() => { navigate("/")}
@@ -51,7 +52,7 @@ const CartSection = () => {
         </div>
         <div className='cart-data-third-div'>
         <button id="cart-minus_btn">-</button>
-            <button id="cart-count_btn">0</button>
+            <button id="cart-count_btn">{cart_quantity}</button>
             <button id="cart-plus_btn">+</button>
         </div>
         <div className='cart-data-fourth-div'>
