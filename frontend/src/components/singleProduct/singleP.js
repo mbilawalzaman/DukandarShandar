@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const SingleP = () => {
   const [value, setValue] = React.useState(4);
   const [singleData, setSingleData] = useState({})
+  const  [quantity , setQuantity] = useState (1)
   
   const dispatch = useDispatch()
 
@@ -39,6 +40,18 @@ const addtocart = (image , title, price) => {
   navigate("/cart")
 }
 
+const increment = () => {
+  setQuantity(quantity+1)
+}
+
+const decrement = () => {
+  setQuantity(quantity-1)
+  if (quantity == 1) {
+    setQuantity(1)
+    toast.error("Product Quantity can not be less than One")
+  }
+}
+
 
 useEffect(() => {
   getProductD();
@@ -59,9 +72,9 @@ useEffect(() => {
           <p className='desc-paragraph'>{singleData.description} Cute MINI Unicorn School Bag for girls playgroup PICNIC BAG creative character designed backpack | Cute stationary items for girls</p>
           <div className='quantity-div'>
             <p>Quantity: </p>
-            <button id="minus_btn">-</button>
-            <button id="count_btn">1</button>
-            <button id="plus_btn">+</button>
+            <button id="minus_btn"onClick={decrement}>-</button>
+            <button id="count_btn">{quantity}</button>
+            <button id="plus_btn" onClick={increment}>+</button>
           </div>
           <div className='add-tocart-and-buy-now-btns'>
             <button id="buy-now_btn" >BUY NOW</button>
