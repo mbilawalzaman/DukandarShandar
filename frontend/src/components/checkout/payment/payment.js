@@ -4,6 +4,9 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import CheckOutNavbar from '../check/checkoutNavbar/checkOutNavbar';
+import { Container, Paper } from '@mui/material';
+import "./payment.css"
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -47,6 +50,17 @@ const Payment = () => {
 
   return (
     <>
+    <CheckOutNavbar/>
+
+    <Container component="main" maxWidth="sm" sx={{ mb: 4}}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 5 }, p: { xs: 2, md: 3 }, paddingTop: "1rem", border: "none", backgroundColor: "#edf1f4", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
+          <Typography component="h1" variant="h4" align="center" sx={{fontFamily:"Poppins", fontWeight: "bold"}}>
+            Payment Details
+          </Typography>
+        </Paper>
+      </Container>
+      <div className='payment-container'>
+        <div className='payment-details'>
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Payment method
@@ -111,8 +125,10 @@ const Payment = () => {
         </Grid>
       </Grid>
     </React.Fragment>
-    <button onClick={backToSaddress}>BACK</button>
-    <button onClick={gotToPlaceOrder}>NEXT</button>
+    <button onClick={backToSaddress} className='back-btn'>BACK</button>
+    <button onClick={gotToPlaceOrder} className='next-btn'>NEXT</button>
+    </div>
+    </div>
     </>
   )
 }

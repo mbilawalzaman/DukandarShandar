@@ -1,20 +1,13 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Review from '../review/review';
-import Payment from '../payment/payment';
-import SAddress from '../saddress/sAddress';
-import DSLogo from "../../../assets/logo.jpg"
+
 import "./check.css"
+import CheckOutNavbar from './checkoutNavbar/checkOutNavbar';
 
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -33,36 +26,22 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 // }
 
 export default function Check() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  // const [activeStep, setActiveStep] = React.useState(0);
 
-  const  handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
+  // const  handleNext = () => {
+  //   setActiveStep(activeStep + 1);
+  // };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep(activeStep - 1);
+  // };
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
-        <Toolbar sx={{backgroundColor: "#edf1f4"}}>
-          <Typography variant="h6" color="inherit" noWrap className='mainCheckoutNav'>
-           <img src={DSLogo} alt="" className='checkout-logo'/>
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 5 }, p: { xs: 2, md: 3 } }}>
+      <CheckOutNavbar/>
+      <Container component="main" maxWidth="sm" sx={{ mb: 4}}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 5 }, p: { xs: 2, md: 3 }, paddingTop: "1rem", border: "none", backgroundColor: "#edf1f4", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
           <Typography component="h1" variant="h4" align="center" sx={{fontFamily:"Poppins", fontWeight: "bold"}}>
             Checkout
           </Typography>

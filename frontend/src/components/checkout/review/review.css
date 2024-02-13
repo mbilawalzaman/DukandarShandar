@@ -1,0 +1,13 @@
+.review-container{
+    display: flex;
+    justify-content: center;
+
+}
+
+.review-details{
+    width: 34%;
+    padding: 2rem 1rem;
+    margin-top: -2.5rem;
+    background-color: "#edf1f4";
+    box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+}

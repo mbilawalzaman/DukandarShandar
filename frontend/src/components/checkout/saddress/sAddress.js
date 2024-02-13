@@ -7,6 +7,7 @@ import { checkOutShippingData } from '../../../features/checkoutSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import "./sAddress.css"
 
 
 const SAddress = () => {
@@ -52,6 +53,8 @@ const SAddress = () => {
   },[])
   return (
     <>
+    <div className='sAddress-main-container'>
+    <div className='sAddress-div'>
       <Typography variant="h6" gutterBottom sx={{fontFamily:"Poppins", fontWeight: "bold"}}>
         Shipping address
       </Typography>
@@ -155,7 +158,9 @@ const SAddress = () => {
         <Grid item xs={12}>
         </Grid>
       </Grid>
-      <button onClick={moveToNext}>NEXT</button>
+      <button onClick={moveToNext} className='moveToNext'>NEXT</button>
+      </div>
+      </div>
     </>
   )
 }
