@@ -1,10 +1,10 @@
-.review-container{
+.place-order-main-container{
     display: flex;
     justify-content: center;
 
 }
 
-.review-details{
+.place-order-details{
     width: 34%;
     padding: 2rem 1rem;
     margin-top: -2.5rem;
@@ -12,14 +12,24 @@
     box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
 }
 
-.order-btn{
+.place-order-details h3{
+    font-family: "Poppins";
+}
+
+.backtoHome-btn-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+
+}
+
+.back-to-home-btn{
     background-color: #18355e;
-    padding: 0.5 0.25rem;
+    padding: 0.5 14.25rem;
     border: none;
     outline: none;
     border-radius: 3px;
     color: white;
     font-family: "Poppins";
-    margin-top: 1rem;
     cursor: pointer;
 }

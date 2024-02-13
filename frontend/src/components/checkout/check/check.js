@@ -1,16 +1,13 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
 import "./check.css"
 import CheckOutNavbar from './checkoutNavbar/checkOutNavbar';
 
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+// const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 // function getStepContent(step) {
 //   switch (step) {

@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { checkOutShippingData } from '../../../features/checkoutSlice';
+import { NameAndAddressfunction, checkOutShippingData } from '../../../features/checkoutSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -34,12 +34,15 @@ const SAddress = () => {
 
   }
 
+
+
   const moveToNext = () => {
     const {firstName, lastName, address, city, state, zip, country} = inputValues
 
     if(firstName && lastName && address && city && state && zip && country){
     toast.success("Go to payment details")
     navigate("/checkout/paymentdetails")
+    dispatch(NameAndAddressfunction({firstName : firstName, lastName: lastName, address: address}))
     }else{
       toast.error("PLease fill all details")
   }
