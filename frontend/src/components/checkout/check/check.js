@@ -19,23 +19,23 @@ import "./check.css"
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <SAddress />;
-    case 1:
-      return <Payment />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return <SAddress />;
+//     case 1:
+//       return <Payment />;
+//     case 2:
+//       return <Review />;
+//     default:
+//       throw new Error('Unknown step');
+//   }
+// }
 
 export default function Check() {
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const handleNext = () => {
+  const  handleNext = () => {
     setActiveStep(activeStep + 1);
   };
 
@@ -62,11 +62,11 @@ export default function Check() {
         </Toolbar>
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 5 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center" sx={{fontFamily:"Poppins", fontWeight: "bold"}}>
             Checkout
           </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+          {/* <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel sx={{fontFamily:"Poppins", fontWeight: "bold"}}>{label}</StepLabel>
@@ -103,7 +103,7 @@ export default function Check() {
                 </Button>
               </Box>
             </React.Fragment>
-          )}
+          )} */}
         </Paper>
       </Container>
     </React.Fragment>

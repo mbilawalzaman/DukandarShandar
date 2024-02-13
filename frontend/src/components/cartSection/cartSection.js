@@ -24,6 +24,10 @@ const CartSection = () => {
   const deleteCartItem = (index) => {
     dispatch(removeCartItem(index))
   }
+
+  const navigateTocheckout = () => {
+    navigate("/checkout")
+  }
   
   useEffect (()=> {
     totalAmount()
@@ -73,8 +77,9 @@ const CartSection = () => {
           )
         }  
         <div className='cart-price-container'>
-          <div className='cartPrice'> <p>Total Price: <span className='cart-price-total'>PKR{cart_total_price}.00</span></p> </div>
-          <button> CheckOut </button>
+          <div className='cartPrice'> <p>Total Price: <span className='cart-price-total'>PKR{cart_total_price}.00</span></p> 
+          <button onClick={navigateTocheckout}> CheckOut </button>
+          </div>
         </div>
          
     </div> : <div className='empty-cart'> <h1> Your Cart in Empty </h1>

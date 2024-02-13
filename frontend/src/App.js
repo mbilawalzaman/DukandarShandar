@@ -15,6 +15,9 @@ import SingleProduct from './pages/single/singleProduct';
 import AllBlogProducts from './pages/allblogprodutcs/allBlogProducts';
 import AllProduct from './pages/allprodutcs/allprodutcs';
 import MainCheckout from './pages/mainCheckout/mainCheckout';
+import Payment from './components/checkout/payment/payment';
+import Review from './components/checkout/review/review';
+import PlaceOrder from './components/checkout/placeOrder/placeOrder';
 
 const App = () => {
   return (
@@ -26,7 +29,10 @@ const App = () => {
         <Route path='/shop' element={<Shop/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/cart' element={<Cart/>}/>
-        <Route path='/checkout' elemant={<MainCheckout/>}/>
+        <Route path='/checkout' element={<MainCheckout/>}/>
+        <Route path='/checkout/paymentdetails' element={<Payment/>}/>
+        <Route path='/checkout/revieworder' element={<Review/>}/>
+        <Route path='/checkout/placeorder' element={<PlaceOrder/>}/>
         <Route path='/singleproduct/:id' element={<SingleProduct/>}/>
         <Route path='/allproduct/:id' element={<AllProduct/>}/>
         <Route path='/blogproduct/:id' element={<AllBlogProducts/>}/>

@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
       state.cartTotalPrice.push(action.payload)
   },
   qtt : (state , action) => {
-    state.quantity.push(action.payload)
+    state.quantity = (action.payload)
 },
   removeCartItem : (state , action) => {
     state.cartData.splice(action.payload ,1)

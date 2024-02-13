@@ -1,43 +1,32 @@
-import * as React from 'react';
+import  React ,{useEffect, useState} from 'react';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const products = [
-  {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
-  },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
-  },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
+
+
 
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
+
 
 export default function Review() {
+  
+const navigate = useNavigate()
+const [products, setProduts] = useState([])
+const cart = useSelector((state) => state.cart.cartData)
+const shippingOwner = useSelector((state)=>state.checkout.checkOutShippingData)
+
+const placeOrder = () => {
+  navigate("/checkout/placeorder")
+}
+
+useEffect (()=>{
+  setProduts(cart)
+},[])
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -70,19 +59,24 @@ export default function Review() {
             Payment details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
+            {products.map((payment) => (
+              <React.Fragment key={payment.title}>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
+                  <Typography gutterBottom sx={{fontSize:"13px", fontFamily: "Poppins"}}>PKR{payment.price}.00</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
+                  <Typography gutterBottom sx={{fontSize:"13px", fontFamily: "Poppins"}}>{payment.title}</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                 <img src={payment.image} alt="" style={{height:"30px"}}/>
                 </Grid>
               </React.Fragment>
             ))}
           </Grid>
         </Grid>
       </Grid>
+      <button onClick={placeOrder}>PLACE ORDER</button>
     </React.Fragment>
+
   );
 }
