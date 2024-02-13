@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   checkOutShippingData:[],
-  checkOutNameAndAddress:[]
+  checkOutNameAndAddress:[],
+  orderId:""
 }
 
 export const checkoutSlice = createSlice({
@@ -14,11 +15,14 @@ export const checkoutSlice = createSlice({
     },
     NameAndAddressfunction : (state , action) => {
       state.checkOutNameAndAddress.push(action.payload)
-  }
+  },
+  order_Id : (state , action) => {
+    state.orderId = action.payload
+}
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { checkOutShippingData, NameAndAddressfunction } = checkoutSlice.actions
+export const { checkOutShippingData, NameAndAddressfunction, order_Id } = checkoutSlice.actions
 
 export default checkoutSlice.reducer

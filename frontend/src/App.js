@@ -18,6 +18,7 @@ import MainCheckout from './pages/mainCheckout/mainCheckout';
 import Payment from './components/checkout/payment/payment';
 import Review from './components/checkout/review/review';
 import PlaceOrder from './components/checkout/placeOrder/placeOrder';
+import Orders from './pages/orders/orders';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Route path='/checkout/paymentdetails' element={<Payment/>}/>
         <Route path='/checkout/revieworder' element={<Review/>}/>
         <Route path='/checkout/placeorder' element={<PlaceOrder/>}/>
+        <Route path='/orders' element={<Orders/>}/>
         <Route path='/singleproduct/:id' element={<SingleProduct/>}/>
         <Route path='/allproduct/:id' element={<AllProduct/>}/>
         <Route path='/blogproduct/:id' element={<AllBlogProducts/>}/>

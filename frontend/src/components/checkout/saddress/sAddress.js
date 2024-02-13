@@ -24,6 +24,7 @@ const SAddress = () => {
     state:"",
     zip:Number,
     country:"",
+    number:Number
   })
 
   let name , value
@@ -37,23 +38,21 @@ const SAddress = () => {
 
 
   const moveToNext = () => {
-    const {firstName, lastName, address, city, state, zip, country} = inputValues
+    const {firstName, lastName, address, city, state, zip, country , number} = inputValues
 
-    if(firstName && lastName && address && city && state && zip && country){
+    if(firstName && lastName && address && city && state && zip && country && number){
     toast.success("Go to payment details")
     navigate("/checkout/paymentdetails")
-    dispatch(NameAndAddressfunction({firstName : firstName, lastName: lastName, address: address}))
+    dispatch(NameAndAddressfunction({firstName : firstName, lastName: lastName, address: address , number: number}))
     }else{
       toast.error("PLease fill all details")
   }
   }
 
-  
-
-  useEffect(() =>{
-    const {firstName, lastName, address} = inputValues
-    dispatch(checkOutShippingData(firstName, lastName, address))
-  },[])
+  // useEffect(() =>{
+  //   const {firstName, lastName, address} = inputValues
+  //   dispatch(checkOutShippingData(firstName, lastName, address))
+  // },[])
   return (
     <>
     <div className='sAddress-main-container'>
@@ -68,6 +67,7 @@ const SAddress = () => {
             id="firstName"
             name="firstName"
             label="First name"
+            type='string'
             value={inputValues.firstName}
             fullWidth
             autoComplete="given-name"
@@ -158,9 +158,23 @@ const SAddress = () => {
             onChange={handleChange}
           />
         </Grid>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="number"
+            name="number"
+            label="Number"
+            value={inputValues.country}
+            fullWidth
+            autoComplete="shipping country"
+            variant="standard"
+            sx={{fontFamily:"Poppins"}}
+            onChange={handleChange}
+          />
+        </Grid>
         <Grid item xs={12}>
         </Grid>
-      </Grid>
       <button onClick={moveToNext} className='moveToNext'>NEXT</button>
       </div>
       </div>
