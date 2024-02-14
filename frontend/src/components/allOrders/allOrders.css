@@ -1,7 +1,7 @@
 .orders-main-div{
+    background-color: #edf1f4;
     height: 100vh;
     width: 100vw;
-    background-color: #edf1f4;
 }
 
 .order-main-box{
@@ -17,21 +17,19 @@
 height: 90vh;
 width: 80vw;
 background-color: white;
-box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+border-radius: 4px;
 }
 
-.order-header-main{
-
-}
 
 .order-header{
     height: 45px;
     width: 100%;
     background-color: #edf1f4;
-    box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 .orderId{
@@ -42,19 +40,19 @@ box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
     margin-right: 0.5rem;
 }
 
-.orderId p, .orderStatus p, .orderQty p .orderAmount p{
+.orderId p, .orderStatus p, .orderQty p, .orderAmount p{
     font-size: 17px;
     font-weight: bold;
     font-family: "Poppins";   
 }
 
-.all-orders-main{
+.all-Order-Main{
     display: flex;
     justify-content: space-between;
     margin-top: 0.2rem;
     background-color: #f4f7f9;
     padding: 0.6rem 0rem;
-    cursor: "pointer" 
+    cursor: pointer 
 }
 
 .all-orderId{

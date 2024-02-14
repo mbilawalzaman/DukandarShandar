@@ -18,22 +18,22 @@ const AllOrders = () => {
 
   return (
     <div className='orders-main-div'>
-    <button onClick={back_home} className="all-orders_btn"> BACK </button>
-    <div className="order-main-box">
-      <div className="order-box"> 
-      <div className="order-header-main">
-      <div className="order-header">
+      <button onClick={back_home} className="all-orders_btn"> BACK </button>
+   <div className='order-main-box'>
+    <div className='order-box'>
+      <div className='order-header-main'>
+        <div className='order-header'>
         <div className="orderId"><p> Order Id</p> </div>
         <div className="orderStatus"> <p> Status </p> </div>
         <div className="orderQty"> <p> Quantity </p></div>
         <div className="orderAmount"> <p> Amount </p></div>
         </div>
-        </div>
-        <div className="all-orders-main">
-          {cart.length > 0 ? cart.map((ele)=>{
+      </div>
+      <div className='all-orders-main'>
+      {cart.length > 0 ? cart.map((ele)=>{
             return(
               <>
-              <div className="allOrdersMain">
+              <div className="all-Order-Main">
                <div className="all-orderId"><p> {orderid} </p> </div>
                <div className="all-orderStatus"> <p> Processing </p> </div>
                <div className="all-orderQty"> <p> {cart_quantity} </p></div>
@@ -43,10 +43,11 @@ const AllOrders = () => {
             )
           }): <h1 style={{fontFamily:"Poppins", textAlign:"center", marginTop:"8rem"}}> No Orders Yet </h1>
           }
-        </div>
-        </div>
-        </div>
-       </div>
+
+      </div>
+    </div>
+   </div>
+    </div>
   )
 }
 
