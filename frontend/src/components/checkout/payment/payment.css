@@ -1,39 +1,37 @@
-.payment-container{
-    display: flex;
-    justify-content: center;
-
+.payment-container {
+  display: flex;
+  justify-content: center;
 }
 
-.payment-details{
-    width: 34%;
-    padding: 2rem 1rem;
-    margin-top: -2.5rem;
-    background-color: "#edf1f4";
-    box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+.payment-details {
+  width: 34%;
+  padding: 2rem 1rem;
+  margin-top: -2.5rem;
+  background-color: "#edf1f4";
+  box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
 }
 
-.back-btn{
-    background-color: #18355e;
-    padding: 0.5 0.25rem;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    color: white;
-    font-family: "Poppins";
-    margin-top: 1rem;
-    cursor: pointer;
-
+.back-btn {
+  background-color: #18355e;
+  padding: 0.5rem 0.25rem;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  color: white;
+  font-family: "Poppins";
+  margin-top: 1rem;
+  cursor: pointer;
 }
 
-.next-btn{
-    background-color: #18355e;
-    padding: 0.5 0.25rem;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    color: white;
-    font-family: "Poppins";
-    margin-top: 1rem;
-    cursor: pointer;
-    margin-left: 0.5rem;
+.next-btn {
+  background-color: #18355e;
+  padding: 0.5rem 0.25rem;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  color: white;
+  font-family: "Poppins";
+  margin-top: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
 }

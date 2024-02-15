@@ -4,12 +4,10 @@ import Loader from "../loader/loader";
 import { useNavigate } from "react-router-dom";
 
 const ShopComponent = () => {
-
   const [blogProductData, setBlogProductData] = useState([]);
+  const [searchInputValue, setSearchInputValue] = useState("");
   const [loading, setloading] = useState(true);
   const navigate = useNavigate();
-
-
 
   const getBlogData = async () => {
     const res = await fetch("http://localhost:4000/getBlogProducts", {
@@ -24,18 +22,18 @@ const ShopComponent = () => {
       setloading(false);
     }
   };
-
-  const getBlogProductsById = async (id) => {
-    console.log(id);
-    navigate(`/blogProduct/${id}`);
-  };
+  //filter Products
+  const filteredData = blogProductData.filter((items) => {
+    return items.blogTitle
+      .toLowerCase()
+      .includes(searchInputValue.toLowerCase());
+  });
 
   useEffect(() => {
     getBlogData();
   }, []);
 
-  useEffect(() => {
-  }, [blogProductData]);
+  useEffect(() => {}, [blogProductData]);
 
   return (
     <>
@@ -46,18 +44,26 @@ const ShopComponent = () => {
           <div className="blog-product-maincontainer">
             <div className="blog-container">
               <div className="blog-filter-container">
-                <h2>Products Filters</h2>
-               
+                <h2>SEARCH FILTER</h2>
+                <div className="main-search-box">
+                  <div className="search-filter-container">
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      id="search"
+                      autoComplete="off"
+                      onChange={(e) => {
+                        setSearchInputValue(e.target.value); //searchInputValue;
+                      }}
+                    ></input>
+                  </div>
+                </div>
               </div>
               <div className="blog-product-container">
-                {blogProductData.map((products) => {
+                {filteredData.map((products) => {
                   return (
                     <div key={products.blogProductId}>
-                      <div
-                        className="blog-product-boxes"
-                        onClick={() =>
-                          getBlogProductsById(products.blogProductId)
-                        }>
+                      <div className="blog-product-boxes">
                         <img src={products.blogSelectedImage} alt="" />
                         <div className="blog-title">
                           <p>
