@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 const ShopComponent = () => {
 
- 
+  const [blogProductData, setBlogProductData] = useState([]);
   const [loading, setloading] = useState(true);
   const navigate = useNavigate();
-  const [blogProductData, setBlogProductData] = useState([])
 
 
 
@@ -36,8 +35,7 @@ const ShopComponent = () => {
   }, []);
 
   useEffect(() => {
-
-  }, []);
+  }, [blogProductData]);
 
   return (
     <>
@@ -48,52 +46,32 @@ const ShopComponent = () => {
           <div className="blog-product-maincontainer">
             <div className="blog-container">
               <div className="blog-filter-container">
-                <h2>Search Filters</h2>
-                <div className="productfilter-container">
-                  <label htmlFor="productfilter">Products Filter</label>
-                  <br />
-                  <br />
-                  <select name="productfilter" id="products">
-                    <option value="clock">Clock</option>
-                    <option value="pen">Pen</option>
-                    <option value="diary">Diary</option>
-                    <option value="bags">Bags</option>
-                  </select>
-                </div>
-                <div className="pricefilter-container">
-                  <label htmlFor="pricefilter">Price Filter:</label>
-                  <br />
-                  <select
-                    name="pricefilter"
-                    id="price"
-                    >
-                    
-                  </select>
-                </div>
+                <h2>Products Filters</h2>
+               
               </div>
               <div className="blog-product-container">
                 {blogProductData.map((products) => {
                   return (
-                    <div key={blogProductData.blogProductId}>
+                    <div key={products.blogProductId}>
                       <div
                         className="blog-product-boxes"
                         onClick={() =>
-                          getBlogProductsById(blogProductData.blogProductId)
+                          getBlogProductsById(products.blogProductId)
                         }>
-                        <img src={blogProductData.blogSelectedImage} alt="" />
+                        <img src={products.blogSelectedImage} alt="" />
                         <div className="blog-title">
                           <p>
-                            <b>Title: </b> {blogProductData.blogTitle}
+                            <b>Title: </b> {products.blogTitle}
                           </p>
                         </div>
                         <div className="blog-des">
                           <p>
-                            <b>Description: </b> {blogProductData.blogDescription}
+                            <b>Description: </b> {products.blogDescription}
                           </p>
                         </div>
                         <div className="blog-p">
                           <p>
-                            <b>Price: </b> {blogProductData.blogPrice}
+                            <b>Price: </b> {products.blogPrice}
                           </p>
                         </div>
                       </div>
