@@ -3,6 +3,7 @@ const Product = require("../Model/productModel");
 const allProduct = require("../Model/allProductModel");
 const router = express.Router();
 const blogProduct = require("../Model/addBlogProductModel");
+const contacForm = require("../Model/contactFormModel");
 
 //Create a Product routes
 
@@ -149,6 +150,32 @@ router.get("/getBlogProducts", async (req, res) => {
     } catch (error) {
       res.send(409).json({ message: "Unable to get single Products" });
       console.log("Error when getting single Products");
+    }
+  });
+
+  //Create Contact form
+
+  router.post("/contact", async (req, res) => {
+    try {
+      const { fullname, email, subject, message } = req.body;
+  
+      if (!fullname || !email || !subject || !message) {
+        return res.status(409).json({ message: "Please fill all fields" });
+      }
+  
+      const contactFormData = new contacForm({
+        fullname,
+        email,
+        subject,
+        message,
+      });
+      await contactFormData.save();
+      res.status(201).json({ message: "Message sent successfully" });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      res
+        .status(409)
+        .json({ message: "Error sending message", error: error.message });
     }
   });
 

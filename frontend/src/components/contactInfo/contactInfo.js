@@ -20,7 +20,7 @@ const ContactInfo = () => {
     setContactState({ ...contactState, [name]: value });
   };
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     const { fullname, email, subject, message } = contactState;
 
     if (!isValidEmail(email)) {
@@ -29,8 +29,20 @@ const ContactInfo = () => {
     }
 
     if (fullname && email && subject && message) {
-      toast.success("Message sent successfully");
-      setContactState({ fullname: "", email: "", subject: "", message: "" });
+      const response = await fetch("http://localhost:4000/contact", {
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fullname,
+          email,
+          subject, 
+          message
+        })
+      });
+      if (response){toast.success("Message sent successfully");
+      setContactState({ fullname: "", email: "", subject: "", message: "" });}
     } else {
       toast.error("Please fill all the fields");
     }
