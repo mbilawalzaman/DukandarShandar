@@ -5,6 +5,7 @@ const router = express.Router();
 const blogProduct = require("../Model/addBlogProductModel");
 const contacForm = require("../Model/contactFormModel");
 const createUser = require("../Model/createUserModel");
+const bcrypt = require("bcrypt");
 
 //Create a Product routes
 
@@ -183,19 +184,19 @@ router.post("/contact", async (req, res) => {
 
 router.post("/createUser", async (req, res) => {
   try {
-    const { firstName, lastName, email, pasword } = req.body;
-
+    const { firstName, lastName, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     if (!firstName || !lastName || !email || !password) {
       return res.status(409).json({ message: "Please fill all fields" });
     }
 
-    const addProductData = new Product({
+    const createUserData = new createUser({
       firstName,
       lastName,
       email,
-      password,
+      password: hashedPassword,
     });
-    await addProductData.save();
+    await createUserData.save();
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error creating new user:", error);
