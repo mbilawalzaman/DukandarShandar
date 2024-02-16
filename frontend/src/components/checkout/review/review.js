@@ -13,19 +13,16 @@ import { toast } from 'react-toastify';
 
 
 
-
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-
-
 export default function Review() {
   
 const navigate = useNavigate()
 const [products, setProduts] = useState([])
 const cart = useSelector((state) => state.cart.cartData)
-const shippingOwner = useSelector((state)=>state.checkout.checkOutShippingData)
 const nameAndAddress = useSelector((state)=>state.checkout.checkOutNameAndAddress)
-
 const cart_total_price = useSelector((state) => state.cart.cartTotal)
+// const shippingOwner = useSelector((state)=>state.checkout.checkOutShippingData)
+
+
 
 const placeOrder = () => {
   navigate("/checkout/placeorder")
@@ -37,6 +34,7 @@ useEffect (()=>{
 },[])
   return (
     <>
+    <CheckOutNavbar />
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"
@@ -61,7 +59,6 @@ useEffect (()=>{
       </Container>
       <div className="review-container">
         <div className="review-details">
-          <CheckOutNavbar />
           <React.Fragment>
             <Typography variant="h6" gutterBottom>
               Order summary
@@ -73,7 +70,7 @@ useEffect (()=>{
                     primary={product.name}
                     secondary={product.desc}
                   />
-                  <Typography variant="body2">{product.price}</Typography>
+                  <Typography variant="body2">PKR{product.price}.00</Typography>
                 </ListItem>
               ))}
               <ListItem sx={{ py: 1, px: 0 }}>
@@ -84,7 +81,7 @@ useEffect (()=>{
               </ListItem>
             </List>
             <Grid container spacing={2}>
-              {/* {nameAndAddress.map((ele) => {
+              {nameAndAddress.map((ele) => {
                 return (
                   <>
                     <Grid item xs={12} sm={6}>
@@ -92,23 +89,13 @@ useEffect (()=>{
                         Shipping
                       </Typography>
                       <Typography gutterBottom>
-                        {ele.firstname + " " + nameAndAddress.lastName}
+                        {ele.firstName + " " + ele.lastName}
                       </Typography>
                       <Typography gutterBottom>{ele.address}</Typography>
                     </Grid>
                   </>
                 );
-              })} */}
-
-              <Grid item xs={12} sm={6}>
-                <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                  Shipping
-                </Typography>
-                <Typography gutterBottom>
-                  {nameAndAddress.firstname + " " + nameAndAddress.lastName}
-                </Typography>
-                <Typography gutterBottom>{nameAndAddress.address}</Typography>
-              </Grid>
+              })}
               <Grid item container direction="column" xs={12} sm={6}>
                 <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                   Payment details

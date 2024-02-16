@@ -49,11 +49,11 @@ const PlaceOrder = () => {
         Your order number is {myRandomNUmber}. We have emailed your order confirmation,
         and will send you an update when your order has shipped.
       </p>
-      </div>
-      </div>
       <div className="backtoHome-btn-container">
       <button onClick={backToHome} className="back-to-home-btn">Back to Home</button>
       <button onClick={viewOrders} className="review-order-btn">View Orders </button>
+      </div>
+      </div>
       </div>
     </div>
   );

@@ -6,7 +6,8 @@
 
 .review-details{
     width: 34%;
-    padding: 2rem 1rem;
+    background-color: #edf1f4;
+    padding: 2rem 1.2rem;
     margin-top: -2.5rem;
     background-color: "#edf1f4";
     box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
@@ -14,7 +15,7 @@
 
 .order-btn{
     background-color: #18355e;
-    padding: 0.5 0.25rem;
+    padding: 0.5rem 0.5rem;
     border: none;
     outline: none;
     border-radius: 3px;

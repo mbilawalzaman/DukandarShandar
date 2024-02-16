@@ -7,14 +7,14 @@
     margin: top -3rem;
     width: 36%;
     padding: 2rem 1rem;
-    margin-top: -2.5;
+    margin-top: -2.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-top: none;
 }
 
 .moveToNext{
     background-color: #18355e;
-    padding: 0.5 0.25rem;
+    padding: .5rem 1rem;
     border: none;
     outline: none;
     border-radius: 3px;

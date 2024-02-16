@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { NameAndAddressfunction, checkOutShippingData } from '../../../features/checkoutSlice';
+import { NameAndAddressfunction } from '../../../features/checkoutSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -165,9 +165,8 @@ const SAddress = () => {
             id="number"
             name="number"
             label="Number"
-            value={inputValues.country}
+            value={inputValues.number}
             fullWidth
-            autoComplete="shipping country"
             variant="standard"
             sx={{fontFamily:"Poppins"}}
             onChange={handleChange}

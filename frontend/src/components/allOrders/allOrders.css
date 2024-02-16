@@ -1,4 +1,4 @@
-.orders-main-div{
+.orders-main-box{
     height: 100vh;
     width: 100vw;
     background-color: #edf1f4;
@@ -20,12 +20,9 @@ background-color: white;
 box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
 }
 
-.order-header-main{
-
-}
 
 .order-header{
-    height: 45px;
+    height: 50px;
     width: 100%;
     background-color: #edf1f4;
     box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
@@ -42,7 +39,7 @@ box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
     margin-right: 0.5rem;
 }
 
-.orderId p, .orderStatus p, .orderQty p .orderAmount p{
+.orderId p, .orderStatus p, .orderQty p , .orderAmount p{
     font-size: 17px;
     font-weight: bold;
     font-family: "Poppins";   
@@ -51,10 +48,10 @@ box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
 .all-orders-main{
     display: flex;
     justify-content: space-between;
-    margin-top: 0.2rem;
     background-color: #f4f7f9;
     padding: 0.6rem 0rem;
-    cursor: "pointer" 
+    cursor: pointer;
+    height: 100%;
 }
 
 .all-orderId{
@@ -68,7 +65,7 @@ box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
 .allOrdersMain{
     display: flex;
     justify-content: space-between;
-    margin-top: 0.2rem;
+    margin-top: 2rem;
     background-color: #f4f7f9;
     padding: 0.6rem 0rem;
     cursor: "pointer" 
@@ -76,7 +73,7 @@ box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
 }
 .all-orders_btn{
     background-color: #18355e;
-    padding: 0.5 0.25rem;
+    padding: 0.5rem 0.5rem;
     border: none;
     outline: none;
     border-radius: 3px;
