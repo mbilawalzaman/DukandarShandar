@@ -3,22 +3,12 @@
   justify-content: center;
 }
 
-<<<<<<< HEAD
-.place-order-details{
-    width: 34%;
-    padding: 3rem 1.2rem;
-    margin-top: -4.95rem;
-    background-color: "#edf1f4";
-    box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
-    background-color: #edf1f4;
-=======
 .place-order-details {
   width: 34%;
   padding: 2rem 1rem;
   margin-top: -4.95rem;
   background-color: "#edf1f4";
   box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
->>>>>>> d2322d065f55658843fcc4290e54ded9bacef142
 }
 
 .place-order-details h3 {
@@ -31,32 +21,6 @@
   margin-top: 0.5rem;
 }
 
-<<<<<<< HEAD
-.back-to-home-btn{
-    background-color: #18355e;
-    padding: .5rem 1rem;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    color: white;
-    font-family: "Poppins";
-    margin-top: 1rem;
-    cursor: pointer;
-}
-
-.review-order-btn{
-    background-color: #18355e;
-    padding: .5rem 1rem;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    color: white;
-    font-family: "Poppins";
-    margin-top: 1rem;
-    cursor: pointer;
-    margin-left: 1rem;
-}
-=======
 .back-to-home-btn {
   background-color: #18355e;
   font-weight: bold;
@@ -87,4 +51,3 @@
   margin-left: 0.5rem;
   font-size: 18px;
 }
->>>>>>> d2322d065f55658843fcc4290e54ded9bacef142

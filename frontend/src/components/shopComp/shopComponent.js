@@ -1,13 +1,13 @@
 import { React, useEffect, useState } from "react";
 import "./shopComponent.css";
 import Loader from "../loader/loader";
-import { useNavigate } from "react-router-dom";
+
 
 const ShopComponent = () => {
   const [blogProductData, setBlogProductData] = useState([]);
   const [searchInputValue, setSearchInputValue] = useState("");
   const [loading, setloading] = useState(true);
-  const navigate = useNavigate();
+
 
   const getBlogData = async () => {
     const res = await fetch("http://localhost:4000/getBlogProducts", {

@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import "./contactInfo.css";
 import { toast } from "react-toastify";
 
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 const ContactInfo = () => {
   const [contactState, setContactState] = useState({
     fullname: "",
@@ -10,16 +15,19 @@ const ContactInfo = () => {
     message: "",
   });
 
-  let name, value;
   const handleChange = (event) => {
-    name = event.target.name;
-    value = event.target.value;
-
+    const { name, value } = event.target;
     setContactState({ ...contactState, [name]: value });
   };
 
   const sendMessage = () => {
     const { fullname, email, subject, message } = contactState;
+
+    if (!isValidEmail(email)) {
+      toast.error("Invalid email address");
+      return; // Stop further processing if email is invalid
+    }
+
     if (fullname && email && subject && message) {
       toast.success("Message sent successfully");
       setContactState({ fullname: "", email: "", subject: "", message: "" });
@@ -53,7 +61,7 @@ const ContactInfo = () => {
                     onChange={handleChange}
                   />
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Enter yourEmail"
                     className="email-input"
                     name="email"
