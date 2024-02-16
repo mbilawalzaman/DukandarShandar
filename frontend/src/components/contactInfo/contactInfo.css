@@ -1,0 +1,108 @@
+.contact-Info-container {
+  display: flex;
+  justify-content: center;
+}
+.contact-Info {
+  width: 80%;
+  display: flex;
+  margin: 5rem 0rem 0rem 0rem;
+}
+
+.contact-first-info {
+  height: 450px;
+  width: 25%;
+  background-color: #edf1f4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.contact-second-info {
+  height: 450px;
+  width: 75%;
+  background-color: #18355e;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.first-two-inputs {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.first-two-inputs input {
+  height: 38px;
+  width: 472.5px;
+  padding-left: 0.6rem;
+  font-family: "Poppins";
+  border: none;
+  outline: none;
+  border-radius: 4px;
+}
+.email-input {
+  margin-left: 0.8rem;
+}
+
+.subject-input {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.subject-input input {
+  height: 38px;
+  width: 85%;
+  padding-left: 0.6rem;
+  font-family: "Poppins";
+  justify-content: center;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+}
+.message-box {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.message-box textarea {
+  height: 235px;
+  font-size: 15px;
+  width: 85%;
+  resize: none;
+  padding-left: 0.6rem;
+  padding-top: 0.3rem;
+  font-family: "Poppins";
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+.contact-btn-div {
+  margin-left: 5rem;
+  margin-top: -0.4;
+}
+.contact-btn-div button {
+  background-color: #3864a1;
+  padding: 0.5rem 2.25rem;
+  border: 1px solid white;
+  outline: none;
+  border-radius: 3px;
+  color: white;
+  font-family: "Poppins";
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.contact-details {
+  font-family: "Poppins";
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.address {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.address-phone {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}

@@ -5,7 +5,7 @@ const BlogHeader = () => {
   return (
     <div className='blog-header-container'>
         <div className='blog-header'>
-            <p>Blog Section</p>
+            <p>Products Section</p>
         </div>
       
     </div>
