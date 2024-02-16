@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./signupComp.css";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const SignupComp = () => {
+  const navigate = useNavigate();
   const [signupState, setSignupState] = useState({
     firstName: "",
     lastName: "",
@@ -71,6 +73,10 @@ const SignupComp = () => {
     }
   };
 
+  const Login = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <div className="signup-page-container">
@@ -82,7 +88,8 @@ const SignupComp = () => {
                 To keep contected with us, Please login with youe personal email
                 info
               </p>
-              <button> Sign In</button>
+              <p>If you already have an account </p>
+              <button onClick={Login}> Login</button>
             </div>
           </div>
           <div className="signup-form-div">
