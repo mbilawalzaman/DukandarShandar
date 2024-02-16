@@ -6,8 +6,16 @@ const blogProduct = require("../Model/addBlogProductModel");
 const contacForm = require("../Model/contactFormModel");
 const createUser = require("../Model/createUserModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+
+// Function to generate a secure key
 
 //Create a Product routes
+// console.log(
+//   "Secret Key: ",
+//   require("crypto").randomBytes(256).toString("base64"),
+// );
 
 router.post("/addproduct", async (req, res) => {
   try {
@@ -203,6 +211,37 @@ router.post("/createUser", async (req, res) => {
     res
       .status(409)
       .json({ message: "Error adding new user", error: error.message });
+  }
+});
+
+// crete login API
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const checkUser = await createUser.findOne({ email });
+
+    if (!checkUser) {
+      return res.status(409).json({ message: "User not found" });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, checkUser.password);
+
+    if (passwordMatch) {
+      const token = jwt.sign(
+        { email: checkUser.email },
+        process.env.JWT_SECRET_KEY,
+        {
+          expiresIn: "1h",
+        },
+      );
+      res.status(201).json({ data: token, message: "Login success" });
+    } else {
+      return res.status(409).json({ message: "Password not match" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 

@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const addBlogProductSchema = new mongoose.Schema({
   blogTitle: {
     type: String,
-    requied: true,
+    required: true,
   },
   blogDescription: {
     type: String,
-    requied: true,
+    required: true,
   },
   blogPrice: {
     type: Number,
-    requied: true,
+    required: true,
   },
   blogSelectedImage: {
     type: String,
-    requied: true,
+    required: true,
   },
 });
 

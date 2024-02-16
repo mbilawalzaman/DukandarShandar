@@ -3,23 +3,22 @@ const mongoose = require("mongoose");
 const addProductSchema = new mongoose.Schema({
   title: {
     type: String,
-    requied: true,
+    required: true,
   },
   description: {
     type: String,
-    requied: true,
+    required: true,
   },
   price: {
     type: Number,
-    requied: true,
+    required: true,
   },
   selectedImage: {
     type: String,
-    requied: true,
+    required: true,
   },
 });
 
 const Product = mongoose.model("product", addProductSchema);
-
 
 module.exports = Product;
