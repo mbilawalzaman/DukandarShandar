@@ -32,8 +32,9 @@ const getProductD = async () => {
   setSingleData(sData)
 }
 
-const addtocart = (image , title, price) => {
-  let cData = {image: image, title:title, price :price}
+const addtocart = (image , title, price, quantity) => {
+  console.log("Actual qty: ", quantity)
+  let cData = {image: image, title:title, price :price, quantity: quantity}
   dispatch(add_To_CART(cData))
   dispatch(cart_total_price(cData.price))
   dispatch(qtt(quantity))
@@ -54,9 +55,20 @@ const decrement = () => {
   }
 }
 
+const buyNow = (image , title, price, quantity) => {
+  let directly_buy_now_data = {image: image, title:title, price :price, quantity: quantity}
+  console.log("Actual data buy now: ", directly_buy_now_data)
+  dispatch(add_To_CART(directly_buy_now_data))
+  dispatch(cart_total_price(directly_buy_now_data.price))
+  dispatch(qtt(quantity))
+  dispatch(cartTotal(directly_buy_now_data.price*quantity))
+  navigate("/checkout")
+}
+
 
 useEffect(() => {
   getProductD();
+  
 });
 
 
@@ -79,8 +91,8 @@ useEffect(() => {
             <button id="plus_btn" onClick={increment}>+</button>
           </div>
           <div className='add-tocart-and-buy-now-btns'>
-            <button id="buy-now_btn" >BUY NOW</button>
-            <button id="add-tocart_btn"onClick={()=>addtocart(singleData.selectedImage, singleData.title, singleData.price)}>ADD TO CART</button>
+            <button id="buy-now_btn" onClick={()=>buyNow(singleData.selectedImage, singleData.title, singleData.price, quantity)}>BUY NOW</button>
+            <button id="add-tocart_btn"onClick={()=>addtocart(singleData.selectedImage, singleData.title, singleData.price, quantity)}>ADD TO CART</button>
           </div>
         </div>
 

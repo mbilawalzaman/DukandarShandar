@@ -61,6 +61,7 @@ const SignupComp = () => {
             email: "",
             password: "",
           });
+          navigate("/login")
         } else {
           toast.error("Failed to create user. Please try again.");
         }

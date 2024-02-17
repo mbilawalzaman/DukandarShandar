@@ -9,12 +9,12 @@ const LoginComp = () => {
     email: "",
     password: "",
   });
-
+  
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-  };
-
+  };  
+  
   let name, value;
   const handleChange = (event) => {
     name = event.target.name;
@@ -49,13 +49,14 @@ const LoginComp = () => {
           }),
         });
 
-        if (response.ok) {
-          console.log("User created successfully");
+        const data = await response.json();
+
+        if (data) {
           toast.success("Login successfully");
-          setloginState({
-            email: "",
-            password: "",
-          });
+          window.localStorage.setItem("isLoggedIn", true);
+          window.localStorage.setItem("token", data.data);
+          navigate("/");
+          console.log("User login successfully", data);
         } else {
           toast.error("Failed to login. Please try again.");
         }

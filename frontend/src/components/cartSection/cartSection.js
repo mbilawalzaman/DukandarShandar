@@ -7,19 +7,15 @@ import { removeCartItem } from '../../features/cartSlice';
 
 const CartSection = () => {
   const cart = useSelector((state) => state.cart.cartData)
-  const cart_price = useSelector((state) => state.cart.cartTotalPrice)
+  // const cart_price = useSelector((state) => state.cart.cartTotalPrice)
   const cart_total_price = useSelector((state) => state.cart.cartTotal)
-  const cart_quantity = useSelector((state) => state.cart.quantity)
+  // const cart_quantity = useSelector((state) => state.cart.quantity)
 
   const navigate = useNavigate();
   const continueShopping =() => { navigate("/")}
   const dispatch = useDispatch();
 
-  const totalAmount = () => {
-   let my__tp = cart_price.length > 0 ? cart_price.reduce((accum , curVal) => {
-      return accum + curVal
-    }) : ""
-  }
+
 
   const deleteCartItem = (index) => {
     dispatch(removeCartItem(index))
@@ -29,9 +25,10 @@ const CartSection = () => {
     navigate("/checkout")
   }
   
-  useEffect (()=> {
-    totalAmount()
-  })
+  useEffect(() => {
+    console.log("Cart data changed:", cart);
+  }, [cart]);
+  
 
   return (
     <>
@@ -49,6 +46,7 @@ const CartSection = () => {
       {
           cart.map((ele, index) => 
           {
+            console.log("Actual cart data", cart)
             return (
               <>
               <div className='cart-data-details-con'>
@@ -58,12 +56,12 @@ const CartSection = () => {
         <p className='image-inside-title'>{ele.title}</p>
         </div>
         <div className='cart-data-second-div'>
-        <p>PKR{ele.price}.00</p>
+        <p>PKR{ele.price*ele.quantity}.00</p>
         </div>
         <div className='cart-data-third-div'>
-        <button id="cart-minus_btn">-</button>
-            <button id="cart-count_btn">{cart_quantity}</button>
-            <button id="cart-plus_btn">+</button>
+        <button id="cart-minus_btn" disabled style={{backgroundColor: "lightgray"}}>-</button>
+            <button id="cart-count_btn">{ele.quantity}</button>
+            <button id="cart-plus_btn" disabled style={{backgroundColor: "lightgray"}}>+</button>
         </div>
         <div className='cart-data-fourth-div'>
         <DeleteIcon sx={{color:"#df4223"}}

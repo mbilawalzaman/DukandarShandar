@@ -9,6 +9,14 @@ const Navbar = () => {
 
   const cart = useSelector((state) => state.cart.cartData)
 
+  const isLoggedIn = window.localStorage.getItem("isLoggedIn")
+
+  const logoutUser = () => {
+    window.localStorage.clear();
+    window.location.href = "/login"
+
+  }
+
   return (
     <>
       <div className='navbarContainer'>
@@ -27,11 +35,13 @@ const Navbar = () => {
         <sup>{cart.length}</sup>
           <Link to='/cart'><ShoppingBagOutlinedIcon sx={{fontSize:"28px"}}/></Link>
         </div>
-
-        <div className='authBtns'>
-            <Link to="/signup"><button>Sign Up</button></Link>
-            <Link to='/login'><button>Login</button></Link>
-        </div>
+        {
+          isLoggedIn === "true" ?  <Link to='#'><button onClick={logoutUser} className='logoutBtn'>Log Out</button></Link> : 
+          <div className='authBtns'>
+          <Link to="/signup"><button>Sign Up</button></Link>
+          <Link to='/login'><button>Login</button></Link>
+      </div>
+        }
         </div>
       </div>
     </>
