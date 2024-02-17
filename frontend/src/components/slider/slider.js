@@ -39,7 +39,7 @@ const Slider = () => {
             <p>
               YOUR PRODUCTS <br /> ARE GREAT{" "}
             </p>
-            <button> View Products</button>
+            <div id="v_products_btn"><button> View Products</button></div>
           </div>
           <div className="slider-box">
             <img src={images[count].img} alt="slider Images" />

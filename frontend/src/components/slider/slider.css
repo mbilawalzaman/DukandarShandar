@@ -25,3 +25,61 @@
     cursor: pointer;
     margin-top: .5rem;
 }
+
+/* Responsive slider*/
+@media screen and (max-width: 940px){
+    .info-box p{
+        font-size: 40px;
+        font-family: "Poppins";
+    }
+    .slider-box img{
+        height: 250px;
+    } 
+}
+
+@media screen and (max-width: 740px){
+    .info-box p{
+        font-size: 40px;
+        font-family: "Poppins";
+        text-align: center;
+    }
+    .slider-box img{
+        height: 280px;
+    }
+    #v_products_btn{
+        display: flex;
+        justify-content: center;
+    }
+    .slider{
+        height: 100%;
+        width: 100%;
+        background-color: #e8ecef;
+        display: flex;
+        flex-direction: column-reverse  ;
+        align-items: center;
+        position: relative;
+        padding: 2rem 0rem 3rem 0rem;
+    }
+}
+
+@media screen and (max-width: 378px){
+    .info-box p{
+        font-size: 32px;
+        font-family: "Poppins";
+        text-align: center;
+    }
+    .slider-box img{
+        height: 240px;
+    }
+}
+
+@media screen and (max-width: 360px){
+    .info-box p{
+        font-size: 30px;
+        font-family: "Poppins";
+        text-align: center;
+    }
+    .slider-box img{
+        height: 200px;
+    }
+}

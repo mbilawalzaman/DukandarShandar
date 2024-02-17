@@ -18,7 +18,7 @@ const HeroSection = () => {
                   cursor: "pointer",
                 }}
               />
-              <h2>Welcome to Dukandar Shandar</h2>
+              <h2>Welcome to shop</h2>
             </div>
             <p>
               Explore a world of creativity and inspiration at our stationary
@@ -40,7 +40,7 @@ const HeroSection = () => {
                   cursor: "pointer",
                 }}
               />
-              <h2>Quality Craft Supplies</h2>
+              <h2>Quality Products</h2>
             </div>
             <p>
               Discover premium craft supplies that elevate your projects. From

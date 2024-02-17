@@ -68,7 +68,7 @@ const Navbar = () => {
         <div className="mobilenavbar">
           <div className="imageAndHamburger">
             <img src={logo} alt="" />
-            <MenuIcon sx={{ cursor: "pointer" }} onClick={Navbar}/>
+            <MenuIcon sx={{ cursor: "pointer", marginRight: "22px", fontSize:"30px"}} onClick={Navbar}/>
           </div>
         </div>
       </div>
