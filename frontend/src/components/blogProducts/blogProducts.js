@@ -48,6 +48,37 @@ const BlogProducts = () => {
 
   return (
     <>
+    <div className="tablet-Mobie-screen-container">
+      <div className="tablet-Mobie-screen">
+
+      <div className="productfilter-mobile-container">
+                  <label htmlFor="mobile-productfilter">Products Filter</label>
+                  <br />
+                  <select name="mobile-produc-filter" id="products">
+                    <option value="clock">Clock</option>
+                    <option value="pen">Pen</option>
+                    <option value="diary">Diary</option>
+                    <option value="bags">Bags</option>
+                  </select>
+                </div>
+                <div className="mobile-pricefilter-container">
+                  <label htmlFor="pricefilter">Price Filter</label>
+                  <br />
+                  <select
+                    name="pricefilter"
+                    id="price"
+                    onChange={filteredChange}>
+                    {priceFiltersData.map((ele, index) => (
+                      <option key={index} value={ele}>
+                        Greater than {ele}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+      </div>
+    </div>
+    <div>
       {loading ? (
         <Loader />
       ) : (
@@ -57,7 +88,7 @@ const BlogProducts = () => {
               <div className="blog-filter-container">
                 <h2>Products Filters</h2>
                 <div className="productfilter-container">
-                  <label htmlFor="productfilter">Products Filter</label>
+                  <label htmlFor="productfilter">Category Filter</label>
                   <br />
                   <br />
                   <select name="productfilter" id="products">
@@ -116,6 +147,7 @@ const BlogProducts = () => {
           </div>
         </div>
       )}
+      </div>
     </>
   );
 };

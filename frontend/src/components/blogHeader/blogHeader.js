@@ -3,8 +3,8 @@ import "./blogHeader.css"
 
 const BlogHeader = () => {
   return (
-    <div className='blog-header-container'>
-        <div className='blog-header'>
+    <div className='product-header-container'>
+        <div className='product-header'>
             <p>Products Section</p>
         </div>
       

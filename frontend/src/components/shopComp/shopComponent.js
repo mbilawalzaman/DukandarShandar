@@ -37,13 +37,34 @@ const ShopComponent = () => {
 
   return (
     <>
+    <div className="mobile-tablet-search-box-container">
+      <div className="mobile-tablet-search-box">
+        <div className="search-box">
+        <h2>SEARCH FILTER</h2>
+                <div className="main-search-box">
+                  <div className="search-filter-container">
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      id="search"
+                      autoComplete="off"
+                      onChange={(e) => {
+                        setSearchInputValue(e.target.value); //searchInputValue;
+                      }}
+                    ></input>
+                  </div>
+                </div>
+        </div>
+      </div>
+    </div>
+    <div>
       {loading ? (
         <Loader />
       ) : (
         <div>
-          <div className="blog-product-maincontainer">
-            <div className="blog-container">
-              <div className="blog-filter-container">
+          <div className="shop-product-maincontainer">
+            <div className="shop-container">
+              <div className="shop-filter-container">
                 <h2>SEARCH FILTER</h2>
                 <div className="main-search-box">
                   <div className="search-filter-container">
@@ -59,23 +80,23 @@ const ShopComponent = () => {
                   </div>
                 </div>
               </div>
-              <div className="blog-product-container">
+              <div className="shop-product-container">
                 {filteredData.map((products) => {
                   return (
                     <div key={products.blogProductId}>
-                      <div className="blog-product-boxes">
+                      <div className="shop-product-boxes">
                         <img src={products.blogSelectedImage} alt="" />
-                        <div className="blog-title">
+                        <div className="shop-title">
                           <p>
                             <b>Title: </b> {products.blogTitle}
                           </p>
                         </div>
-                        <div className="blog-des">
+                        <div className="shop-des">
                           <p>
                             <b>Description: </b> {products.blogDescription}
                           </p>
                         </div>
-                        <div className="blog-p">
+                        <div className="shop-p">
                           <p>
                             <b>Price: </b> {products.blogPrice}
                           </p>
@@ -89,6 +110,7 @@ const ShopComponent = () => {
           </div>
         </div>
       )}
+      </div>
     </>
   );
 };
