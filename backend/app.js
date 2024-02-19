@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ limit: '256mb', extended: true }));
 //database Connection
 require("./database/dbConnection")
 
-
 // Config
 dotenv.config({ path: './config.env' });
 
