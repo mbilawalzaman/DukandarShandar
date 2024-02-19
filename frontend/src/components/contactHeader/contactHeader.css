@@ -14,4 +14,9 @@
 
 /* Responsive Contact header */
 
-@media screen and 
+@media screen and (max-width: 345){
+.contact-header p {
+  font-family: "Poppins";
+  font-size: 40px;
+}
+}

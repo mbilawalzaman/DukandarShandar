@@ -66,22 +66,24 @@ const ContactInfo = () => {
           <div className="contact-second-info">
             <div className="contact-form">
               <div className="contat-inputs">
-                <div className="first-two-inputs">
-                  <input
-                    type="text"
-                    placeholder="Enter Full Name"
-                    name="fullname"
-                    value={contactState.fullname}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="email"
-                    placeholder="Enter yourEmail"
-                    className="email-input"
-                    name="email"
-                    value={contactState.email}
-                    onChange={handleChange}
-                  />
+                <div className="first-two-inputs-container">
+                  <div className="first-two-inputs">
+                    <input
+                      type="text"
+                      placeholder="Enter Full Name"
+                      name="fullname"
+                      value={contactState.fullname}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="email"
+                      placeholder="Enter yourEmail"
+                      className="email-input"
+                      name="email"
+                      value={contactState.email}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </div>
                 <div className="subject-input">
                   <input
@@ -100,8 +102,7 @@ const ContactInfo = () => {
                     rows="10"
                     placeholder="Enter Message"
                     value={contactState.message}
-                    onChange={handleChange}
-                  ></textarea>
+                    onChange={handleChange}></textarea>
                 </div>
                 <div className="contact-btn-div">
                   <button type="submit" onClick={sendMessage}>

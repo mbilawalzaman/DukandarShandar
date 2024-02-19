@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./slider.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useNavigate } from "react-router-dom";
 
 const Slider = () => {
   const [count, setCount] = useState(0);
+  const Navigate = useNavigate("");
 
   let images = [
     {
@@ -31,6 +33,10 @@ const Slider = () => {
     }
   };
 
+  const viewProducts = () => {
+    Navigate("/products")
+  }
+
   return (
     <>
       <div className="slider-container">
@@ -39,7 +45,7 @@ const Slider = () => {
             <p>
               YOUR PRODUCTS <br /> ARE GREAT{" "}
             </p>
-            <div id="v_products_btn"><button> View Products</button></div>
+            <div id="v_products_btn" onClick={viewProducts}><button> View Products</button></div>
           </div>
           <div className="slider-box">
             <img src={images[count].img} alt="slider Images" />

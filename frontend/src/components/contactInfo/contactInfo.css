@@ -21,16 +21,21 @@
   background-color: #18355e;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
-.first-two-inputs {
-  margin-top: 2rem;
+.first-two-inputs-container{
   display: flex;
   justify-content: center;
 }
 
+.first-two-inputs {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  width: 87%;
+}
+
 .first-two-inputs input {
   height: 38px;
-  width: 375px;
+  width: 50%;
   padding-left: 0.6rem;
   font-family: "Poppins";
   border: none;
@@ -105,4 +110,68 @@
 .address-phone {
   margin-top: 1rem;
   margin-left: 1rem;
+}
+
+/* Responsive contact details and contact details */
+
+@media screen and (max-width: 1050px){
+
+  .contact-Info {
+    width: 80%;
+    display: flex;
+    margin: 5rem 0rem 0rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-first-info {
+    height: 250px;
+    width: 75%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #edf1f4;
+    margin-bottom: 1rem;
+  }
+  
+}
+
+@media screen and (max-width: 500px){
+  .contact-second-info {
+    height: 500px;
+    width: 75%;
+    background-color: #18355e;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .first-two-inputs {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
+
+  .first-two-inputs input {
+    height: 38px;
+    width: 95%;
+    padding-left: 0.6rem;
+    font-family: "Poppins";
+    border: 1px solid black;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+  }
+  .email-input {
+    margin-left: 0rem;
+    margin-top: 0.8rem;
+  }
+}
+
+@media screen  and (max-width: 450px){
+  .contact-first-info {
+    height: 330px;
+    width: 75%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #edf1f4;
+    margin-bottom: 1rem;
+  }
+  
 }

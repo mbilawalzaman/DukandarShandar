@@ -48,8 +48,8 @@ const CartSection = () => {
           {
             console.log("Actual cart data", cart)
             return (
-              <>
-              <div className='cart-data-details-con'>
+             
+              <div key={index} className='cart-data-details-con'>
                 <div className='cart-data-details'>
         <div className='cart-data-first-div'>
         <img src={ele.image} alt="" />
@@ -69,7 +69,7 @@ const CartSection = () => {
         </div>
         </div>
         </div>
-              </>
+             
             )
           }
           )

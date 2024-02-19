@@ -31,6 +31,7 @@ const SAddress = () => {
   const handleChange = (event) => {
     name = event.target.name;
     value = event.target.value;
+    
     setInputValues({...inputValues, [name]:value})
 
   }

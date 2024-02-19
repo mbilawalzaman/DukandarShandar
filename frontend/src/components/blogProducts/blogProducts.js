@@ -120,7 +120,7 @@ const BlogProducts = () => {
                       <div
                         className="blog-product-boxes"
                         onClick={() =>
-                          getBlogProductsById(products.blogProductId)
+                          getBlogProductsById(products._id)
                         }>
                         <img src={products.blogSelectedImage} alt="" />
                         <div className="blog-title">

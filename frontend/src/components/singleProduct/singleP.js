@@ -16,9 +16,7 @@ const SingleP = () => {
   
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-
-const params = useParams();
+  const params = useParams();
 
 
 const getProductD = async () => {
@@ -40,7 +38,6 @@ const addtocart = (image , title, price, quantity) => {
   dispatch(qtt(quantity))
   dispatch(cartTotal(cData.price*quantity))
   toast.success("Product added to Cart!")
-  navigate("/cart")
 }
 
 const increment = () => {
