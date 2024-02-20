@@ -61,7 +61,7 @@ const SignupComp = () => {
             email: "",
             password: "",
           });
-          navigate("/login")
+          navigate("/login");
         } else {
           toast.error("Failed to create user. Please try again.");
         }
@@ -95,38 +95,44 @@ const SignupComp = () => {
           </div>
           <div className="signup-form-div">
             <div className="signup-form-inner-div">
-              <h2>Create An Account</h2>
+              <h2 className="create-an-account">Create An Account</h2>
               <p className="useEmail">Use your Email for registration</p>
               <div className="input-area-box">
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  value={signupState.firstName}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  name="lastName"
-                  value={signupState.lastName}
-                  onChange={handleChange}
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  name="email"
-                  value={signupState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={signupState.password}
-                  onChange={handleChange}
-                />
-                <button onClick={createUser}>SIGN UP</button>
+                <div className="m-input">
+                  <input
+                    id="signupFirstName"
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={signupState.firstName}
+                    onChange={handleChange}
+                  />
+                  <input
+                    id="signupLastName"
+                    type="text"
+                    placeholder="Last Name"
+                    name="lastName"
+                    value={signupState.lastName}
+                    onChange={handleChange}
+                  />
+                  <input
+                    id="signupEmail"
+                    type="email"
+                    placeholder="Email Address"
+                    name="email"
+                    value={signupState.email}
+                    onChange={handleChange}
+                  />
+                  <input
+                    id="signupPassword"
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={signupState.password}
+                    onChange={handleChange}
+                  />
+                  <button onClick={createUser}>SIGN UP</button>
+                </div>
               </div>
             </div>
           </div>

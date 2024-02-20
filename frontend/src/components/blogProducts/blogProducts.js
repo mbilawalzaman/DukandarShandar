@@ -48,105 +48,100 @@ const BlogProducts = () => {
 
   return (
     <>
-    <div className="tablet-Mobie-screen-container">
-      <div className="tablet-Mobie-screen">
-
-      <div className="productfilter-mobile-container">
-                  <label htmlFor="mobile-productfilter">Products Filter</label>
-                  <br />
-                  <select name="mobile-produc-filter" id="products">
-                    <option value="clock">Clock</option>
-                    <option value="pen">Pen</option>
-                    <option value="diary">Diary</option>
-                    <option value="bags">Bags</option>
-                  </select>
-                </div>
-                <div className="mobile-pricefilter-container">
-                  <label htmlFor="pricefilter">Price Filter</label>
-                  <br />
-                  <select
-                    name="pricefilter"
-                    id="price"
-                    onChange={filteredChange}>
-                    {priceFiltersData.map((ele, index) => (
-                      <option key={index} value={ele}>
-                        Greater than {ele}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
+      <div className="tablet-Mobie-screen-container">
+        <div className="tablet-Mobie-screen">
+          <div className="productfilter-mobile-container">
+            <label htmlFor="mobile-productfilter">Products Filter</label>
+            <br />
+            <select name="mobile-produc-filter" id="products">
+              <option value="clock">Clock</option>
+              <option value="pen">Pen</option>
+              <option value="diary">Diary</option>
+              <option value="bags">Bags</option>
+            </select>
+          </div>
+          <div className="mobile-pricefilter-container">
+            <label htmlFor="pricefilter">Price Filter</label>
+            <br />
+            <select name="pricefilter" id="price" onChange={filteredChange}>
+              {priceFiltersData.map((ele, index) => (
+                <option key={index} value={ele}>
+                  Greater than {ele}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <div>
-          <div className="blog-product-maincontainer">
-            <div className="blog-container">
-              <div className="blog-filter-container">
-                <h2>Products Filters</h2>
-                <div className="productfilter-container">
-                  <label htmlFor="productfilter">Category Filter</label>
-                  <br />
-                  <br />
-                  <select name="productfilter" id="products">
-                    <option value="clock">Clock</option>
-                    <option value="pen">Pen</option>
-                    <option value="diary">Diary</option>
-                    <option value="bags">Bags</option>
-                  </select>
+      <div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div>
+            <div className="blog-product-maincontainer">
+              <div className="blog-container">
+                <div className="blog-filter-container">
+                  <h2>Products Filters</h2>
+                  <div className="productfilter-container">
+                    <label htmlFor="productfilter">Category Filter</label>
+                    <br />
+                    <br />
+                    <select name="productfilter" id="products">
+                      <option value="clock">Clock</option>
+                      <option value="pen">Pen</option>
+                      <option value="diary">Diary</option>
+                      <option value="bags">Bags</option>
+                    </select>
+                  </div>
+                  <div className="pricefilter-container">
+                    <label htmlFor="pricefilter">Price Filter:</label>
+                    <br />
+                    <select
+                      name="pricefilter"
+                      id="price"
+                      onChange={filteredChange}
+                    >
+                      {priceFiltersData.map((ele, index) => (
+                        <option key={index} value={ele}>
+                          Greater than {ele}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                <div className="pricefilter-container">
-                  <label htmlFor="pricefilter">Price Filter:</label>
-                  <br />
-                  <select
-                    name="pricefilter"
-                    id="price"
-                    onChange={filteredChange}>
-                    {priceFiltersData.map((ele, index) => (
-                      <option key={index} value={ele}>
-                        Greater than {ele}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div className="blog-product-container">
-                {filterData.map((products) => {
-                  return (
-                    <div key={products.blogProductId}>
-                      <div
-                        className="blog-product-boxes"
-                        onClick={() =>
-                          getBlogProductsById(products._id)
-                        }>
-                        <img src={products.blogSelectedImage} alt="" />
-                        <div className="blog-title">
-                          <p>
-                            <b>Title: </b> {products.blogTitle}
-                          </p>
-                        </div>
-                        <div className="blog-des">
-                          <p>
-                            <b>Description: </b> {products.blogDescription}
-                          </p>
-                        </div>
-                        <div className="blog-p">
-                          <p>
-                            <b>Price: </b> {products.blogPrice}
-                          </p>
+                <div className="blog-product-container">
+                  {filterData.map((products) => {
+                    return (
+                      <div key={products.blogProductId}>
+                        <div
+                          className="blog-product-boxes"
+                          onClick={() => getBlogProductsById(products._id)}
+                        >
+                          <img src={products.blogSelectedImage} alt="" />
+                          <div className="blog-title">
+                            <p>
+                              <b>Title: </b> {products.blogTitle}
+                            </p>
+                          </div>
+                          <div className="blog-des">
+                            <p>
+                              <b>Description: </b> {products.blogDescription}
+                            </p>
+                          </div>
+                          <div className="blog-p">
+                            <p>
+                              <b>Price: </b> {products.blogPrice}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </>
   );

@@ -18,6 +18,7 @@ import Payment from "./components/checkout/payment/payment";
 import Review from "./components/checkout/review/review";
 import PlaceOrder from "./components/checkout/placeOrder/placeOrder";
 import Orders from "./pages/orders/orders";
+import ShopSingleProduct from "./components/shopSingleProduct/shopSingleProduct";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/singleproduct/:id" element={<SingleProduct />} />
         <Route path="/allproduct/:id" element={<AllProduct />} />
         <Route path="/blogproduct/:id" element={<AllBlogProducts />} />
+        <Route path="/shopproduct/:id" element={<ShopSingleProduct />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />

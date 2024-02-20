@@ -71,10 +71,21 @@ router.post("/addallproduct", async (req, res) => {
 
 router.post("/addBlogProduct", async (req, res) => {
   try {
-    const { blogTitle, blogDescription, blogPrice, blogSelectedImage } =
-      req.body;
+    const {
+      blogTitle,
+      blogDescription,
+      blogPrice,
+      blogSelectedImage,
+      blogCategory,
+    } = req.body;
 
-    if (!blogTitle || !blogDescription || !blogPrice || !blogSelectedImage) {
+    if (
+      !blogTitle ||
+      !blogDescription ||
+      !blogPrice ||
+      !blogSelectedImage ||
+      !blogCategory
+    ) {
       return res.status(409).json({ message: "Please fill all fields" });
     }
 
@@ -83,6 +94,7 @@ router.post("/addBlogProduct", async (req, res) => {
       blogDescription,
       blogPrice,
       blogSelectedImage,
+      blogCategory,
     });
     await addBlogProductData.save();
     res.status(201).json({ message: "Product added successfully" });
