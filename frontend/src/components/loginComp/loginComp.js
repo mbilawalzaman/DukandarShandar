@@ -9,17 +9,14 @@ const LoginComp = () => {
     email: "",
     password: "",
   });
-  
+
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-  };  
-  
-  let name, value;
-  const handleChange = (event) => {
-    name = event.target.name;
-    value = event.target.value;
+  };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setloginState({ ...loginState, [name]: value });
   };
 
@@ -50,13 +47,17 @@ const LoginComp = () => {
         });
 
         const data = await response.json();
+        console.log("data", data);
 
-        if (data) {
+        if (data && data.message !== "User not found") {
           toast.success("Login successfully");
           window.localStorage.setItem("isLoggedIn", true);
           window.localStorage.setItem("token", data.data);
           navigate("/");
           console.log("User login successfully", data);
+        } else if (data && data.message === "User not found") {
+          toast.error("User not found. Redirecting to signup.");
+          navigate("/signup");
         } else {
           toast.error("Failed to login. Please try again.");
         }
