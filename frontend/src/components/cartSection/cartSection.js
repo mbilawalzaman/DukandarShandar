@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./cartSection.css";
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { removeCartItem } from '../../features/cartSlice';
 
 const CartSection = () => {
   const cart = useSelector((state) => state.cart.cartData)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const cart_price = useSelector((state) => state.cart.cartTotalPrice)
   const cart_total_price = useSelector((state) => state.cart.cartTotal)
   // const cart_quantity = useSelector((state) => state.cart.quantity)
@@ -22,16 +21,12 @@ const CartSection = () => {
     dispatch(removeCartItem(index))
   }
 
-  const navigateToCheckout = () => {
-    if (isLoggedIn) {
-      navigate("/checkout");
-    } else {
-      navigate("/login");
-    }
+  const navigateTocheckout = () => {
+    navigate("/checkout")
   }
   
   useEffect(() => {
-    const userIsLoggedIn =     setIsLoggedIn(userIsLoggedIn);
+    console.log("Cart data changed:", cart);
   }, [cart]);
   
 
@@ -81,7 +76,7 @@ const CartSection = () => {
         }  
         <div className='cart-price-container'>
           <div className='cartPrice'> <p>Total Price: <span className='cart-price-total'>PKR{cart_total_price}.00</span></p> 
-          <button onClick={navigateToCheckout}> CheckOut </button>
+          <button onClick={navigateTocheckout}> CheckOut </button>
           </div>
         </div>
          
