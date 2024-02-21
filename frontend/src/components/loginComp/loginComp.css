@@ -150,3 +150,89 @@
   margin-top: 2rem;
   border-radius: 20px;
 }
+
+/* Responsive login component */
+
+@media screen and (max-width: 931px) {
+  .welome-to-login-inner-div h2 {
+    font-family: "Poppins";
+    font-size: 35px;
+    font-weight: bold;
+    color: #18355e;
+  }
+}
+
+@media screen and (max-width: 809px) {
+  .welome-to-login-inner-div h2 {
+    font-family: "Poppins";
+    font-size: 30px;
+    font-weight: bold;
+    color: #18355e;
+  }
+}
+
+@media screen and (max-width: 735px) {
+  .welome-to-login-inner-div h2 {
+    font-family: "Poppins";
+    font-size: 35px;
+    font-weight: bold;
+    color: #18355e;
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .login-up-page {
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .welome-to-login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+    justify-content: center;
+    background-color: #edf1f4;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+  }
+
+  .login-form-div {
+    width: 100%;
+    height: 100%;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+  }
+}
+
+@media screen and (max-width: 442px) {
+  #loginEmail {
+    width: 300px;
+  }
+  #loginPassword {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 327px) {
+  #loginEmail {
+    width: 280px;
+  }
+  #loginPassword {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 304px) {
+  #loginEmail {
+    width: 260px;
+  }
+  #loginPassword {
+    width: 260px;
+  }
+}

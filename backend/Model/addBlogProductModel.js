@@ -17,6 +17,10 @@ const addBlogProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  blogCategory: {
+    type: String,
+    required: true,
+  },
 });
 
 const blogProduct = mongoose.model("blogproduct", addBlogProductSchema);

@@ -95,6 +95,7 @@ const LoginComp = () => {
               <p className="useEmail">Use your regisgtered Email to Login</p>
               <div className="input-area-box">
                 <input
+                  id="loginEmail"
                   type="email"
                   placeholder="Email Address"
                   name="email"
@@ -102,6 +103,7 @@ const LoginComp = () => {
                   onChange={handleChange}
                 />
                 <input
+                  id="loginPassword"
                   type="password"
                   placeholder="Password"
                   name="password"
