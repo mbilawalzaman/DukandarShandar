@@ -26,6 +26,7 @@ import dashLogo from "../assets/logo.jpg";
 import AddProduct from "./addProduct/addProduct";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ViewProduct from "./viewProducts/viewProducts";
+import EditProducts from "./editProducts/editProducts";
 import("./admin.css");
 
 const drawerWidth = 240;
@@ -253,6 +254,7 @@ export default function Admin() {
           <Toolbar />
           {/* <AddProduct /> */}
           <ViewProduct />
+          <EditProducts />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}></Grid>
           </Container>

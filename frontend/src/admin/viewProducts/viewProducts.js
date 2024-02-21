@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import "./viewProducts.css"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -72,6 +73,7 @@ export default function ViewProducts() {
   const [productData, setProductData] = React.useState([])
   const [allproductData, setAllProductData] = useState([])
   const [blogProductData, setBlogProductData] = useState([]);
+  const Navigate = useNavigate("");
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -118,6 +120,11 @@ export default function ViewProducts() {
 
   };
 
+  const handleAllProduuctEdit = (id) => {
+
+    Navigate(`/editproduct/${id}`);
+  }
+
 
   React.useEffect(() => {
     getData();
@@ -155,7 +162,7 @@ export default function ViewProducts() {
                   <TableCell>{product.title}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>{product.price}</TableCell>
-                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} onClick={()=>handleAllProduuctEdit(product._id)}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
                   </TableRow>
                   </> 
                 )
@@ -208,7 +215,7 @@ export default function ViewProducts() {
                   <TableCell>{product.alltitle}</TableCell>
                   <TableCell>{product.alldescription}</TableCell>
                   <TableCell>{product.allprice}</TableCell>
-                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} /><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
                   </TableRow>
                   </> 
                 )
