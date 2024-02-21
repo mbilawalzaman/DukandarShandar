@@ -98,7 +98,6 @@ const SignupComp = () => {
               <h2 className="create-an-account">Create An Account</h2>
               <p className="useEmail">Use your Email for registration</p>
               <div className="input-area-box">
-<<<<<<< HEAD
                 <input
                   id="signupFirstName"
                   type="text"
@@ -132,7 +131,7 @@ const SignupComp = () => {
                   onChange={handleChange}
                 />
                 <button onClick={createUser}>SIGN UP</button>
-=======
+
                 <div className="m-input">
                   <input
                     id="signupFirstName"
@@ -168,7 +167,6 @@ const SignupComp = () => {
                   />
                   <button onClick={createUser}>SIGN UP</button>
                 </div>
->>>>>>> f9d562622bebac9d8fe19ba3618cf3ba119f06dc
               </div>
             </div>
           </div>

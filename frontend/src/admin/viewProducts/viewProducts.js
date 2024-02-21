@@ -70,6 +70,8 @@ export default function ViewProducts() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [productData, setProductData] = React.useState([])
+  const [allproductData, setAllProductData] = useState([])
+  const [blogProductData, setBlogProductData] = useState([]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -91,15 +93,42 @@ export default function ViewProducts() {
     setProductData(productD);
   }
   
+ 
+  
+  const getAllData = async () => {
+    const res = await fetch("http://localhost:4000/getAllproducts", {
+      method: "GET",
+      headers:{
+        "Content-Type": "application/json"
+      }
+    });
+    const allproductD = await res.json();
+    setAllProductData(allproductD);
+  } 
+
+  const getBlogData = async () => {
+    const res = await fetch("http://localhost:4000/getBlogProducts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const blogProductD = await res.json();
+    setBlogProductData(blogProductD);
+
+  };
+
+
   React.useEffect(() => {
     getData();
+    getAllData();
+    getBlogData();
   },[])
-  console.log("checkData", productData)
 
   return (
     <>
     <div className='viewProducts-Container'> 
-    <h1 className='viewProducts-heading'>View Products</h1>
+    <h1 className='viewProducts-heading'> Top Searched Products</h1>
       <div className='viewProducts'><Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -126,6 +155,111 @@ export default function ViewProducts() {
                   <TableCell>{product.title}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>{product.price}</TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  </TableRow>
+                  </> 
+                )
+              })
+            }
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+    </div>
+    </div>
+
+
+
+
+    <div className='viewProducts-Container'> 
+    <h1 className='viewProducts-heading'>View All Products</h1>
+      <div className='viewProducts'><Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {
+              allproductData.map((product) => {
+                return (
+                  <>
+                  <TableRow>
+                  <TableCell><img style={{height:"60px", width:"80px"}} src={product.selectedAllImage} alt=""/></TableCell>
+                  <TableCell>{product.alltitle}</TableCell>
+                  <TableCell>{product.alldescription}</TableCell>
+                  <TableCell>{product.allprice}</TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  </TableRow>
+                  </> 
+                )
+              })
+            }
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+    </div>
+    </div>
+
+
+
+    <div className='viewProducts-Container'> 
+    <h1 className='viewProducts-heading'>Blog Products</h1>
+      <div className='viewProducts'><Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {
+              blogProductData.map((product) => {
+                return (
+                  <>
+                  <TableRow>
+                  <TableCell><img style={{height:"60px", width:"80px"}} src={product.blogSelectedImage} alt=""/></TableCell>
+                  <TableCell>{product.blogTitle}</TableCell>
+                  <TableCell>{product.blogDescription}</TableCell>
+                  <TableCell>PKR {product.blogPrice}.00</TableCell>
                   <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
                   </TableRow>
                   </> 
