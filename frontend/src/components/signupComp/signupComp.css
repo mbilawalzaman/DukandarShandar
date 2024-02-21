@@ -1,150 +1,224 @@
-.sign-up-page{
+.sign-up-page {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+}
+
+.welome-to-signup {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #edf1f4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.signup-form-div {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.welome-to-signup-inner-div {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form-inner-div {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welome-to-signup-inner-div h2 {
+  font-family: "Poppins";
+  font-size: 40px;
+  font-weight: bold;
+  color: #18355e;
+}
+
+.welome-to-signup-inner-div p {
+  font-family: "Poppins";
+  font-size: 15px;
+  text-align: center;
+  width: 300px;
+  margin-top: 1rem;
+}
+
+.welome-to-signup-inner-div button {
+  font-family: "Poppins";
+  font-size: 15px;
+  padding: 0.8rem 3.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid black;
+  outline: none;
+  color: #18355e;
+  font-weight: bold;
+  background-color: none;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 20px;
+}
+
+.welome-to-signup-inner-div button:hover {
+  font-family: "Poppins";
+  font-size: 14px;
+  padding: 0.8rem 3.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid black;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  background-color: #18355e;
+  transition: all 1s ease-in-out;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 20px;
+}
+
+.signup-form-inner-div h2 {
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 30px;
+}
+.useEmail {
+  margin-top: 1rem;
+  color: #18355e;
+  font-weight: bold;
+  font-family: "Poppins";
+  margin-bottom: 1rem;
+}
+
+.input-area-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-area-box input {
+  margin-top: 1rem;
+  width: 400px;
+  height: 50px;
+  padding-left: 1rem;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  background-color: rgb(223, 235, 235);
+}
+
+.input-area-box button {
+  font-family: "Poppins";
+  font-size: 14px;
+  padding: 0.8rem 3.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid black;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  background-color: #18355e;
+  transition: all 1s ease-in-out;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 20px;
+}
+
+.input-area-box button:hover {
+  font-family: "Poppins";
+  font-size: 14px;
+  padding: 0.8rem 3.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid black;
+  outline: none;
+  color: #18355e;
+  font-weight: bold;
+  background-color: white;
+  transition: all 1s ease-in-out;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 20px;
+}
+
+/* Responsive signup page */
+
+@media screen and (max-width: 1106px) {
+  .welome-to-signup-inner-div h2 {
+    font-family: "Poppins";
+    font-size: 35 px;
+    font-weight: bold;
+    color: #18355e;
+  }
+}
+
+@media screen and (max-width: 843px) {
+  .welome-to-signup-inner-div h2 {
+    font-family: "Poppins";
+    font-size: 30 px;
+    font-weight: bold;
+    color: #18355e;
+  }
+}
+@media screen and (max-width: 755px) {
+  .sign-up-page {
     height: 90vh;
     width: 100vw;
     display: flex;
-}
-
-.welome-to-signup{
-    width: 40%;
+    flex-direction: column;
+  }
+  .welome-to-signup {
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #edf1f4;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.signup-form-div{
-    width: 60%;
+    padding-top: 5rem;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+  }
+  .signup-form-div {
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+    margin-top: 3rem;
+  }
 }
 
-.welome-to-signup-inner-div{
-    height: 300px;
+@media screen and (max-width: 500px) {
+  .signup-form-div {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
-
-.signup-form-inner-div{
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.welome-to-signup-inner-div h2{
-    font-family: "Poppins";
-    font-size: 40px;
-    font-weight: bold;
-    color: #18355e;
-}
-
-.welome-to-signup-inner-div p{
-    font-family: "Poppins";
-    font-size: 15px;
-    text-align: center;
-    width: 300px;
-    margin-top: 1rem;
-}
-
-.welome-to-signup-inner-div button{
-    font-family: "Poppins";
-    font-size: 15px;
-    padding: .8rem 3.5rem;
-    border-radius: 20px;
-    cursor: pointer;
-    border: 2px solid black;
-    outline: none;
-    color: #18355e;
-    font-weight: bold;
-    background-color: none;
-    text-align: center;
-    margin-top: 2rem;
-    border-radius: 20px;
-}
-
-.welome-to-signup-inner-div button:hover{
-    font-family: "Poppins";
-    font-size: 14px;
-    padding: .8rem 3.5rem;
-    border-radius: 20px;
-    cursor: pointer;
-    border: 2px solid black;
-    outline: none;
-    color: white;
-    font-weight: bold;
-    background-color: #18355e;
-    transition: all 1s ease-in-out;
-    text-align: center;
-    margin-top: 2rem;
-    border-radius: 20px;
-}
-
-.signup-form-inner-div h2{
-    font-family: "Poppins";
-    font-weight: bold;
-    font-size: 30px;
-}
-.useEmail{
-    margin-top: 1rem;
-    color: #18355e;
-    font-weight: bold;
-    font-family: "Poppins";
-    margin-bottom: 1rem;
-}
-
-.input-area-box{
-    display: flex;
-    flex-direction: column;
-}
-
-.input-area-box input{
-    margin-top: 1rem;
-    width: 400px;
-    height: 50px;
-    padding-left: 1rem;
-    border-radius: 2px;
-    outline: none;
-    border: none;
-    background-color: rgb(223, 235, 235);
-}
-
-.input-area-box button{
-    font-family: "Poppins";
-    font-size: 14px;
-    padding: .8rem 3.5rem;
-    border-radius: 20px;
-    cursor: pointer;
-    border: 2px solid black;
-    outline: none;
-    color: white;
-    font-weight: bold;
-    background-color: #18355e;
-    transition: all 1s ease-in-out;
-    text-align: center;
-    margin-top: 2rem;
-    border-radius: 20px;
-}
-
-.input-area-box button:hover{
-    font-family: "Poppins";
-    font-size: 14px;
-    padding: .8rem 3.5rem;
-    border-radius: 20px;
-    cursor: pointer;
-    border: 2px solid black;
-    outline: none;
-    color: #18355e;
-    font-weight: bold;
     background-color: white;
-    transition: all 1s ease-in-out;
-    text-align: center;
-    margin-top: 2rem;
-    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
+    margin-top: 3rem;
+  }
+
+  .input-area-box {
+    display: flex;
+    flex-direction: column;
+  }
+  #signupFirstName,
+  #signupLastName,
+  #signupEmail,
+  #signupPassword {
+    width: 320px;
+  }
 }

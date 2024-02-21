@@ -61,7 +61,7 @@ const SignupComp = () => {
             email: "",
             password: "",
           });
-          navigate("/login")
+          navigate("/login");
         } else {
           toast.error("Failed to create user. Please try again.");
         }
@@ -99,6 +99,7 @@ const SignupComp = () => {
               <p className="useEmail">Use your Email for registration</p>
               <div className="input-area-box">
                 <input
+                  id="signupFirstName"
                   type="text"
                   name="firstName"
                   placeholder="First Name"
@@ -106,6 +107,7 @@ const SignupComp = () => {
                   onChange={handleChange}
                 />
                 <input
+                  id="signupLastName"
                   type="text"
                   placeholder="Last Name"
                   name="lastName"
@@ -113,6 +115,7 @@ const SignupComp = () => {
                   onChange={handleChange}
                 />
                 <input
+                  id="signupEmail"
                   type="email"
                   placeholder="Email Address"
                   name="email"
@@ -120,6 +123,7 @@ const SignupComp = () => {
                   onChange={handleChange}
                 />
                 <input
+                  id="signupPassword"
                   type="password"
                   placeholder="Password"
                   name="password"
