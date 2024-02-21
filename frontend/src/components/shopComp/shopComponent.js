@@ -79,7 +79,7 @@ const ShopComponent = () => {
                         id="search"
                         autoComplete="off"
                         onChange={(e) => {
-                          setSearchInputValue(e.target.value); //searchInputValue;
+                          setSearchInputValue(e.target.value);
                         }}
                       ></input>
                     </div>

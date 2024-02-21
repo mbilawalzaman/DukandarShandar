@@ -251,8 +251,8 @@ export default function Admin() {
           }}
         >
           <Toolbar />
-          {/* <AddProduct /> */}
-          <ViewProduct />
+          <AddProduct />
+          {/* <ViewProduct /> */}
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}></Grid>
           </Container>

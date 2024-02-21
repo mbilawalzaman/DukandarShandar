@@ -62,7 +62,7 @@ margin-top: 2rem;
 }
 
 .upload-container , .all-upload-container , .blog-upload-container{
-    height: 200px;
+    height: 160px;
     width: 80%;
     text-align: center;
     border: 2px dashed #ccc;
