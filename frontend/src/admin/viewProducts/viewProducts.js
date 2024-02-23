@@ -216,7 +216,7 @@ export default function ViewProducts() {
                   <TableCell>{product.alltitle}</TableCell>
                   <TableCell>{product.alldescription}</TableCell>
                   <TableCell>{product.allprice}</TableCell>
-                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} /><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} onClick={()=>handleAllProductEdit(product._id)}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
                   </TableRow>
                   </> 
                 )
@@ -268,7 +268,7 @@ export default function ViewProducts() {
                   <TableCell>{product.blogTitle}</TableCell>
                   <TableCell>{product.blogDescription}</TableCell>
                   <TableCell>PKR {product.blogPrice}.00</TableCell>
-                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} onClick={()=>handleAllProductEdit(product._id)}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
                   </TableRow>
                   </> 
                 )
