@@ -3,7 +3,8 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: "config.env" });
 
-const DB = process.env.DATABASE;
+const DB = "mongodb+srv://bilawal:Xzc123tp@ecommerce.vifzmrh.mongodb.net/";
+// const DB = process.env.DATABASE;
 
 mongoose
   .connect(DB, {

@@ -41,6 +41,40 @@ router.post("/addproduct", async (req, res) => {
   }
 });
 
+//Update Product Top product getAllProductById
+
+router.put("/editproduct/:id", async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { title, description, price, selectedImage } = req.body;
+
+    if (!title || !description || !price || !selectedImage) {
+      return res.status(409).json({ message: "Please fill all fields" });
+    }
+
+    const updateProduct = await Product.findByIdAndUpdate(
+      productId,
+      {
+        title,
+        description,
+        price,
+        selectedImage,
+      },
+      { new: true },
+    );
+    await updateProduct.save();
+    res.status(201).json({ message: "Product updated successfully" });
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res
+      .status(409)
+      .json({
+        message: "Error updating product when updating ",
+        error: error.message,
+      });
+  }
+});
+
 //Create all Product routes
 
 router.post("/addallproduct", async (req, res) => {
@@ -123,7 +157,7 @@ router.get("/getAllproducts", async (req, res) => {
     const getAllproducts = await allProduct.find({});
     res.status(201).send(getAllproducts);
   } catch (error) {
-    json({ message: "Unable to get All Products" });
+    res.send(409).json({ message: "Unable to get All Products" });
     console.log("Error when getting All Products");
   }
 });
@@ -142,7 +176,7 @@ router.get("/getBlogProducts", async (req, res) => {
 //get Top product by ID
 router.get("/getProductById/:id", async (req, res) => {
   try {
-    const productId = req.params.id.replace(/[^a-f0-9]/gi, ''); // Remove non-hex characters
+    const productId = req.params.id.replace(/[^a-f0-9]/gi, "");
     const singleProduct = await Product.findById(productId);
 
     if (!singleProduct) {
@@ -155,7 +189,6 @@ router.get("/getProductById/:id", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
-
 
 //get All product by ID
 
