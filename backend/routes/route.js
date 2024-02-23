@@ -112,7 +112,7 @@ router.get("/getTopProducts", async (req, res) => {
     const getTopProducts = await Product.find({});
     res.status(201).send(getTopProducts);
   } catch (error) {
-    res.send(409).json({ message: "Unable to get All Products" });
+    console.log({ message: "Unable to get All Products" });
     console.log("Error when getting All Products");
   }
 });
@@ -123,7 +123,7 @@ router.get("/getAllproducts", async (req, res) => {
     const getAllproducts = await allProduct.find({});
     res.status(201).send(getAllproducts);
   } catch (error) {
-    res.send(409).json({ message: "Unable to get All Products" });
+    json({ message: "Unable to get All Products" });
     console.log("Error when getting All Products");
   }
 });
@@ -134,7 +134,7 @@ router.get("/getBlogProducts", async (req, res) => {
     const getBlogProducts = await blogProduct.find({});
     res.status(201).send(getBlogProducts);
   } catch (error) {
-    res.send(409).json({ message: "Unable to get All Blog Products" });
+    console.log({ message: "Unable to get All Blog Products" });
     console.log("Error when getting All Blog Products");
   }
 });
@@ -142,13 +142,20 @@ router.get("/getBlogProducts", async (req, res) => {
 //get Top product by ID
 router.get("/getProductById/:id", async (req, res) => {
   try {
-    const singleProduct = await Product.findById(req.params.id);
-    res.status(201).send(singleProduct);
+    const productId = req.params.id.replace(/[^a-f0-9]/gi, ''); // Remove non-hex characters
+    const singleProduct = await Product.findById(productId);
+
+    if (!singleProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+
+    res.status(200).send(singleProduct);
   } catch (error) {
-    res.send(409).json({ message: "Unable to get single Products" });
-    console.log("Error when getting single Products");
+    console.error("Error when getting single Product:", error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
 
 //get All product by ID
 
@@ -157,7 +164,7 @@ router.get("/getAllProductById/:id", async (req, res) => {
     const AllProduct = await allProduct.findById(req.params.id);
     res.status(201).send(AllProduct);
   } catch (error) {
-    res.send(409).json({ message: "Unable to get single Products" });
+    json({ message: "Unable to get single Products" });
     console.log("Error when getting single Products");
   }
 });
