@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./editProduct.css";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditProduct = () => {
   const [addProductData, setAddProductData] = useState({
@@ -25,7 +27,7 @@ const EditProduct = () => {
   const handleChange = (event) => {
     name = event.target.name;
     value = event.target.value;
-    setAddProductData({ ...addProductData, [name]: value });
+    setRetrieveData({ ...retrieveData, [name]: value });
   };
 
   const handleBase64 = (e) => {
@@ -39,11 +41,30 @@ const EditProduct = () => {
     };
   };
 
-  nst handleSubmit = () => {
-    const response = fetch(`http://localhost:4000/updateProduct/${id}`, {
-      method: "PUT",    
-    })
-  }useEffect(() => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:4000/updateProduct/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(retrieveData),
+        },
+      );
+      if (response.ok) {
+        toast.success("Product updated successfully");
+      } else {
+        toast.error("Failed to update product");
+      }
+    } catch (error) {
+      console.log("Failed to update product", error);
+    }
+  };
+
+  useEffect(() => {
     getData();
   }, []);
   return (
@@ -53,7 +74,7 @@ const EditProduct = () => {
           <div className="add">
             <p>Edit Product</p>
             <div className="formContainer">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="inputArea">
                   <input
                     type="text"
