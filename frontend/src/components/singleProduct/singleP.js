@@ -26,6 +26,7 @@ const getProductD = async () => {
         "Content-Type": "application/json"
       }
   });
+  console.log(fetchD)
   const sData = await fetchD.json();
   setSingleData(sData)
 }

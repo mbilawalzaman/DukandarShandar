@@ -19,7 +19,7 @@ import Review from "./components/checkout/review/review";
 import PlaceOrder from "./components/checkout/placeOrder/placeOrder";
 import Orders from "./pages/orders/orders";
 import ShopSingleProduct from "./components/shopSingleProduct/shopSingleProduct";
-import EditProducts from "./admin/editProducts/editProducts";
+import EditProduct from "./admin/editProducts/editProduct";
 
 const App = () => {
   return (
@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/editproduct:id" element={<EditProducts />} />
+        <Route path="/editproduct/:id" element={<EditProduct/>} />
       </Routes>
     </div>
   );

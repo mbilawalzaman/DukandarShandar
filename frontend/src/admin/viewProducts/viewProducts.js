@@ -120,9 +120,10 @@ export default function ViewProducts() {
 
   };
 
-  const handleAllProduuctEdit = (id) => {
+  const handleAllProductEdit = (id) => {
 
-    Navigate(`/editproduct/${id}`);
+    Navigate(`/editproduct/:${id}`);
+    console.log(id)
   }
 
 
@@ -162,7 +163,7 @@ export default function ViewProducts() {
                   <TableCell>{product.title}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>{product.price}</TableCell>
-                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} onClick={()=>handleAllProduuctEdit(product._id)}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
+                  <TableCell><EditIcon sx={{fontSize:"30px", cursor:"pointer"}} onClick={()=>handleAllProductEdit(product._id)}/><DeleteIcon sx={{marginLeft:"1rem", fontSize:"30px", cursor:"pointer", color:"red" }}/></TableCell>
                   </TableRow>
                   </> 
                 )
