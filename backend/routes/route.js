@@ -22,7 +22,7 @@ router.post("/addproduct", async (req, res) => {
     const { title, description, price, selectedImage } = req.body;
 
     if (!title || !description || !price || !selectedImage) {
-      return res.status(409).json({ message: "Please fill all fields" });
+      return res.status(400).json({ message: "Please fill all fields" });
     }
 
     const addProductData = new Product({
@@ -31,25 +31,27 @@ router.post("/addproduct", async (req, res) => {
       price,
       selectedImage,
     });
+    
     await addProductData.save();
+    
     res.status(201).json({ message: "Product added successfully" });
+
   } catch (error) {
     console.error("Error adding product:", error);
-    res
-      .status(409)
-      .json({ message: "Error adding product", error: error.message });
+    res.status(500).json({ message: "Error adding product", error: error.message });
   }
 });
+
 
 //Update Product Top product getAllProductById
 
 router.put("/editproduct/:id", async (req, res) => {
   try {
-    const productId = req.params.id;
+    const productId = req.params.id.replace(/[^a-f0-9]/gi, "");
     const { title, description, price, selectedImage } = req.body;
 
     if (!title || !description || !price || !selectedImage) {
-      return res.status(409).json({ message: "Please fill all fields" });
+      return res.status(400).json({ message: "Please fill all fields" });
     }
 
     const updateProduct = await Product.findByIdAndUpdate(
@@ -60,20 +62,50 @@ router.put("/editproduct/:id", async (req, res) => {
         price,
         selectedImage,
       },
-      { new: true },
+      { new: true }
     );
-    await updateProduct.save();
-    res.status(201).json({ message: "Product updated successfully" });
+
+    if (!updateProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product updated successfully" });
+
   } catch (error) {
     console.error("Error updating product:", error);
-    res
-      .status(409)
-      .json({
-        message: "Error updating product when updating ",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error updating product",
+      error: error.message,
+    });
   }
 });
+
+
+//Delete Product by id
+
+router.delete("/deleteproduct/:id", async (req, res) => {
+  try {
+    const productId = req.params.id.replace(/[^a-f0-9]/gi, "");
+
+    if (!productId) {
+      return res.status(400).json({ message: "Product Id is required" });
+    }
+
+    // find and delete product
+    const product = await Product.findByIdAndDelete(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
+
+  } catch (error) {
+    console.error("Error Deleting product", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 
 //Create all Product routes
 
@@ -100,6 +132,32 @@ router.post("/addallproduct", async (req, res) => {
       .json({ message: "Error adding product", error: error.message });
   }
 });
+
+//Delete Blog Product by id
+
+router.delete("/deleteallproduct/:id", async (req, res) => {
+  try {
+    const allProductId = req.params.id.replace(/[^a-f0-9]/gi, "");
+
+    if (!allProductId) {
+      return res.status(400).json({ message: "Product Id is required" });
+    }
+
+    // find and delete product
+    const allProducts = await allProduct.findByIdAndDelete(allProductId);
+
+    if (!allProducts) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
+
+  } catch (error) {
+    console.error("Error Deleting product", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 
 //Create a Blog Product routes
 
@@ -137,6 +195,32 @@ router.post("/addBlogProduct", async (req, res) => {
     res
       .status(409)
       .json({ message: "Error adding product", error: error.message });
+  }
+});
+
+
+//Delete Blog Product by id
+
+router.delete("/deleteblogproduct/:id", async (req, res) => {
+  try {
+    const blogProductId = req.params.id.replace(/[^a-f0-9]/gi, "");
+
+    if (!blogProductId) {
+      return res.status(400).json({ message: "Product Id is required" });
+    }
+
+    // find and delete product
+    const blogProducts = await blogProduct.findByIdAndDelete(blogProductId);
+
+    if (!blogProducts) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
+
+  } catch (error) {
+    console.error("Error Deleting product", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

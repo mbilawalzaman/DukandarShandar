@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./editProduct.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const EditProduct = () => {
-  const [addProductData, setAddProductData] = useState({
-    title: "",
-    description: "",
-    price: "",
-  });
+  // const [addProductData, setAddProductData] = useState({
+  //   title: "",
+  //   description: "",
+  //   price: "",
+  // });
   const [selectedImage, setselectedImage] = useState("");
   const [retrieveData, setRetrieveData] = useState([]);
+  const navigate = useNavigate("");
 
   const { id } = useParams();
 
@@ -45,7 +47,7 @@ const EditProduct = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:4000/updateProduct/${id}`,
+        `http://localhost:4000/editproduct/${id}`,
         {
           method: "PUT",
           headers: {
@@ -56,6 +58,7 @@ const EditProduct = () => {
       );
       if (response.ok) {
         toast.success("Product updated successfully");
+        navigate("/admin")
       } else {
         toast.error("Failed to update product");
       }
