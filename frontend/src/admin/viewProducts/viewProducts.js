@@ -17,6 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./viewProducts.css"
 
 const columns: Column[] = [
   { id: "image", label: "Product Image", minWidth: 170 },
@@ -120,6 +121,11 @@ export default function ViewProducts() {
     setAllProductData(allproductD);
   };
 
+  const handleAllProductEdit = (id) => {
+    Navigate(`/editallproduct/:${id}`);
+    console.log(id);
+  };
+
   const getBlogData = async () => {
     const res = await fetch("http://localhost:4000/getBlogProducts", {
       method: "GET",
@@ -131,8 +137,8 @@ export default function ViewProducts() {
     setBlogProductData(blogProductD);
   };
 
-  const handleAllProductEdit = (id) => {
-    Navigate(`/editproduct/:${id}`);
+  const handleBlogProductEdit = (id) => {
+    Navigate(`/editblogproduct/:${id}`);
     console.log(id);
   };
 
@@ -398,11 +404,11 @@ const handleConfirmDeleteBlog = async () => {
                               aria-labelledby="alert-dialog-title"
                               aria-describedby="alert-dialog-description">
                               <DialogTitle id="alert-dialog-title">
-                                Delete All Products
+                                Delete Product
                               </DialogTitle>
                               <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
-                                  Are you sure you want to delete all products?
+                                  Are you sure you want to delete product?
                                 </DialogContentText>
                               </DialogContent>
                               <DialogActions>
@@ -488,7 +494,7 @@ const handleConfirmDeleteBlog = async () => {
                           <TableCell>
                             <EditIcon
                               sx={{ fontSize: "30px", cursor: "pointer" }}
-                              onClick={() => handleAllProductEdit(product._id)}
+                              onClick={() => handleBlogProductEdit(product._id)}
                             />
 
 
@@ -500,11 +506,11 @@ const handleConfirmDeleteBlog = async () => {
                               aria-labelledby="alert-dialog-title"
                               aria-describedby="alert-dialog-description">
                               <DialogTitle id="alert-dialog-title">
-                                Delete All Products
+                                Delete Product
                               </DialogTitle>
                               <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
-                                  Are you sure you want to delete all products?
+                                  Are you sure you want to delete product?
                                 </DialogContentText>
                               </DialogContent>
                               <DialogActions>

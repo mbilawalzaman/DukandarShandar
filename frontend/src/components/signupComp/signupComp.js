@@ -10,6 +10,7 @@ const SignupComp = () => {
     lastName: "",
     email: "",
     password: "",
+    role:"user"
   });
 
   const isValidEmail = (email) => {
@@ -26,7 +27,7 @@ const SignupComp = () => {
   };
 
   const createUser = async () => {
-    const { firstName, lastName, email, password } = signupState;
+    const { firstName, lastName, email, password, role } = signupState;
 
     try {
       if (!isValidEmail(email)) {
@@ -39,7 +40,7 @@ const SignupComp = () => {
         return;
       }
 
-      if (firstName && lastName && email && password) {
+      if (firstName && lastName && email && password, role) {
         const response = await fetch("http://localhost:4000/createUser", {
           method: "POST",
           headers: {
@@ -50,6 +51,7 @@ const SignupComp = () => {
             lastName,
             email,
             password,
+            role
           }),
         });
 
@@ -60,6 +62,7 @@ const SignupComp = () => {
             lastName: "",
             email: "",
             password: "",
+            role: "user"
           });
           navigate("/login");
         } else {
@@ -131,42 +134,6 @@ const SignupComp = () => {
                   onChange={handleChange}
                 />
                 <button onClick={createUser}>SIGN UP</button>
-
-                <div className="m-input">
-                  <input
-                    id="signupFirstName"
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={signupState.firstName}
-                    onChange={handleChange}
-                  />
-                  <input
-                    id="signupLastName"
-                    type="text"
-                    placeholder="Last Name"
-                    name="lastName"
-                    value={signupState.lastName}
-                    onChange={handleChange}
-                  />
-                  <input
-                    id="signupEmail"
-                    type="email"
-                    placeholder="Email Address"
-                    name="email"
-                    value={signupState.email}
-                    onChange={handleChange}
-                  />
-                  <input
-                    id="signupPassword"
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={signupState.password}
-                    onChange={handleChange}
-                  />
-                  <button onClick={createUser}>SIGN UP</button>
-                </div>
               </div>
             </div>
           </div>

@@ -18,14 +18,13 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TableViewIcon from "@mui/icons-material/TableView";
-import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaidIcon from "@mui/icons-material/Paid";
 import dashLogo from "../assets/logo.jpg";
-import AddProduct from "./addProduct/addProduct";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ViewProduct from "./viewProducts/viewProducts";
+import { Link } from "@mui/material";
+
 
 import("./admin.css");
 
@@ -153,6 +152,7 @@ export default function Admin() {
               <div className="firstLink">
                 {toggle ? (
                   <div style={{ display: "flex", alignItems: "center" }}>
+                    
                     <DashboardIcon
                       sx={{ fontSize: "28px", cursor: "pointer" }}
                     />
@@ -164,12 +164,14 @@ export default function Admin() {
               </div>
               <div className="secondLink">
                 {toggle ? (
+                    <Link href="/admin/addproduct">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <AddShoppingCartIcon
                       sx={{ fontSize: "28px", cursor: "pointer" }}
                     />
                     <p>Add Product</p>
                   </div>
+                    </Link>
                 ) : (
                   <AddShoppingCartIcon
                     sx={{ fontSize: "28px", cursor: "pointer" }}
@@ -178,38 +180,16 @@ export default function Admin() {
               </div>
               <div className="thirdLink">
                 {toggle ? (
+                  <Link href="/admin">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <TableViewIcon
                       sx={{ fontSize: "28px", cursor: "pointer" }}
                     />
                     <p>View Product</p>
                   </div>
+                  </Link>
                 ) : (
                   <TableViewIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                )}
-              </div>
-              <div className="fourthLink">
-                {toggle ? (
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <AutoFixHighIcon
-                      sx={{ fontSize: "28px", cursor: "pointer" }}
-                    />
-                    <p>Edit Product</p>
-                  </div>
-                ) : (
-                  <AutoFixHighIcon
-                    sx={{ fontSize: "28px", cursor: "pointer" }}
-                  />
-                )}
-              </div>
-              <div className="fifthtLink">
-                {toggle ? (
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <DeleteIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                    <p>Delete Product</p>
-                  </div>
-                ) : (
-                  <DeleteIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
                 )}
               </div>
               <div className="sixthLink">
@@ -252,7 +232,6 @@ export default function Admin() {
           }}
         >
           <Toolbar />
-          {/* <AddProduct /> */}
           <ViewProduct />
           
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

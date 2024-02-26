@@ -1,11 +1,11 @@
   import React, { useEffect, useState } from "react";
-  import "./editProduct.css";
+  import "./editallProduct.css";
   import { useNavigate, useParams } from "react-router-dom";
   import { toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 
 
-  const EditProduct = () => {
+  const EditallProduct = () => {
     // const [addProductData, setAddProductData] = useState({
     //   title: "",
     //   description: "",
@@ -22,7 +22,7 @@
 
     const getData = async () => {
       const getSingleProduct = await fetch(
-        `http://localhost:4000/getProductById/${id}`,
+        `http://localhost:4000/getAllProductById/${id}`,
       );
       const response = await getSingleProduct.json();
       setRetrieveData(response);
@@ -53,11 +53,11 @@
         
         // Check if selectedImage is not empty before including it
         if (selectedImage !== "") {
-          requestBody.selectedImage = selectedImage;
+          requestBody.selectedAllImage = selectedImage;
         }
     
         const response = await fetch(
-          `http://localhost:4000/editproduct/${id}`,
+          `http://localhost:4000/editallproduct/${id}`,
           {
             method: "PUT",
             headers: {
@@ -96,23 +96,23 @@
                     <input
                       type="text"
                       placeholder="Add Title"
-                      name="title"
-                      value={retrieveData.title}
+                      name="alltitle"
+                      value={retrieveData.alltitle}
                       onChange={handleChange}
                     />
                     <input
                       type="text"
                       placeholder="Add Description"
-                      name="description"
-                      value={retrieveData.description}
+                      name="alldescription"
+                      value={retrieveData.alldescription}
                       onChange={handleChange}
                     />
                     <input
                       type="number"
                       placeholder="Add Price"
                       id="price"
-                      name="price"
-                      value={retrieveData.price}
+                      name="allprice"
+                      value={retrieveData.allprice}
                       onChange={handleChange}
                     />
                   </div>
@@ -125,7 +125,7 @@
                         accept="image/*"
                         type="file"
                         id="image-upload"
-                        name="selectedImage"
+                        name="selectedallImage"
                         // value={retrieveData.selectedImage}
                         onChange={handleBase64}
                       />
@@ -145,4 +145,4 @@
     );
   };
 
-  export default EditProduct;
+  export default EditallProduct;

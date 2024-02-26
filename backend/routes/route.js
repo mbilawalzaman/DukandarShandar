@@ -8,6 +8,8 @@ const createUser = require("../Model/createUserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const Admin = require("../Model/adminLoginModel");
+const sessionModel = require("../Model/sessionModel");
 
 // Function to generate a secure key
 
@@ -43,7 +45,7 @@ router.post("/addproduct", async (req, res) => {
 });
 
 
-//Update Product Top product getAllProductById
+//Update Product Top product
 
 router.put("/editproduct/:id", async (req, res) => {
   try {
@@ -278,25 +280,115 @@ router.get("/getProductById/:id", async (req, res) => {
 
 router.get("/getAllProductById/:id", async (req, res) => {
   try {
-    const AllProduct = await allProduct.findById(req.params.id);
-    res.status(201).send(AllProduct);
+    const allProductId = req.params.id.replace(/[^a-f0-9]/gi, "");
+    const allSingleProduct = await allProduct.findById(allProductId);
+    
+    if (!allSingleProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+
+    res.status(200).send(allSingleProduct);
   } catch (error) {
-    json({ message: "Unable to get single Products" });
-    console.log("Error when getting single Products");
+    console.error("Error when getting single Product:", error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+//Update All Product
+
+router.put("/editallproduct/:id", async (req, res) => {
+  try {
+    const allproductId = req.params.id.replace(/[^a-f0-9]/gi, "");
+    const { alltitle, alldescription, allprice, selectedAllImage } = req.body;
+
+    if (!alltitle || !alldescription || !allprice || !selectedAllImage) {
+      return res.status(400).json({ message: "Please fill all fields" });
+    }
+
+    const updateAllProduct = await allProduct.findByIdAndUpdate(
+      allproductId,
+      {
+        alltitle,
+        alldescription,
+        allprice,
+        selectedAllImage,
+      },
+      { new: true }
+    );
+
+    if (!updateAllProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product updated successfully" });
+
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).json({
+      message: "Error updating product",
+      error: error.message,
+    });
+  }
+});
+
 
 //get Blog product by ID
 
 router.get("/getBlogProductById/:id", async (req, res) => {
   try {
-    const BlogProduct = await blogProduct.findById(req.params.id);
-    res.status(201).send(BlogProduct);
+    const BlogProductId = req.params.id.replace(/[^a-f0-9]/gi, "");
+    const blogSingleProduct = await blogProduct.findById(BlogProductId);
+    
+    if (!blogSingleProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+
+    res.status(200).send(blogSingleProduct);
   } catch (error) {
-    res.send(409).json({ message: "Unable to get single Products" });
-    console.log("Error when getting single Products");
+    console.error("Error when getting single Product:", error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+
+
+//Update Blog Product
+
+router.put("/editblogproduct/:id", async (req, res) => {
+  try {
+    const blogProductId = req.params.id.replace(/[^a-f0-9]/gi, "");
+    const { blogTitle, blogDescription, blogPrice, blogSelectedImage } = req.body;
+
+    if (!blogTitle || !blogDescription || !blogPrice || !blogSelectedImage) {
+      return res.status(400).json({ message: "Please fill all fields" });
+    }
+
+    const updateBlogProduct = await blogProduct.findByIdAndUpdate(
+      blogProductId,
+      {
+        blogTitle,
+        blogDescription,
+        blogPrice,
+        blogSelectedImage,
+      },
+      { new: true }
+    );
+
+    if (!updateBlogProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product updated successfully" });
+
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).json({
+      message: "Error updating product",
+      error: error.message,
+    });
+  }
+});
+
 
 //Create Contact form
 
@@ -328,9 +420,9 @@ router.post("/contact", async (req, res) => {
 
 router.post("/createUser", async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !role) {
       return res.status(409).json({ message: "Please fill all fields" });
     }
 
@@ -339,6 +431,7 @@ router.post("/createUser", async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
+      role
     });
     await createUserData.save();
     res.status(201).json({ message: "User created successfully" });
@@ -364,14 +457,24 @@ router.post("/login", async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, checkUser.password);
 
     if (passwordMatch) {
+      // Create a session
       const token = jwt.sign(
-        { email: checkUser.email },
+        { email: checkUser.email, userId: checkUser._id }, // Include userId in the token
         process.env.JWT_SECRET_KEY,
-        {
-          expiresIn: "1h",
-        },
+        { expiresIn: "1h" }
       );
-      res.status(201).json({ data: token, message: "Login success" });
+
+      // Save the session to your database using your session model
+      const newSession = new sessionModel({ token, userId: checkUser._id }); // Include userId in the session model
+      await newSession.save();
+
+      // Set the session information in a cookie
+      res.cookie("auth", token, {
+        maxAge: 60 * 60 * 1000, // Cookie expires in 1 hour
+        httpOnly: true, // Helps protect against cross-site scripting attacks
+      });
+
+      res.status(201).json({ data: { token, sessionId: newSession._id, userId: checkUser._id }, message: "Login success" });
     } else {
       return res.status(409).json({ message: "Password not match" });
     }
@@ -379,6 +482,88 @@ router.post("/login", async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
+});
+
+
+//get session
+
+router.get("/getsession", async (req, res) => {
+  const { userId, token } = req.query;
+
+  try {
+    // Validate userId and token
+    if (!userId || !token) {
+      return res.status(400).json({ message: "Missing userId or token" });
+    }
+
+    // Check if the session exists
+    const session = await sessionModel.findOne({ userId, token });
+
+    if (session) {
+      console.log("Session found:", session);
+      return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
+    } else {
+      console.log("Session not found");
+      return res.status(404).json({ message: "Session not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
+
+
+// delete session
+
+router.delete("/deletesession/:sessionId", async (req, res) => {
+  const sessionId = req.params.sessionId;
+
+  try {
+    // Find the session by ID and delete it
+    const deletedSession = await sessionModel.findByIdAndDelete(sessionId);
+
+    if (!deletedSession) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    return res.status(200).json({ data: deletedSession, message: "Session deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+//get user by ID
+
+router.get("/getUserById/:id", async (req, res) => {
+  try {
+    const userId = req.params.id.replace(/[^a-f0-9]/gi, "");
+    const singleUser = await createUser.findById(userId);
+    
+    if (!singleUser) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+
+    res.status(200).send(singleUser);
+  } catch (error) {
+    console.error("Error when getting single Product:", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
+
+//admin Router
+
+router.get("/adminlogin", async(req, res)=> {
+  try {
+    const adminLoginCredentials = await Admin.findOne();
+    res.status(201).send(adminLoginCredentials);
+  } catch (error) {
+    console.log({ message: "user not found" });
+  }
+
 });
 
 module.exports = router;

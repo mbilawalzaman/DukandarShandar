@@ -20,8 +20,23 @@ import PlaceOrder from "./components/checkout/placeOrder/placeOrder";
 import Orders from "./pages/orders/orders";
 import ShopSingleProduct from "./components/shopSingleProduct/shopSingleProduct";
 import EditProduct from "./admin/editProducts/editProduct";
+import EditallProduct from "./admin/editallProduct/editallProduct";
+import EditBlogProduct from "./admin/editBlogProduct/editBlogProduct";
+import AddProduct from "./admin/addProduct/addProduct";
+import ViewProducts from "./admin/viewProducts/viewProducts";
+import TotalOrders from "./admin/totalOrders/totalOrders";
+import TotalEarnings from "./admin/totalEarnings/totalEarnings";
+import AdminLogin from "./admin/adminLogin/adminLogin";
 
 const App = () => {
+  localStorage.setItem("adminLogin", false);
+  const isLoggedIn = window.localStorage.getItem("isLoggedIn");
+  const isAdminLoggin = localStorage.getItem("adminLogin");
+
+  console.log("check user logged in or not:", isAdminLoggin);
+
+  
+
   return (
     <div>
       <Routes>
@@ -42,8 +57,14 @@ const App = () => {
         <Route path="/shopproduct/:id" element={<ShopSingleProduct />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/adminlogin" element={<AdminLogin/>} />
+        <Route path="/admin" element={isAdminLoggin === "false" ? <AdminLogin/> : <Admin/> } />
+        <Route path="/admin/addproduct" element={<AddProduct/>} />
+        <Route path="/admin/totalorders" element={<TotalOrders/>} />
+        <Route path="/admin/totalearnings" element={<TotalEarnings/>} />
         <Route path="/editproduct/:id" element={<EditProduct/>} />
+        <Route path="/editallproduct/:id" element={<EditallProduct/>} />
+        <Route path="/editblogproduct/:id" element={<EditBlogProduct/>} />
       </Routes>
     </div>
   );

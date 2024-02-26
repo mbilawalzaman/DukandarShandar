@@ -2,6 +2,7 @@ import { React, useState } from "react";
 // import imageToBase64 from 'image-to-base64/browser';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminAppBar from "../adminAppbar/adminAppbar";
 import("./addProduct.css");
 
 const AddProduct = () => {
@@ -200,6 +201,7 @@ const AddProduct = () => {
 
   return (
     <div>
+      <AdminAppBar/>
       <div className="addProductContainer">
         <div className="addProduct">
           <div className="add">
