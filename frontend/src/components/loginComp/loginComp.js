@@ -3,6 +3,7 @@ import "./loginComp.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+
 const LoginComp = () => {
   const navigate = useNavigate();
   const [loginState, setloginState] = useState({
@@ -48,12 +49,20 @@ const LoginComp = () => {
 
         const data = await response.json();
         console.log("data", data);
+        console.log("---------------------==========-=-=-=-=-=-=-=--------------------");
+        console.log(response.headers)
+        const authToken = response.headers['set-cookie'][0].split('=')[1].split(';')[0];
+    console.log('AuthToken:', authToken);
 
         if (data && data.message !== "User not found") {
           toast.success("Login successfully");
           window.localStorage.setItem("isLoggedIn", true);
-          window.localStorage.setItem("token", data.data);
-          navigate("/");
+          window.localStorage.setItem("token", data.data.token);
+          if (data.data.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
           console.log("User login successfully", data);
         } else if (data && data.message === "User not found") {
           toast.error("User not found. Redirecting to signup.");

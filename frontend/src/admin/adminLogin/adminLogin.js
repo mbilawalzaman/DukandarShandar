@@ -21,8 +21,30 @@ const AdminLogin = () => {
   };
 
   const login = async () => {
-    toast.success("Admin login sucessfully")
+    // Check the credentials (you may replace this with your actual authentication logic)
+    const isValidCredentials = true; // Replace this with your authentication logic
+  
+    if (isValidCredentials) {
+      // Set adminLogin status in localStorage
+      localStorage.setItem("adminLogin", "true");
+  
+      // Display success toast
+      toast.success("Admin login successfully");
+  
+      // Navigate to the /admin route
+      navigate("/admin");
+    } else {
+      // Display error toast for unsuccessful login
+      toast.error("Invalid email or password");
+  
+      // Set adminLogin status to "false" in localStorage for unsuccessful login
+      localStorage.setItem("adminLogin", "false");
+  
+      // Navigate to /admin/login for unsuccessful login
+      navigate("/admin/login");
+    }
   };
+  
 
   return (
     <>

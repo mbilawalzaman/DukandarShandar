@@ -24,8 +24,6 @@ import dashLogo from "../assets/logo.jpg";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ViewProduct from "./viewProducts/viewProducts";
 import { Link } from "@mui/material";
-
-
 import("./admin.css");
 
 const drawerWidth = 240;
