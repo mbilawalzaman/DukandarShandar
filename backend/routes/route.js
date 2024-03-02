@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Admin = require("../Model/adminLoginModel");
 const sessionModel = require("../Model/sessionModel");
+const { token } = require("morgan");
 
 // Function to generate a secure key
 
@@ -433,6 +434,7 @@ router.post("/createUser", async (req, res) => {
       password: hashedPassword,
       role
     });
+    
     await createUserData.save();
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
@@ -444,7 +446,6 @@ router.post("/createUser", async (req, res) => {
 });
 
 // crete login API
-
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -457,24 +458,38 @@ router.post("/login", async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, checkUser.password);
 
     if (passwordMatch) {
-      // Create a session
+      // Check if a session exists for the user
+      const existingSession = await sessionModel.findOne({ userId: checkUser._id });
+
+      // If a session exists, delete it
+      if (existingSession) {
+        await sessionModel.findByIdAndDelete(existingSession._id);
+      }
+
+      // Create a new session
       const token = jwt.sign(
-        { email: checkUser.email, userId: checkUser._id }, // Include userId in the token
+        { email: checkUser.email, userId: checkUser._id },
         process.env.JWT_SECRET_KEY,
         { expiresIn: "1h" }
       );
 
-      // Save the session to your database using your session model
-      const newSession = new sessionModel({ token, userId: checkUser._id }); // Include userId in the session model
+      const newSession = new sessionModel({ token, userId: checkUser._id });
       await newSession.save();
 
       // Set the session information in a cookie
-      res.cookie("auth", token, {
+      res.cookie("auth", token);
+      res.cookie('authToken', token, {
         maxAge: 60 * 60 * 1000, // Cookie expires in 1 hour
-        httpOnly: true, // Helps protect against cross-site scripting attacks
+        httpOnly: true,
+        // You can also set other cookie options like secure: true for HTTPS
       });
+      console.log(res);
+      console.log('--------------------------------================-');
 
-      res.status(201).json({ data: { token, sessionId: newSession._id, userId: checkUser._id }, message: "Login success" });
+      res.status(201).json({
+        data: { token, sessionId: newSession._id, userId: checkUser._id },
+        message: "Login success"
+      });
     } else {
       return res.status(409).json({ message: "Password not match" });
     }
@@ -484,23 +499,29 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-//get session
-
 router.get("/getsession", async (req, res) => {
-  const { userId, token } = req.query;
+  const { userId } = req.query;
 
   try {
-    // Validate userId and token
-    if (!userId || !token) {
-      return res.status(400).json({ message: "Missing userId or token" });
+    // Validate userId
+    if (!userId) {
+      return res.status(400).json({ message: "Missing userId" });
     }
 
     // Check if the session exists
-    const session = await sessionModel.findOne({ userId, token });
+    const session = await sessionModel.findOne({ userId });
 
     if (session) {
       console.log("Session found:", session);
+      const checkUser = await createUser.findById(userId);
+
+      if (!checkUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Retrieve the token from the user document
+      const token = checkUser.token;
+
       return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
     } else {
       console.log("Session not found");
@@ -511,6 +532,70 @@ router.get("/getsession", async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+
+
+
+
+
+
+
+//get session
+
+// router.get("/getsession", async (req, res) => {
+//   const { userId, token } = req.query;
+
+//   try {
+//     // Validate userId and token
+//     if (!userId || !token) {
+//       return res.status(400).json({ message: "Missing userId or token" });
+//     }
+
+//     // Check if the session exists
+//     const session = await sessionModel.findOne({ userId, token });
+
+//     if (session) {
+//       console.log("Session found:", session);
+//       return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
+//     } else {
+//       console.log("Session not found");
+//       return res.status(404).json({ message: "Session not found" });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
+//get session
+router.get("/getsession", async (req, res) => {
+  const { userId } = req.query;
+
+  try {
+    // Validate userId
+    if (!userId) {
+      return res.status(400).json({ message: "Missing userId" });
+    }
+
+    // Assume you have some logic to generate or retrieve the token
+    const token = generateToken(); // Replace with your logic to get the token
+
+    // Check if the session exists
+    const session = await sessionModel.findOne({ userId });
+
+    if (session) {
+      console.log("Session found:", session, token);
+      return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
+    } else {
+      console.log("Session not found");
+      return res.status(404).json({ message: "Session not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
 
 
 

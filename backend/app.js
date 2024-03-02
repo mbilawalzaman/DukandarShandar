@@ -1,27 +1,36 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
 const app = express();
 
+// Use built-in express.json() and express.urlencoded() for body parsing
+app.use(express.json({ limit: "256mb" }));
+app.use(express.urlencoded({ limit: "256mb", extended: true }));
 
-app.use(bodyParser.json({ limit: '256mb' }));
-app.use(bodyParser.urlencoded({ limit: '256mb', extended: true }));
-
-//database Connection
-require("./database/dbConnection")
+// Database Connection
+require("./database/dbConnection");
 
 // Config
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 
-//defing Routes
-app.use(cookieParser());
-app.use(cors({credentials: true,origin: true}));
-app.use(express.json());
-app.use(require("./routes/route"))
-
-
+// Defining Routes
+app.use(require("cookie-parser")());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  }),
+);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with your client's origin
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
+app.use(require("./routes/route"));
 
 const PORT = process.env.PORT;
 
