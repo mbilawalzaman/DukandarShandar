@@ -23,20 +23,12 @@ import EditProduct from "./admin/editProducts/editProduct";
 import EditallProduct from "./admin/editallProduct/editallProduct";
 import EditBlogProduct from "./admin/editBlogProduct/editBlogProduct";
 import AddProduct from "./admin/addProduct/addProduct";
-import ViewProducts from "./admin/viewProducts/viewProducts";
 import TotalOrders from "./admin/totalOrders/totalOrders";
 import TotalEarnings from "./admin/totalEarnings/totalEarnings";
 import AdminLogin from "./admin/adminLogin/adminLogin";
-import ProtectedRoute from '../src/middleware';
 
 
-const App = () => {
-  localStorage.setItem("adminLogin", "false");
-  const isLoggedIn = window.localStorage.getItem("isLoggedIn");
-  const isAdminLoggedIn = JSON.parse(localStorage.getItem("adminLogin"));
-
-  console.log("check user logged in or not:", isAdminLoggedIn);
-  
+const App = () => {   
 
   return (
     <div>
@@ -59,17 +51,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/adminlogin" element={<AdminLogin/>} />
-        <Route path="/admin" element={
-            
-            <ProtectedRoute Component={Admin} />
-
-
-        } >             </Route>
-        <Route
-          path="/admin"
-          element={isAdminLoggedIn ? <Admin /> : <AdminLogin />}
-        />
-        
+        <Route path="/admin" element={<Admin/>} />
         <Route path="/admin/addproduct" element={<AddProduct/>} />
         <Route path="/admin/totalorders" element={<TotalOrders/>} />
         <Route path="/admin/totalearnings" element={<TotalEarnings/>} />

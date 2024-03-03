@@ -41,6 +41,7 @@ const LoginComp = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify({
             email,
             password,
@@ -49,10 +50,7 @@ const LoginComp = () => {
 
         const data = await response.json();
         console.log("data", data);
-        console.log("---------------------==========-=-=-=-=-=-=-=--------------------");
-        console.log(response.headers)
-        const authToken = response.headers['set-cookie'][0].split('=')[1].split(';')[0];
-    console.log('AuthToken:', authToken);
+
 
         if (data && data.message !== "User not found") {
           toast.success("Login successfully");

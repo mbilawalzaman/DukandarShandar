@@ -458,6 +458,9 @@ router.post("/login", async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, checkUser.password);
 
     if (passwordMatch) {
+      // Fetch user role from the database
+      const userRole = checkUser.role; // Assuming 'role' is a field in your createUser model
+
       // Check if a session exists for the user
       const existingSession = await sessionModel.findOne({ userId: checkUser._id });
 
@@ -468,7 +471,7 @@ router.post("/login", async (req, res) => {
 
       // Create a new session
       const token = jwt.sign(
-        { email: checkUser.email, userId: checkUser._id },
+        { email: checkUser.email, userId: checkUser._id, role: userRole }, // Include the role in the JWT payload
         process.env.JWT_SECRET_KEY,
         { expiresIn: "1h" }
       );
@@ -477,17 +480,30 @@ router.post("/login", async (req, res) => {
       await newSession.save();
 
       // Set the session information in a cookie
-      res.cookie("auth", token);
-      res.cookie('authToken', token, {
-        maxAge: 60 * 60 * 1000, // Cookie expires in 1 hour
+      res.cookie('userId', checkUser._id, {
+        maxAge: 60 * 60 * 1000,
         httpOnly: true,
-        // You can also set other cookie options like secure: true for HTTPS
+        secure: true, // Set to true for HTTPS
+        domain: 'localhost', // Adjust as needed
+        path: '/', // Specify the path if needed
       });
-      console.log(res);
-      console.log('--------------------------------================-');
+      
+      res.cookie('token', token, {
+        maxAge: 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true, // Set to true for HTTPS
+        domain: 'localhost', // Adjust as needed
+        path: '/', // Specify the path if needed
+      });
 
+      // Send the token, session ID, user ID, and user role in the response
       res.status(201).json({
-        data: { token, sessionId: newSession._id, userId: checkUser._id },
+        data: {
+          token,
+          sessionId: newSession._id,
+          userId: checkUser._id,
+          role: userRole, // Include the user role
+        },
         message: "Login success"
       });
     } else {
@@ -499,7 +515,37 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/getsession", async (req, res) => {
+// Middleware to check if the user is an admin
+const isAdmin = (req, res, next) => {
+  const token = req.cookies.token; // Assuming you're storing the token in a cookie
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized - No token provided" });
+  }
+
+  try {
+    // Verify the token and extract the user information
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+    // Check if the user has the admin role
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({ message: "Forbidden - Admin access required" });
+    }
+
+    // If the user is an admin, proceed to the next middleware or route handler
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Unauthorized - Invalid token" });
+  }
+};
+
+// Use the isAdmin middleware for the /admin route
+router.get("/admin", isAdmin, async (req, res) => {
+  // Your existing /admin route logic goes ere
+  res.send('Admin page');
+});
+
+router.get("/getsessionbyid", async (req, res) => {
   const { userId } = req.query;
 
   try {
@@ -534,56 +580,24 @@ router.get("/getsession", async (req, res) => {
 });
 
 
+// get session
 
-
-
-
-
-//get session
-
-// router.get("/getsession", async (req, res) => {
-//   const { userId, token } = req.query;
-
-//   try {
-//     // Validate userId and token
-//     if (!userId || !token) {
-//       return res.status(400).json({ message: "Missing userId or token" });
-//     }
-
-//     // Check if the session exists
-//     const session = await sessionModel.findOne({ userId, token });
-
-//     if (session) {
-//       console.log("Session found:", session);
-//       return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
-//     } else {
-//       console.log("Session not found");
-//       return res.status(404).json({ message: "Session not found" });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ message: "Internal server error" });
-//   }
-// });
-
-//get session
 router.get("/getsession", async (req, res) => {
-  const { userId } = req.query;
+  const { userId, token } = req.query;
+  console.log("Received userId:", userId);
+  console.log("Received token:", token);
 
   try {
-    // Validate userId
-    if (!userId) {
-      return res.status(400).json({ message: "Missing userId" });
+    // Validate userId and token
+    if (!userId || !token) {
+      return res.status(400).json({ message: "Missing userId or token" });
     }
 
-    // Assume you have some logic to generate or retrieve the token
-    const token = generateToken(); // Replace with your logic to get the token
-
     // Check if the session exists
-    const session = await sessionModel.findOne({ userId });
+    const session = await sessionModel.findOne({ userId, token });
 
     if (session) {
-      console.log("Session found:", session, token);
+      console.log("Session found:", session);
       return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
     } else {
       console.log("Session not found");
@@ -594,6 +608,7 @@ router.get("/getsession", async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 
 
