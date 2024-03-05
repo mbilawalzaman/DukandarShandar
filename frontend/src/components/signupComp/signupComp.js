@@ -40,7 +40,7 @@ const SignupComp = () => {
         return;
       }
 
-      if (firstName && lastName && email && password, role) {
+      if (firstName && lastName && email && password && role) {
         const response = await fetch("http://localhost:4000/createUser", {
           method: "POST",
           headers: {

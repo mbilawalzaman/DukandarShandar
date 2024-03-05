@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MenuIcon from "@mui/icons-material/Menu";
 import ClearIcon from '@mui/icons-material/Clear';
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart.cartData);
@@ -14,6 +15,7 @@ const Navbar = () => {
 
   const logoutUser = () => {
     window.localStorage.clear();
+    Cookies.remove('authToken-b');
     window.location.href = "/login";
   };
 
