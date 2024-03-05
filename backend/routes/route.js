@@ -448,61 +448,44 @@ router.post("/createUser", async (req, res) => {
 // crete login API
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  
   try {
-    const checkUser = await createUser.findOne({ email });
+    const user = await createUser.findOne({ email });
 
-    if (!checkUser) {
+    if (!user) {
       return res.status(409).json({ message: "User not found" });
     }
 
-    const passwordMatch = await bcrypt.compare(password, checkUser.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (passwordMatch) {
-      // Fetch user role from the database
-      const userRole = checkUser.role; // Assuming 'role' is a field in your createUser model
+      const userRole = user.role;
 
-      // Check if a session exists for the user
-      const existingSession = await sessionModel.findOne({ userId: checkUser._id });
+      const existingSession = await sessionModel.findOne({ userId: user._id });
 
-      // If a session exists, delete it
       if (existingSession) {
         await sessionModel.findByIdAndDelete(existingSession._id);
       }
 
-      // Create a new session
       const token = jwt.sign(
-        { email: checkUser.email, userId: checkUser._id, role: userRole }, // Include the role in the JWT payload
+        { email: user.email, userId: user._id, role: userRole },
         process.env.JWT_SECRET_KEY,
         { expiresIn: "1h" }
       );
 
-      const newSession = new sessionModel({ token, userId: checkUser._id });
+      const newSession = new sessionModel({ token, userId: user._id });
       await newSession.save();
 
-      // Set the session information in a cookie
-      res.cookie('userId', checkUser._id, {
+      res.cookie('authToken-b', token, {
         maxAge: 60 * 60 * 1000,
-        httpOnly: true,
-        secure: true, // Set to true for HTTPS
-        domain: 'localhost', // Adjust as needed
-        path: '/', // Specify the path if needed
-      });
-      
-      res.cookie('token', token, {
-        maxAge: 60 * 60 * 1000,
-        httpOnly: true,
-        secure: true, // Set to true for HTTPS
-        domain: 'localhost', // Adjust as needed
-        path: '/', // Specify the path if needed
       });
 
-      // Send the token, session ID, user ID, and user role in the response
       res.status(201).json({
         data: {
           token,
-          sessionId: newSession._id,
-          userId: checkUser._id,
-          role: userRole, // Include the user role
+          sessionId: newSession._id, // Assuming MongoDB generates the _id
+          userId: user._id,
+          role: userRole,
         },
         message: "Login success"
       });
@@ -515,35 +498,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Middleware to check if the user is an admin
-const isAdmin = (req, res, next) => {
-  const token = req.cookies.token; // Assuming you're storing the token in a cookie
 
-  if (!token) {
-    return res.status(401).json({ message: "Unauthorized - No token provided" });
-  }
-
-  try {
-    // Verify the token and extract the user information
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-    // Check if the user has the admin role
-    if (decoded.role !== 'admin') {
-      return res.status(403).json({ message: "Forbidden - Admin access required" });
-    }
-
-    // If the user is an admin, proceed to the next middleware or route handler
-    next();
-  } catch (error) {
-    return res.status(401).json({ message: "Unauthorized - Invalid token" });
-  }
-};
-
-// Use the isAdmin middleware for the /admin route
-router.get("/admin", isAdmin, async (req, res) => {
-  // Your existing /admin route logic goes ere
-  res.send('Admin page');
-});
 
 router.get("/getsessionbyid", async (req, res) => {
   const { userId } = req.query;
@@ -559,16 +514,14 @@ router.get("/getsessionbyid", async (req, res) => {
 
     if (session) {
       console.log("Session found:", session);
-      const checkUser = await createUser.findById(userId);
 
-      if (!checkUser) {
-        return res.status(404).json({ message: "User not found" });
-      }
+      // You can directly use the token from the session object
+      const token = session.token;
 
-      // Retrieve the token from the user document
-      const token = checkUser.token;
+      // Log data before returning
+      console.log("Data:", { sessionId: session._id, token: token });
 
-      return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
+      return res.status(200).json({ data: { sessionId: session._id, token: token }, message: "Session found" });
     } else {
       console.log("Session not found");
       return res.status(404).json({ message: "Session not found" });
@@ -580,35 +533,45 @@ router.get("/getsessionbyid", async (req, res) => {
 });
 
 
-// get session
 
-router.get("/getsession", async (req, res) => {
-  const { userId, token } = req.query;
-  console.log("Received userId:", userId);
-  console.log("Received token:", token);
+
+// Get session by passing email and password
+router.post("/getsession", async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-    // Validate userId and token
-    if (!userId || !token) {
-      return res.status(400).json({ message: "Missing userId or token" });
+    const user = await createUser.findOne({ email });
+
+    if (!user) {
+      return res.status(409).json({ message: "User not found" });
     }
 
-    // Check if the session exists
-    const session = await sessionModel.findOne({ userId, token });
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (session) {
-      console.log("Session found:", session);
-      return res.status(200).json({ data: { sessionId: session._id, token }, message: "Session found" });
+    if (passwordMatch) {
+      const session = await sessionModel.findOne({ userId: user._id });
+
+      if (session) {
+        return res.status(200).json({
+          data: {
+            sessionId: session._id,
+            token: session.token,
+            userId: user._id,
+            role: user.role,
+          },
+          message: "Session found"
+        });
+      } else {
+        return res.status(404).json({ message: "Session not found" });
+      }
     } else {
-      console.log("Session not found");
-      return res.status(404).json({ message: "Session not found" });
+      return res.status(409).json({ message: "Password not match" });
     }
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 
 

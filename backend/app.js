@@ -15,17 +15,15 @@ dotenv.config({ path: "./config.env" });
 
 // Defining Routes
 app.use(require("cookie-parser")());
+
+// Use cors middleware
 app.use(
   cors({
     credentials: true,
     origin: "http://localhost:3000",
-  }),
+  })
 );
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+
 app.use(require("./routes/route"));
 
 const PORT = process.env.PORT;

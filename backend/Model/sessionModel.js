@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const SessionSchema = new mongoose.Schema({
   token: {
     type: String,
-    unique: true,  // Token should be unique
-    required: true,  // Token is required
+    unique: true,
+    required: true,
   },
   userId: {
     type: String,
-    unique: true,  // userId should be unique
-    required: true,  // userId is required
+    unique: true,
+    required: true,
   },
 });
 
