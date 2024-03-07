@@ -40,9 +40,9 @@ const BlogProducts = () => {
     }
   };
 
-  const getBlogProductsById = async (id) => {
+  const getBlogProductById = async (id) => {
     console.log(id);
-    navigate(`/blogProduct/${id}`);
+    navigate(`/shopproduct/${id}`);
   };
 
   useEffect(() => {
@@ -143,7 +143,7 @@ const BlogProducts = () => {
                         <div
                           className="blog-product-boxes"
                           onClick={() =>
-                            getBlogProductsById(products.blogProductId)
+                            getBlogProductById(products._id)
                           }>
                           <img src={products.blogSelectedImage} alt="" />
                           <div className="blog-title">
