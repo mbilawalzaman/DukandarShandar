@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ShopSingleProduct = () => {
+const BlogSingleProduct = () => {
   const [value, setValue] = React.useState(4);
   const [quantity, setQuantity] = useState(1);
   const [blogData, setBlogData] = useState({});
@@ -64,17 +64,18 @@ const ShopSingleProduct = () => {
   };
 
   const buyNow = (image, title, price, quantity) => {
-    let directly_buy_now_data = { image: image, title: title, price: price, quantity: quantity };
+    let directly_buy_now_data = {
+      image: image,
+      title: title,
+      price: price,
+      quantity: quantity,
+    };
     console.log("Actual data buy now: ", directly_buy_now_data);
     dispatch(add_To_CART(directly_buy_now_data));
     dispatch(cart_total_price(directly_buy_now_data.price));
     dispatch(qtt(quantity));
     dispatch(cartTotal(directly_buy_now_data.price * quantity));
-    console.log("Navigating to /checkout");
-    navigate("/checkout");
   };
-  
-  
 
   useEffect(() => {
     getBlogProductD();
@@ -116,7 +117,19 @@ const ShopSingleProduct = () => {
               </button>
             </div>
             <div className="blog-add-tocart-and-buy-now-btns">
-            <button id="buy-now_btn" onClick={()=>buyNow(blogData.selectedImage, blogData.title, blogData.price, quantity)}>BUY NOW</button>
+              <button
+                id="blog-buy-now_btn"
+                onClick={() =>
+                  buyNow(
+                    blogData.blogSelectedImage,
+                    blogData.blogTitle,
+                    blogData.blogPrice,
+                    quantity,
+                  )
+                }
+              >
+                BUY NOW
+              </button>
               <button
                 id="blog-add-tocart_btn"
                 onClick={() =>
@@ -126,7 +139,8 @@ const ShopSingleProduct = () => {
                     blogData.blogPrice,
                     quantity,
                   )
-                }>
+                }
+              >
                 ADD TO CART
               </button>
             </div>
@@ -137,4 +151,4 @@ const ShopSingleProduct = () => {
   );
 };
 
-export default ShopSingleProduct;
+export default BlogSingleProduct;
