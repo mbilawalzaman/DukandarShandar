@@ -16,15 +16,14 @@ import Grid from "@mui/material/Grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import TableViewIcon from "@mui/icons-material/TableView";
-import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaidIcon from "@mui/icons-material/Paid";
 import dashLogo from "../assets/logo.jpg";
-import AddProduct from "./addProduct/addProduct";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ViewProduct from "./viewProducts/viewProducts";
+import { Link } from "@mui/material";
 import("./admin.css");
 
 const drawerWidth = 240;
@@ -91,11 +90,13 @@ export default function Admin() {
         <AppBar
           position="absolute"
           open={open}
-          sx={{ backgroundColor: "#e8ecef" }}>
+          sx={{ backgroundColor: "#e8ecef" }}
+        >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
-            }}>
+            }}
+          >
             <IconButton
               edge="start"
               color="inherit"
@@ -105,7 +106,8 @@ export default function Admin() {
                 marginRight: "36px",
                 ...(open && { display: "none" }),
                 color: "black",
-              }}>
+              }}
+            >
               <MenuIcon />
             </IconButton>
             <Typography
@@ -113,7 +115,8 @@ export default function Admin() {
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1, fontFamily: "Poppins", color: "black" }}>
+              sx={{ flexGrow: 1, fontFamily: "Poppins", color: "black" }}
+            >
               Dashboard
             </Typography>
             <IconButton color="inherit">
@@ -130,7 +133,8 @@ export default function Admin() {
               alignItems: "center",
               justifyContent: "flex-end",
               px: [1],
-            }}>
+            }}
+          >
             <div className="dashboardLogoContainer">
               <div className="dashboardLogo">
                 <img src={dashLogo} alt="Dashlogo" />
@@ -143,55 +147,72 @@ export default function Admin() {
           <Divider />
           <div className="listMainContainer">
             <div className="listContainer">
-            <div className="firstLink">
-                {toggle ? <div style={{display:"flex", alignItems:"center"}}>
-                    <DashboardIcon sx={{ fontSize: "28px", cursor: "pointer" }}/><p>Dashboard</p></div>
-                    :<DashboardIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                }
+              <div className="firstLink">
+                {toggle ? (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    
+                    <DashboardIcon
+                      sx={{ fontSize: "28px", cursor: "pointer" }}
+                    />
+                    <p>Dashboard</p>
+                  </div>
+                ) : (
+                  <DashboardIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
+                )}
               </div>
               <div className="secondLink">
-                {toggle ? <div style={{display:"flex", alignItems:"center"}}>
-                    <AddShoppingCartIcon sx={{ fontSize: "28px", cursor: "pointer" }}/><p>Add Product</p></div>
-                    :<AddShoppingCartIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                }
+                {toggle ? (
+                    <Link href="/admin/addproduct">
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <AddShoppingCartIcon
+                      sx={{ fontSize: "28px", cursor: "pointer" }}
+                    />
+                    <p>Add Product</p>
+                  </div>
+                    </Link>
+                ) : (
+                  <AddShoppingCartIcon
+                    sx={{ fontSize: "28px", cursor: "pointer" }}
+                  />
+                )}
               </div>
               <div className="thirdLink">
-                {toggle ? <div style={{display:"flex", alignItems:"center"}}><TableViewIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />
-                <p>View Product</p></div>: <TableViewIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />}
-              </div>c,
-              <div className="fourthLink">
-              {toggle ? <div style={{display:"flex", alignItems:"center"}}><AutoFixHighIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                <p>Edit Product</p>
-                </div>: <AutoFixHighIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />}
-                
-              </div>
-              <div className="fifthtLink">
-              {toggle ? <div style={{display:"flex", alignItems:"center"}}><DeleteIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                <p>Delete Product</p>
-                </div>: <DeleteIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />}
+                {toggle ? (
+                  <Link href="/admin">
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <TableViewIcon
+                      sx={{ fontSize: "28px", cursor: "pointer" }}
+                    />
+                    <p>View Product</p>
+                  </div>
+                  </Link>
+                ) : (
+                  <TableViewIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
+                )}
               </div>
               <div className="sixthLink">
-              {toggle ? <div style={{display:"flex", alignItems:"center"}}><ShoppingCartIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />
-                <p>Total Orders</p></div>: <ShoppingCartIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />}
+                {toggle ? (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <ShoppingCartIcon
+                      sx={{ fontSize: "28px", cursor: "pointer" }}
+                    />
+                    <p>Total Orders</p>
+                  </div>
+                ) : (
+                  <ShoppingCartIcon
+                    sx={{ fontSize: "28px", cursor: "pointer" }}
+                  />
+                )}
               </div>
               <div className="seventhLink">
-              {toggle ? <div style={{display:"flex", alignItems:"center"}}><PaidIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
-                <p>Total Earnings</p></div>: <PaidIcon
-                  sx={{ fontSize: "28px", cursor: "pointer" }}
-                />}
-                
+                {toggle ? (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <PaidIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
+                    <p>Total Earnings</p>
+                  </div>
+                ) : (
+                  <PaidIcon sx={{ fontSize: "28px", cursor: "pointer" }} />
+                )}
               </div>
             </div>
           </div>
@@ -206,9 +227,11 @@ export default function Admin() {
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
-          }}>
+          }}
+        >
           <Toolbar />
-          <AddProduct/>
+          <ViewProduct />
+          
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}></Grid>
           </Container>

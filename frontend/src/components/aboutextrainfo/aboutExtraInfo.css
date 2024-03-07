@@ -12,9 +12,6 @@
     align-items: center;
     
 }
-.double-icons{
-    
-}
 
 .extra-info p{
     width: 75%;
@@ -22,4 +19,51 @@
     font-size: 15px;
     letter-spacing: .5px;
     word-spacing: 1px;
+}
+
+/* Responsive About extra information */
+
+@media screen and (max-width: 989px) {
+    .extra-info{
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .extra-info{
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;       
+    }
+}
+@media screen and (max-width: 618px) {
+    .extra-info{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;       
+    }
+}
+@media screen and (max-width: 415px) {
+    .extra-info p{
+        width: 95%;
+        text-align: center;
+        font-size: 15px;
+        letter-spacing: .5px;
+        word-spacing: 1px;
+    }
+}
+@media screen and (max-width: 372px) {
+    .extra-info p{
+        width: 95%;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: .5px;
+        word-spacing: 1px;
+    }
 }

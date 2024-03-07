@@ -1,0 +1,11 @@
+.Total-earnings-cards-main-container{
+    display: flex;
+    justify-content: center;
+}
+
+.Total-earnings-cards-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    width: 60%;
+}

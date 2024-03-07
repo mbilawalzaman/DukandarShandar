@@ -3,19 +3,20 @@ import {useDispatch } from 'react-redux'
 import "./singleP.css"
 import Rating from '@mui/material/Rating';
 import { useNavigate, useParams } from 'react-router-dom';
-import { add_To_CART } from '../../features/cartSlice';
+import { add_To_CART , cart_total_price, qtt , cartTotal} from '../../features/cartSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const SingleP = () => {
   const [value, setValue] = React.useState(4);
   const [singleData, setSingleData] = useState({})
+  const  [quantity , setQuantity] = useState (1)
   
   const dispatch = useDispatch()
-
-const navigate = useNavigate()
-
-const params = useParams();
+  const navigate = useNavigate()
+  const params = useParams();
 
 
 const getProductD = async () => {
@@ -25,20 +26,47 @@ const getProductD = async () => {
         "Content-Type": "application/json"
       }
   });
+  console.log(fetchD)
   const sData = await fetchD.json();
   setSingleData(sData)
 }
 
-const addtocart = (image , title, price) => {
-  let cData = {image: image, title:title, price :price}
-  dispatch(add_To_CART(cData)) 
-  alert("Product added to Cart!")
-  navigate("/cart")
+const addtocart = (image , title, price, quantity) => {
+  console.log("Actual qty: ", quantity)
+  let cData = {image: image, title:title, price :price, quantity: quantity}
+  dispatch(add_To_CART(cData))
+  dispatch(cart_total_price(cData.price))
+  dispatch(qtt(quantity))
+  dispatch(cartTotal(cData.price*quantity))
+  toast.success("Product added to Cart!")
+}
+
+const increment = () => {
+  setQuantity(quantity+1)
+}
+
+const decrement = () => {
+  setQuantity(quantity-1)
+  if (quantity === 1) {
+    setQuantity(1)
+    toast.error("Product Quantity can not be less than One")
+  }
+}
+
+const buyNow = (image , title, price, quantity) => {
+  let directly_buy_now_data = {image: image, title:title, price :price, quantity: quantity}
+  console.log("Actual data buy now: ", directly_buy_now_data)
+  dispatch(add_To_CART(directly_buy_now_data))
+  dispatch(cart_total_price(directly_buy_now_data.price))
+  dispatch(qtt(quantity))
+  dispatch(cartTotal(directly_buy_now_data.price*quantity))
+  navigate("/checkout")
 }
 
 
 useEffect(() => {
   getProductD();
+  
 });
 
 
@@ -56,13 +84,13 @@ useEffect(() => {
           <p className='desc-paragraph'>{singleData.description} Cute MINI Unicorn School Bag for girls playgroup PICNIC BAG creative character designed backpack | Cute stationary items for girls</p>
           <div className='quantity-div'>
             <p>Quantity: </p>
-            <button id="minus_btn">-</button>
-            <button id="count_btn">1</button>
-            <button id="plus_btn">+</button>
+            <button id="minus_btn"onClick={decrement}>-</button>
+            <button id="count_btn">{quantity}</button>
+            <button id="plus_btn" onClick={increment}>+</button>
           </div>
           <div className='add-tocart-and-buy-now-btns'>
-            <button id="buy-now_btn" >BUY NOW</button>
-            <button id="add-tocart_btn"onClick={()=>addtocart(singleData.selectedImage, singleData.title, singleData.price)}>ADD TO CART</button>
+            <button id="buy-now_btn" onClick={()=>buyNow(singleData.selectedImage, singleData.title, singleData.price, quantity)}>BUY NOW</button>
+            <button id="add-tocart_btn"onClick={()=>addtocart(singleData.selectedImage, singleData.title, singleData.price, quantity)}>ADD TO CART</button>
           </div>
         </div>
 

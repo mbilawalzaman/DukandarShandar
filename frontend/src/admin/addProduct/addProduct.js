@@ -1,5 +1,8 @@
 import { React, useState } from "react";
 // import imageToBase64 from 'image-to-base64/browser';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AdminAppBar from "../adminAppbar/adminAppbar";
 import("./addProduct.css");
 
 const AddProduct = () => {
@@ -8,7 +11,7 @@ const AddProduct = () => {
     description: "",
     price: "",
   });
-  
+
   const [addAllProductData, setAllAddProductData] = useState({
     alltitle: "",
     alldescription: "",
@@ -45,15 +48,15 @@ const AddProduct = () => {
   };
 
   const handleBase64 = (e) => {
-  var reader = new FileReader();
-  reader.readAsDataURL(e.target.files[0]);
-  reader.onload = () => {
-    setselectedImage(reader.result);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setselectedImage(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("Error:", error);
+    };
   };
-  reader.onerror = (error) => {
-    console.log("Error:", error);
-  };
-};
 
   const handleAllBase64 = (e) => {
     var allreader = new FileReader();
@@ -98,7 +101,7 @@ const AddProduct = () => {
       const responseData = await res.text(); // Read the response only once as text
 
       if (res.ok) {
-        alert("Data Successfully Added");
+        toast.success("Data Successfully Added");
         setAddProductData({
           title: "",
           description: "",
@@ -107,12 +110,12 @@ const AddProduct = () => {
         });
         console.log(responseData); // Log the response data
       } else {
-        alert("Failed to add data. Please check console for details.");
+        toast.error("Failed to add data. Please check console for details.");
         console.error(responseData); // Log the error response data
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("An error occurred. Please check the console for details.");
+      toast.error("An error occurred. Please check the console for details.");
     }
   };
   const addallProduct = async (event) => {
@@ -136,7 +139,7 @@ const AddProduct = () => {
       const responseallData = await response.text(); // Read the response only once as text
 
       if (response.ok) {
-        alert("Data Successfully Added");
+        toast.success("Data Successfully Added");
         setAllAddProductData({
           alltitle: "",
           alldescription: "",
@@ -145,18 +148,19 @@ const AddProduct = () => {
         });
         console.log(responseallData); // Log the response data
       } else {
-        alert("Failed to add data. Please check console for details.");
-        console.error("Error",responseallData); // Log the error response data
+        toast.error("Failed to add data. Please check console for details.");
+        console.error("Error", responseallData); // Log the error response data
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("An error occurred. Please check the console for details.");
+      toast.error("An error occurred. Please check the console for details.");
     }
   };
 
   const addBlogProduct = async (event) => {
     event.preventDefault();
-    const { blogTitle, blogDescription, blogPrice } = addBlogProductData;
+    const { blogTitle, blogDescription, blogPrice, blogCategory } =
+      addBlogProductData;
 
     try {
       const blogRes = await fetch("http://localhost:4000/addBlogProduct", {
@@ -169,35 +173,35 @@ const AddProduct = () => {
           blogDescription,
           blogPrice,
           blogSelectedImage,
+          blogCategory,
         }),
       });
 
-      const responseBlogData = await blogRes.text(); 
+      const responseBlogData = await blogRes.text();
 
       if (blogRes.ok) {
-        alert("Data Successfully Added");
+        toast.success("Data Successfully Added");
         setAddBlogProductData({
           blogTitle: "",
           blogDescription: "",
           blogPrice: "",
-          blogSelectedImage: (""),
+          blogCategory: "",
+          blogSelectedImage: "",
         });
-        console.log("Data==>",responseBlogData);
+        console.log("Data==>", responseBlogData);
       } else {
-        alert("Failed to add data. Please check console for details.");
-        console.error("Error",responseBlogData); 
+        toast.error("Failed to add data. Please check console for details.");
+        console.error("Error", responseBlogData);
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("An error occurred. Please check the console for details.");
+      toast.error("An error occurred. Please check the console for details.");
     }
   };
 
-
-  
-
   return (
     <div>
+      <AdminAppBar/>
       <div className="addProductContainer">
         <div className="addProduct">
           <div className="add">
@@ -286,7 +290,8 @@ const AddProduct = () => {
                   <div className="all-upload-container">
                     <label
                       htmlFor="allimage-upload"
-                      className="all-upload-label">
+                      className="all-upload-label"
+                    >
                       <p>Drag and drop an image or click here to upload</p>
                     </label>
                     <input
@@ -337,12 +342,20 @@ const AddProduct = () => {
                     value={addBlogProductData.blogPrice}
                     onChange={handleBlogChange}
                   />
+                  <input
+                    type="text"
+                    placeholder="Add blog Product Category"
+                    name="blogCategory"
+                    value={addBlogProductData.blogCategory}
+                    onChange={handleBlogChange}
+                  />
                 </div>
                 <div className="blog-upload-box">
                   <div className="blog-upload-container">
                     <label
                       htmlFor="blogimage-upload"
-                      className="blog-upload-label">
+                      className="blog-upload-label"
+                    >
                       <p>Drag and drop an image or click here to upload</p>
                     </label>
                     <input

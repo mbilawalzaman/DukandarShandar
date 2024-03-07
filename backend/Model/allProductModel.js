@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const addAllProductSchema = new mongoose.Schema({
   alltitle: {
     type: String,
-    requied: true,
+    required: true,
   },
   alldescription: {
     type: String,
-    requied: true,
+    required: true,
   },
   allprice: {
     type: Number,
-    requied: true,
+    required: true,
   },
   selectedAllImage: {
     type: String,
-    requied: true,
+    required: true,
   },
 });
 

@@ -1,0 +1,15 @@
+.viewProducts-Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.viewProducts {
+  width: 80%;
+}
+
+.viewProducts-heading {
+  margin-top: 2rem;
+  
+  
+}

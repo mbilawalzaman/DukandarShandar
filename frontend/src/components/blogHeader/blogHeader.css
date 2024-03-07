@@ -1,4 +1,4 @@
-.blog-header{
+.product-header{
     height: 250px;
     width: 100%;
     display: flex;
@@ -7,7 +7,27 @@
     background-color: #e8ecef;
     color: #58575c;
 }
-.blog-header p{
+.product-header p{
     font-family: "Poppins";
     font-size: 50px;
+}
+
+@media screen and (max-width: 625px){
+    .product-header p{
+        font-family: "Poppins";
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 384px){
+    .product-header p{
+        font-family: "Poppins";
+        font-size: 35px;
+    }
+}
+@media screen and (max-width: 346px){
+    .product-header p{
+        font-family: "Poppins";
+        font-size: 30px;
+    }
 }

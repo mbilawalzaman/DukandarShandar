@@ -17,8 +17,8 @@
         display: flex;
         justify-content: center;
         position: relative;
-        margin-bottom: 1rem;
-        
+        cursor: pointer;
+        margin-bottom: 1rem;   
     }
     .albox img{
         height: 250px;  
@@ -92,5 +92,22 @@
         background-color: #ffa203;
         cursor: pointer;
         border-radius: 4px;
+    }
+
+    @media screen and (max-width: 921px){
+        .albox{
+            background-color: white;
+            box-shadow: rgba(0, 0,  0, 0.1) 0px 4px 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 1rem;  
+        }
+        .albox img{
+            height: 100px;  
+            cursor: pointer;
+        }
     }
     

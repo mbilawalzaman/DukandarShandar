@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer">
           <div className="text-info-div">
-            <h1>Visit our Website and Enjoy Fast Shipping</h1>
+            <h1>Visit our Website Enjoy Shopping</h1>
             <p>
               Discover a world of amazing products and hassle-free shopping on
               our website.

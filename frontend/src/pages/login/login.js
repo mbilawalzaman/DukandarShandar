@@ -1,13 +1,16 @@
-import React from 'react'
-import Navbar from '../../components/navbar/Navbar'
+import React from "react";
+import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/footer";
+import LoginComp from "../../components/loginComp/loginComp";
 
 const Login = () => {
   return (
     <div>
-      <Navbar/>
-      <h1>This is login page</h1>
+      <Navbar />
+      <LoginComp />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

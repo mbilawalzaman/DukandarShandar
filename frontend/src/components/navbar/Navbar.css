@@ -51,5 +51,143 @@ a:hover {
     transition: all .1s ease-in-out;
     margin-left: 1rem;
     border-radius: 6px;
+}
 
+.logoutBtn{
+    padding: .5rem 1rem;
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    background-color: #febe4c;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+
+.logoutBtn:hover{
+    background-color: #f99f04;
+    color: white;
+    transition: all .1s ease-in-out;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+
+.mobilenavbar-container{
+    display: none;
+}
+
+.mobilenavbar{
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 70px;
+}
+
+
+.imageAndHamburger{
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageAndHamburger img{
+    height: 60px
+}
+
+.mobile-navbar-box-container{
+    display: flex;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    /* justify-content: right;
+    margin-right: -25rem; */
+}
+.mobile-navbar-box{
+    height: 500px;
+    width: 100vw;
+    z-index: 1;
+    background-color: white;
+    padding-bottom: 4rem;
+    display: none;
+}
+
+
+.mobile-links{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+
+
+}
+.mobile-links a{
+    font-family: "Poppins";
+    text-decoration: none;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    color: rgb(74, 70, 70);
+}
+.mobile-links a:hover{
+    color: #ffbe4a;
+    transition: all .5s ease-in-out;
+}
+
+.mobile-icons{
+    margin-top: 1.2rem;
+    margin-left: 1.5rem;
+}
+
+.mobile-authBtns{
+    margin-top: 1rem;
+
+}
+.mobile-authBtns button{
+    padding: .5rem 1rem;
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    background-color: #febe4c;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+
+.mobile-authBtns button:hover{
+    background-color: #f99f04;
+    color: white;
+    transition: all .1s ease-in-out;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+.mobile-logoutBtn{
+    padding: .5rem 1rem;
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    background-color: #febe4c;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+
+.mobile-logoutBtn:hover{
+    background-color: #f99f04;
+    color: white;
+    transition: all .1s ease-in-out;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+
+/* Responsive of navbar */
+
+@media screen and (max-width:740px){
+.navbar{
+    display: none;
+}
+.mobilenavbar-container{
+    display: block;
+}
 }
