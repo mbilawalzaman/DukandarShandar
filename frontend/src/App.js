@@ -28,6 +28,7 @@ import TotalEarnings from "./admin/totalEarnings/totalEarnings";
 import AdminLogin from "./admin/adminLogin/adminLogin";
 import ProtectedRoute from "./middleware/middleware";
 import ProtectedCheckout from "./middleware/checkoutmiddleware";
+import BlogSingleProduct from "./components/blogSingleProduct/blogSingleProduct";
 
 
 const App = () => {   
@@ -38,7 +39,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Blog />} />
-        <Route path="/shop" element={<Shop />} />
+        {/* <Route path="/shop" element={<Shop />} /> */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
         {/* <Route path="/checkout" element={<MainCheckout />} /> */}
@@ -48,16 +49,17 @@ const App = () => {
         <Route path="/orders" element={<Orders />} />
         <Route path="/singleproduct/:id" element={<SingleProduct />} />
         <Route path="/allproduct/:id" element={<AllProduct />} />
-        <Route path="/blogproduct/:id" element={<AllBlogProducts />} />
-        <Route path="/shopproduct/:id" element={<ShopSingleProduct />} />
+        {/* <Route path="/blogproduct/:id" element={<AllBlogProducts />} />     */}
+        <Route path="/blogproduct/:id" element={<BlogSingleProduct/>} />    
+        {/* <Route path="/shopproduct/:id" element={<ShopSingleProduct />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/adminlogin" element={<AdminLogin/>} />
         <Route path="/admin" element={<ProtectedRoute Component={Admin} />} />
-        <Route path="/checkout" element={<ProtectedCheckout Component={MainCheckout} />} />
+        
+        <Route path="/checkout" element={<ProtectedCheckout Component={MainCheckout} />}  > </Route>
 
-
-        {/* <Route path="/admin" element={<Admin/>} /> */}
+        // {/* <Route path="/admin" element={<Admin/>} /> */}
         <Route path="/admin/addproduct" element={<AddProduct/>} />
         <Route path="/admin/totalorders" element={<TotalOrders/>} />
         <Route path="/admin/totalearnings" element={<TotalEarnings/>} />

@@ -9,21 +9,36 @@ const BlogProducts = () => {
   const [filterData, setFilterData] = useState([]);
   const [blogProductData, setBlogProductData] = useState([]);
   const [categoryFilters, setCategoryFilters] = useState("");
+  const [searchInputValue, setSearchInputValue] = useState(""); // New search input
+
   const [loading, setloading] = useState(true);
   const navigate = useNavigate();
 
   const filterdCategoryData = blogProductData.filter((items) => {
-    return items.blogCategory
-      .toLowerCase()
-      .includes(categoryFilters.toLowerCase());
+    return items.blogCategory.toLowerCase().includes(categoryFilters.toLowerCase());
   });
 
   const filteredChange = (event) => {
     let userSelected = +event.target.value;
-    let filteredValues = blogProductData.filter(
-      (data) => data.blogPrice > userSelected,
-    );
+    let filteredValues = blogProductData.filter((data) => data.blogPrice > userSelected);
     setFilterData(filteredValues);
+  };
+
+  const filteredSearch = () => {
+    // Additional filter for search input
+    let searchFilteredValues;
+  
+    if (searchInputValue.trim() === "") {
+      // If the search input is empty, show all products
+      searchFilteredValues = blogProductData;
+    } else {
+      // Filter based on the search input value
+      searchFilteredValues = filterData.filter((data) =>
+        data.blogTitle.toLowerCase().includes(searchInputValue.toLowerCase())
+      );
+    }
+  
+    setFilterData(searchFilteredValues);
   };
 
   const getBlogData = async () => {
@@ -42,7 +57,7 @@ const BlogProducts = () => {
 
   const getBlogProductById = async (id) => {
     console.log(id);
-    navigate(`/shopproduct/${id}`);
+    navigate(`/blogproduct/${id}`);
   };
 
   useEffect(() => {
@@ -52,12 +67,15 @@ const BlogProducts = () => {
   useEffect(() => {
     // Update filterData when categoryFilters changes
     const filteredCategoryData = blogProductData.filter((items) => {
-      return items.blogCategory
-        .toLowerCase()
-        .includes(categoryFilters.toLowerCase());
+      return items.blogCategory.toLowerCase().includes(categoryFilters.toLowerCase());
     });
     setFilterData(filteredCategoryData);
   }, [categoryFilters, blogProductData]);
+
+  useEffect(() => {
+    // Trigger search filter when searchInputValue changes
+    filteredSearch();
+  }, [searchInputValue]);
 
   return (
     <>
@@ -72,7 +90,8 @@ const BlogProducts = () => {
               value={categoryFilters}
               onChange={(e) => {
                 setCategoryFilters(e.target.value);
-              }}>
+              }}
+            >
               <option value="">All Categories</option>
               {filterdCategoryData.map((element, index) => (
                 <option key={index} value={element.blogCategory}>
@@ -91,6 +110,23 @@ const BlogProducts = () => {
                 </option>
               ))}
             </select>
+          </div>
+          {/* New search input */}
+          <div>
+            <h2>SEARCH FILTER</h2>
+            <div className="main-search-box">
+              <div className="search-filter-container">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  id="search"
+                  autoComplete="off"
+                  onChange={(e) => {
+                    setSearchInputValue(e.target.value);
+                  }}
+                ></input>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -111,8 +147,9 @@ const BlogProducts = () => {
                       id="products"
                       value={categoryFilters}
                       onChange={(e) => {
-                        setCategoryFilters(e.target.value); //searchInputValue;
-                      }}>
+                        setCategoryFilters(e.target.value);
+                      }}
+                    >
                       <option value="">All Categories</option>
                       {filterdCategoryData.map((element, index) => (
                         <option key={index} value={element.blogCategory}>
@@ -124,16 +161,29 @@ const BlogProducts = () => {
                   <div className="pricefilter-container">
                     <label htmlFor="pricefilter">Price Filter:</label>
                     <br />
-                    <select
-                      name="pricefilter"
-                      id="price"
-                      onChange={filteredChange}>
+                    <select name="pricefilter" id="price" onChange={filteredChange}>
                       {priceFiltersData.map((ele, index) => (
                         <option key={index} value={ele}>
                           Greater than {ele}
                         </option>
                       ))}
                     </select>
+                  </div>
+                  <div className="pricefilter-container">
+                  <label htmlFor="pricefilter">Search Filter:</label>
+                    <div className="main-search-box">
+                      <div className="search-filter-container">
+                        <input
+                          type="text"
+                          placeholder="Search"
+                          id="search"
+                          autoComplete="off"
+                          onChange={(e) => {
+                            setSearchInputValue(e.target.value);
+                          }}
+                        ></input>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="blog-product-container">
@@ -142,9 +192,8 @@ const BlogProducts = () => {
                       <div key={products.blogProductId}>
                         <div
                           className="blog-product-boxes"
-                          onClick={() =>
-                            getBlogProductById(products._id)
-                          }>
+                          onClick={() => getBlogProductById(products._id)}
+                        >
                           <img src={products.blogSelectedImage} alt="" />
                           <div className="blog-title">
                             <p>

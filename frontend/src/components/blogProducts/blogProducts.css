@@ -88,6 +88,8 @@ border-radius: 8px;
     border-radius: 2px;
     border: 1px solid #202124;
 }
+
+
 .tablet-Mobie-screen-container{
     display: flex;
     justify-content: center;
@@ -125,6 +127,10 @@ border-radius: 8px;
     outline: none;
     border-radius: 2px;
     border: 1px solid #202124;
+}
+
+.search-filter-container input{
+    padding-left: .5rem;
 }
 
 /* Responsive filter box */
