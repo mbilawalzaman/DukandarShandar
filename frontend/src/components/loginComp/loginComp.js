@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./loginComp.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const LoginComp = () => {
@@ -80,6 +81,14 @@ const LoginComp = () => {
   const signUp = () => {
     navigate("/signup");
   };
+
+  useEffect(() => {
+    const isLoggedIn = window.localStorage.getItem("isLoggedIn");
+    if (isLoggedIn === "true") {
+      // User is already logged in, redirect to home page
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>

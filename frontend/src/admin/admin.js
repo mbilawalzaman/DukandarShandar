@@ -24,6 +24,7 @@ import dashLogo from "../assets/logo.jpg";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ViewProduct from "./viewProducts/viewProducts";
 import { Link } from "@mui/material";
+import Logout from "../components/logout/logout";
 import("./admin.css");
 
 const drawerWidth = 240;
@@ -119,8 +120,12 @@ export default function Admin() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
+            <Logout/>
+            <IconButton color="inherit" sx={{
+              marginLeft: "2rem"
+            }}>
               <Badge badgeContent={4} color="secondary">
+                
                 <NotificationsIcon sx={{ color: "black" }} />
               </Badge>
             </IconButton>

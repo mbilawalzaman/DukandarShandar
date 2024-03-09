@@ -1,0 +1,19 @@
+.logoutButton{
+    padding: .5rem 1rem;
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    background-color: #febe4c;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
+
+.logoutButton:hover{
+    background-color: #f99f04;
+    color: white;
+    transition: all .1s ease-in-out;
+    margin-left: 1rem;
+    border-radius: 6px;
+}
