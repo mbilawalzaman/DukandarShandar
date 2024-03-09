@@ -70,12 +70,17 @@ const BlogSingleProduct = () => {
       price: price,
       quantity: quantity,
     };
+<<<<<<< HEAD
   
     // Dispatch actions to update state
+=======
+    console.log("Actual data buy now: ", directly_buy_now_data);
+>>>>>>> 9a9ef4d607af6e0d3b97137af3fa7adea1cc8bed
     dispatch(add_To_CART(directly_buy_now_data));
     dispatch(cart_total_price(directly_buy_now_data.price));
     dispatch(qtt(quantity));
     dispatch(cartTotal(directly_buy_now_data.price * quantity));
+<<<<<<< HEAD
   
     // Navigate to /checkout after state updates
     navigate("/checkout");
@@ -83,6 +88,9 @@ const BlogSingleProduct = () => {
     console.log("Actual data buy now: ", directly_buy_now_data);
   };
   
+=======
+  };
+>>>>>>> 9a9ef4d607af6e0d3b97137af3fa7adea1cc8bed
 
   useEffect(() => {
     getBlogProductD();
