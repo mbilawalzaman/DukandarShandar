@@ -21,7 +21,6 @@ if(cookie){
   console.log('Decoded payload:', decodedPayload.role);
   if(decodedPayload.role!=='admin'){
        navigate('/login');
-  
   }
   }
   }, [ navigate]);

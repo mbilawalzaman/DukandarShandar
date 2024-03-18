@@ -28,6 +28,7 @@ const getAllProductD = async () => {
   });
   const allData = await fetchAllD.json();
   setAllData(allData)
+  localStorage.setItem('productId', params.id);
 }
 
 const addtocart = (image , title, price, quantity) => {

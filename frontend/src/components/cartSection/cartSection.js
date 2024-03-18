@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import "./cartSection.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { removeCartItem } from '../../features/cartSlice';
+import { cartTotal, removeCartItem } from '../../features/cartSlice';
 
 const CartSection = () => {
   const cart = useSelector((state) => state.cart.cartData)
@@ -18,8 +18,18 @@ const CartSection = () => {
 
 
   const deleteCartItem = (index) => {
-    dispatch(removeCartItem(index))
-  }
+    const removedItem = cart[index];
+    dispatch(removeCartItem(index));
+  
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    cartItems.splice(index, 1);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  
+    // Recalculate total price after removing the item
+    const newTotalPrice = cart_total_price - (removedItem.price * removedItem.quantity);
+    dispatch(cartTotal(newTotalPrice)); // Ensure cartTotal is correctly dispatched
+  };
+  
 
   const navigateTocheckout = () => {
     navigate("/checkout")

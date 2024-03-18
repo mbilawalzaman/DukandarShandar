@@ -11,6 +11,7 @@ const crypto = require("crypto");
 const Admin = require("../Model/adminLoginModel");
 const sessionModel = require("../Model/sessionModel");
 const { token } = require("morgan");
+const Order = require("../Model/orderModel");
 
 // Function to generate a secure key
 
@@ -573,11 +574,6 @@ router.post("/getsession", async (req, res) => {
   }
 });
 
-
-
-
-
-
 // delete session
 
 router.delete("/deletesession/:sessionId", async (req, res) => {
@@ -627,6 +623,36 @@ router.get("/adminlogin", async(req, res)=> {
     console.log({ message: "user not found" });
   }
 
+});
+
+router.post("/createOrder", async (req, res) => {
+  try {
+    const newOrder = new Order({
+      userId: req.body.userId,
+      customerName: req.body.customerName,
+      products: req.body.products,
+      totalAmount: req.body.totalAmount,
+      paymentMethod: req.body.paymentMethod,
+    });
+
+    const savedOrder = await newOrder.save();
+
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/getAllOrdersByUserId/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const orders = await Order.find({ userId });
+    res.status(200).json({ orders });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 module.exports = router;

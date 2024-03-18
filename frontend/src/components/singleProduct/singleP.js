@@ -29,6 +29,7 @@ const getProductD = async () => {
   console.log(fetchD)
   const sData = await fetchD.json();
   setSingleData(sData)
+  localStorage.setItem('productId', params.id);
 }
 
 const addtocart = (image , title, price, quantity) => {
@@ -66,8 +67,7 @@ const buyNow = (image , title, price, quantity) => {
 
 useEffect(() => {
   getProductD();
-  
-});
+}, []);
 
 
   return (

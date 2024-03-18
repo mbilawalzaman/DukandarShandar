@@ -1,4 +1,4 @@
-import  React ,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -8,30 +8,56 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CheckOutNavbar from '../check/checkoutNavbar/checkOutNavbar';
 import { Container, Paper } from '@mui/material';
-import "./review.css"
+import './review.css';
 import { toast } from 'react-toastify';
 
-
-
 export default function Review() {
-  
-const navigate = useNavigate()
-const [products, setProduts] = useState([])
-const cart = useSelector((state) => state.cart.cartData)
-const nameAndAddress = useSelector((state)=>state.checkout.checkOutNameAndAddress)
-const cart_total_price = useSelector((state) => state.cart.cartTotal)
-// const shippingOwner = useSelector((state)=>state.checkout.checkOutShippingData)
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const cart = useSelector((state) => state.cart.cartData);
+  const nameAndAddress = useSelector((state) => state.checkout.checkOutNameAndAddress);
+  const cart_total_price = useSelector((state) => state.cart.cartTotal);
 
+  const placeOrder = async () => {
+    try {
+      const orderData = {
+        customerName: nameAndAddress[0].firstName + ' ' + nameAndAddress[0].lastName,
+        products: cart.map((product) => ({
+          productId: product.productId,
+          quantity: product.quantity,
+        })),
+        totalAmount: cart_total_price,
+        paymentMethod: 'YourPaymentMethod',
+      };
 
+      console.log('Placing order with data:', orderData);
 
-const placeOrder = () => {
-  navigate("/checkout/placeorder")
-  toast.success("")
-}
+      const response = await fetch('http://localhost:4000/createOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
 
-useEffect (()=>{
-  setProduts(cart)
-},[])
+      if (response.ok) {
+        const savedOrder = await response.json();
+        console.log('Order placed successfully:', savedOrder);
+        navigate('/checkout/placeorder');
+        toast.success('Order placed successfully!');
+      } else {
+        console.error('Failed to place order:', response.statusText);
+        toast.error('Failed to place order. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      toast.error('Error placing order. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    setProducts(cart);
+  }, []);
   return (
     <>
     <CheckOutNavbar />
