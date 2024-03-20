@@ -3,14 +3,11 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: "config.env" });
 
-const DB = "mongodb+srv://bilawal:Xzc123tp@ecommerce.vifzmrh.mongodb.net/";
-// const DB = process.env.DATABASE;
+// const DB = "mongodb+srv://bilawal:Xzc123tp@ecommerce.vifzmrh.mongodb.net/";
+const DB = process.env.DATABASE;
 
 mongoose
-  .connect(DB, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  })
+  .connect(DB)
   .then(() => {
     console.log("Database is connected");
   })
