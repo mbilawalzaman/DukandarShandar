@@ -271,6 +271,17 @@ router.get("/getProductById/:id", async (req, res) => {
       return res.status(404).send({ message: "Product not found" });
     }
 
+// Calculate the rating
+const rating = singleProduct.rating / singleProduct.numOfRate;
+
+// Round the rating up to the nearest multiple of 0.5
+const roundedRating = Math.ceil(rating * 2) / 2;
+
+// Update the product's rating
+singleProduct.rating = roundedRating;
+
+console.log("Rating:", roundedRating);
+
     res.status(200).send(singleProduct);
   } catch (error) {
     console.error("Error when getting single Product:", error);
@@ -655,5 +666,53 @@ router.get("/getAllOrdersByUserId/:userId", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+// Update Product Rating by ID
+router.put("/updateRatingByProductId/:id", async (req, res) => {
+  try {
+    const productId = req.params.id.replace(/[^a-f0-9]/gi, "");
+    let { rating } = req.body;
+
+    // Validate if rating is provided
+    if (!rating || isNaN(rating) || rating < 0 || rating > 5) {
+      return res.status(400).json({ message: "Invalid rating value" });
+    }
+
+    // Round the rating up to the nearest multiple of 0.5
+    rating = Math.ceil(rating * 2) / 2;
+
+    // If the rating is greater than 5, set it to 5
+    // rating = Math.min(rating, 5);
+
+    // Find the product by ID
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+
+    // Update the product rating
+    const total= product.rating+rating;
+    product.rating = total;
+
+    const num=1;
+
+    const numOfRate=product.numOfRate+num;
+    product.numOfRate=numOfRate;
+
+    // Save the updated product to the database
+    await product.save();
+
+    res.status(200).json({ message: "Product rating updated successfully" });
+  } catch (error) {
+    console.error("Error updating product rating:", error);
+    res.status(500).json({
+      message: "Error updating product rating",
+      error: error.message,
+    });
+  }
+});
+
 
 module.exports = router;

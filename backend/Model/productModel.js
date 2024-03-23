@@ -17,6 +17,19 @@ const addProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rating: {
+    type: Number,
+    default:0
+  },
+  stock: {
+    type: Number,
+    default:0
+  },
+  numOfRate: {
+    type: Number,
+    default:0
+  },
+
 });
 
 const Product = mongoose.model("product", addProductSchema);
