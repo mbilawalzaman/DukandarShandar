@@ -20,29 +20,15 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-    },
-    {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'allproduct', // Reference to the All Product model
-        required: true,
-      },
-      quantity: {
+      productPrice:{
         type: Number,
         required: true,
       },
-    },
-    {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'product', // Reference to the Generic Product model
-        required: true,
-      },
-      quantity: {
+      totalPrice: {
         type: Number,
         required: true,
-      },
-    },
+      }
+    }
   ],
   orderDate: {
     type: Date,
