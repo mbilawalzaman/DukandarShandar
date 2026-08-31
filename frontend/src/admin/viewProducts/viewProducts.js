@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./viewProducts.css"
 
-const columns: Column[] = [
+const columns = [
   { id: "image", label: "Product Image", minWidth: 170 },
   {
     id: "product_title",
@@ -43,34 +43,6 @@ const columns: Column[] = [
   },
 ];
 
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973),
-  createData("France", "FR", 67022000, 640679),
-  createData("United Kingdom", "GB", 67545757, 242495),
-  createData("Russia", "RU", 146793744, 17098246),
-  createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767),
-];
-
 export default function ViewProducts() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -88,18 +60,16 @@ export default function ViewProducts() {
 
   const Navigate = useNavigate("");
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const res = await fetch("http://localhost:4000/getTopProducts", {
       method: "GET",
       headers: {
@@ -108,9 +78,9 @@ export default function ViewProducts() {
     });
     const productD = await res.json();
     setProductData(productD);
-  };
+  }, []);
 
-  const getAllData = async () => {
+  const getAllData = useCallback(async () => {
     const res = await fetch("http://localhost:4000/getAllproducts", {
       method: "GET",
       headers: {
@@ -119,14 +89,14 @@ export default function ViewProducts() {
     });
     const allproductD = await res.json();
     setAllProductData(allproductD);
-  };
+  }, []);
 
   const handleAllProductEdit = (id) => {
     Navigate(`/editallproduct/:${id}`);
     console.log(id);
   };
 
-  const getBlogData = async () => {
+  const getBlogData = useCallback(async () => {
     const res = await fetch("http://localhost:4000/getBlogProducts", {
       method: "GET",
       headers: {
@@ -135,7 +105,7 @@ export default function ViewProducts() {
     });
     const blogProductD = await res.json();
     setBlogProductData(blogProductD);
-  };
+  }, []);
 
   const handleBlogProductEdit = (id) => {
     Navigate(`/editblogproduct/:${id}`);
@@ -256,7 +226,7 @@ const handleConfirmDeleteBlog = async () => {
     getData();
     getAllData();
     getBlogData();
-  }, []);
+  }, [getData, getAllData, getBlogData]);
 
   return (
     <>
@@ -286,13 +256,13 @@ const handleConfirmDeleteBlog = async () => {
                           <TableCell>
                             <img
                               style={{ height: "60px", width: "80px" }}
-                              src={product.selectedImage}
+                              src={product.selectedImage || product.selectedAllImage || product.blogSelectedImage}
                               alt=""
                             />
                           </TableCell>
-                          <TableCell>{product.title}</TableCell>
-                          <TableCell>{product.description}</TableCell>
-                          <TableCell>{product.price}</TableCell>
+                          <TableCell>{product.title || product.alltitle || product.blogTitle}</TableCell>
+                          <TableCell>{product.description || product.alldescription || product.blogDescription}</TableCell>
+                          <TableCell>{product.price || product.allprice || product.blogPrice}</TableCell>
                           <TableCell>
                             <EditIcon
                               sx={{ fontSize: "30px", cursor: "pointer" }}
@@ -348,7 +318,7 @@ const handleConfirmDeleteBlog = async () => {
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={rows.length}
+              count={productData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -384,13 +354,13 @@ const handleConfirmDeleteBlog = async () => {
                           <TableCell>
                             <img
                               style={{ height: "60px", width: "80px" }}
-                              src={products.selectedAllImage}
+                              src={products.selectedAllImage || products.selectedImage || products.blogSelectedImage}
                               alt=""
                             />
                           </TableCell>
-                          <TableCell>{products.alltitle}</TableCell>
-                          <TableCell>{products.alldescription}</TableCell>
-                          <TableCell>{products.allprice}</TableCell>
+                          <TableCell>{products.alltitle || products.title || products.blogTitle}</TableCell>
+                          <TableCell>{products.alldescription || products.description || products.blogDescription}</TableCell>
+                          <TableCell>{products.allprice || products.price || products.blogPrice}</TableCell>
                           <TableCell>
                             <EditIcon
                               sx={{ fontSize: "30px", cursor: "pointer" }}
@@ -448,7 +418,7 @@ const handleConfirmDeleteBlog = async () => {
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={rows.length}
+              count={allproductData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
@@ -484,13 +454,13 @@ const handleConfirmDeleteBlog = async () => {
                           <TableCell>
                             <img
                               style={{ height: "60px", width: "80px" }}
-                              src={product.blogSelectedImage}
+                              src={product.blogSelectedImage || product.selectedImage || product.selectedAllImage}
                               alt=""
                             />
                           </TableCell>
-                          <TableCell>{product.blogTitle}</TableCell>
-                          <TableCell>{product.blogDescription}</TableCell>
-                          <TableCell>PKR {product.blogPrice}.00</TableCell>
+                          <TableCell>{product.blogTitle || product.title || product.alltitle}</TableCell>
+                          <TableCell>{product.blogDescription || product.description || product.alldescription}</TableCell>
+                          <TableCell>PKR {product.blogPrice || product.price || product.allprice}.00</TableCell>
                           <TableCell>
                             <EditIcon
                               sx={{ fontSize: "30px", cursor: "pointer" }}
@@ -548,7 +518,7 @@ const handleConfirmDeleteBlog = async () => {
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={rows.length}
+              count={blogProductData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import "./blogSingleProduct.css";
 import Rating from "@mui/material/Rating";
@@ -21,7 +21,7 @@ const BlogSingleProduct = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  const getBlogProductD = async () => {
+  const getBlogProductD = useCallback(async () => {
     const fetchBlogD = await fetch(
       `http://localhost:4000/getBlogProductById/${params.id}`,
       {
@@ -33,16 +33,15 @@ const BlogSingleProduct = () => {
     );
     const blogData = await fetchBlogD.json();
     setBlogData(blogData);
-  };
+    if (blogData.rating) {
+      setValue(blogData.rating);
+    }
+    localStorage.setItem("blogProductId", params.id);
+  }, [params.id]);
 
   const addtocart = (image, title, price, quantity) => {
     console.log("Actual qty: ", quantity);
-    let cData = {
-      image: image,
-      title: title,
-      price: price,
-      quantity: quantity,
-    };
+    let cData = { image: image, title: title, price: price, quantity: quantity };
     dispatch(add_To_CART(cData));
     dispatch(cart_total_price(cData.price));
     dispatch(qtt(quantity));
@@ -56,10 +55,10 @@ const BlogSingleProduct = () => {
   };
 
   const decrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    } else {
-      toast.error("Product Quantity cannot be less than One");
+    setQuantity(quantity - 1);
+    if (quantity === 1) {
+      setQuantity(1);
+      toast.error("Product Quantity can not be less than One");
     }
   };
 
@@ -70,23 +69,23 @@ const BlogSingleProduct = () => {
       price: price,
       quantity: quantity,
     };
-  
+
     // Dispatch actions to update state
     dispatch(add_To_CART(directly_buy_now_data));
     dispatch(cart_total_price(directly_buy_now_data.price));
     dispatch(qtt(quantity));
     dispatch(cartTotal(directly_buy_now_data.price * quantity));
-  
+
     // Navigate to /checkout after state updates
     navigate("/checkout");
-  
+
     console.log("Actual data buy now: ", directly_buy_now_data);
   };
   
 
   useEffect(() => {
     getBlogProductD();
-  }, []);
+  }, [getBlogProductD]);
 
   return (
     <>
@@ -99,20 +98,18 @@ const BlogSingleProduct = () => {
             <p className="blog-firstTitle"> {blogData.blogTitle}</p>
             <p className="blog-secondTitle">{blogData.blogTitle}</p>
             <Rating
-              name="blog-read-only"
+              name="blog-controlled-rating"
               id="blog-rating-star"
               value={value}
-              readOnly
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
             />
             <p className="blog-price-p">
               PKR{blogData.blogPrice}.00
               <sup className="blog-super-tag">per piece</sup>
             </p>
-            <p className="blog-desc-paragraph">
-              {blogData.blogDescription} Cute MINI Unicorn School Bag for girls
-              playgroup PICNIC BAG creative character designed backpack | Cute
-              stationary items for girls
-            </p>
+            <p className="blog-desc-paragraph">{blogData.blogDescription}</p>
             <div className="blog-quantity-div">
               <p>Quantity: </p>
               <button id="blog-minus_btn" onClick={decrement}>
@@ -133,8 +130,7 @@ const BlogSingleProduct = () => {
                     blogData.blogPrice,
                     quantity,
                   )
-                }
-              >
+                }>
                 BUY NOW
               </button>
               <button
@@ -146,8 +142,7 @@ const BlogSingleProduct = () => {
                     blogData.blogPrice,
                     quantity,
                   )
-                }
-              >
+                }>
                 ADD TO CART
               </button>
             </div>

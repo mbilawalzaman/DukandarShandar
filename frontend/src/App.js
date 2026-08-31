@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home/home";
 import About from "./pages/about/about";
 import Blog from "./pages/blog/blog";
@@ -56,6 +56,7 @@ const App = () => {
         <Route path="/editallproduct/:id" element={<EditallProduct/>} />
         <Route path="/editblogproduct/:id" element={<EditBlogProduct/>} />
         <Route path="/checkout" element={<ProtectedCheckout Component={MainCheckout} />}  > </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );

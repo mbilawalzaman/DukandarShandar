@@ -1,4 +1,4 @@
-import {React, useState,useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import "./renderAllProducts.css"
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -11,7 +11,7 @@ const RederAllProdutcs = () => {
   const navigate = useNavigate();
 
 
-  const getAllData = async () => {
+  const getAllData = useCallback(async () => {
     const res = await fetch("http://localhost:4000/getAllproducts", {
       method: "GET",
       headers:{
@@ -22,9 +22,8 @@ const RederAllProdutcs = () => {
     setAllProductData(allproductD);
     if (allproductD) {
       setloading(false);
-      
     }
-  } 
+  }, []); 
 
   const getAllProductsById = async (id) =>{
     console.log(id)
@@ -33,7 +32,7 @@ const RederAllProdutcs = () => {
   
   useEffect(() => {
     getAllData();
-  },[])
+  }, [getAllData]);
 
   return (
     <>
@@ -54,13 +53,13 @@ const RederAllProdutcs = () => {
           <Grid xs={2} sm={2} md={4} key={index} className="albox">
             <div className='overlay'>
                 <div className='overlay-info' onClick={() => {getAllProductsById(products._id)}}>
-                    <p> Title: {products.alltitle}</p>
-                    <p> Price: {products.allprice}</p>
-                    <p>Des: {products.alldescription}</p>
+                    <p> Title: {products.alltitle || products.title}</p>
+                    <p> Price: {products.allprice || products.price}</p>
+                    <p>Des: {products.alldescription || products.description}</p>
                 </div>
 
             </div>
-            <img src={products.selectedAllImage} alt=" "/>
+            <img src={products.selectedAllImage || products.selectedImage} alt=""/>
           </Grid>
         ))}
       </Grid>

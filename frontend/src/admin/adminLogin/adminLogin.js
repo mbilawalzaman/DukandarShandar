@@ -10,11 +10,6 @@ const AdminLogin = () => {
     password: "",
   });
 
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setloginState({ ...loginState, [name]: value });

@@ -53,7 +53,7 @@ const LoginComp = () => {
         console.log("data", data);
 
 
-        if (data && data.message !== "User not found") {
+        if (response.ok && data.data) {
           toast.success("Login successfully");
           window.localStorage.setItem("isLoggedIn", true);
           window.localStorage.setItem("token", data.data.token);
@@ -63,11 +63,13 @@ const LoginComp = () => {
             navigate("/");
           }
           console.log("User login successfully", data);
+        } else if (data && data.message === "Password not match") {
+          toast.error("Password does not match");
         } else if (data && data.message === "User not found") {
           toast.error("User not found. Redirecting to signup.");
           navigate("/signup");
         } else {
-          toast.error("Failed to login. Please try again.");
+          toast.error(data?.message || "Failed to login. Please try again.");
         }
       } else {
         toast.error("Please fill all the fields");

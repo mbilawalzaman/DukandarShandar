@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import {useDispatch } from 'react-redux'
 import "./singleP.css"
 import Rating from '@mui/material/Rating';
@@ -19,7 +19,7 @@ const SingleP = () => {
   const params = useParams();
 
 
-const getProductD = async () => {
+const getProductD = useCallback(async () => {
     const fetchD = await fetch(`http://localhost:4000/getProductById/${params.id}`, {
     method: "GET",
       headers:{
@@ -29,8 +29,11 @@ const getProductD = async () => {
   console.log(fetchD)
   const sData = await fetchD.json();
   setSingleData(sData)
+  if (sData.rating) {
+    setValue(sData.rating);
+  }
   localStorage.setItem('productId', params.id);
-}
+}, [params.id]);
 
 const addtocart = (image , title, price, quantity) => {
   console.log("Actual qty: ", quantity)
@@ -67,7 +70,7 @@ const buyNow = (image , title, price, quantity) => {
 
 useEffect(() => {
   getProductD();
-}, []);
+}, [getProductD]);
 
 
   return (
@@ -79,7 +82,14 @@ useEffect(() => {
         <div className="single-text-info-product">
           <p className='firstTitle'> {singleData.title}</p>
           <p className='secondTitle'>{singleData.title}</p>
-          <Rating name="read-only" id="rating-star" value={value} readOnly />
+          <Rating
+            name="controlled-rating"
+            id="rating-star"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+          />
           <p className='price-p'>PKR{singleData.price}.00<sup className='super-tag'>per piece</sup></p>
           <p className='desc-paragraph'>{singleData.description} Cute MINI Unicorn School Bag for girls playgroup PICNIC BAG creative character designed backpack | Cute stationary items for girls</p>
           <div className='quantity-div'>

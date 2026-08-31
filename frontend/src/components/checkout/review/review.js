@@ -57,7 +57,7 @@ export default function Review() {
 
   useEffect(() => {
     setProducts(cart);
-  }, []);
+  }, [cart]);
   return (
     <>
     <CheckOutNavbar />

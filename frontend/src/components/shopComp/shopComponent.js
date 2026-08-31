@@ -55,8 +55,7 @@ const ShopComponent = () => {
                   autoComplete="off"
                   onChange={(e) => {
                     setSearchInputValue(e.target.value); //searchInputValue;
-                  }}
-                ></input>
+                  }}></input>
               </div>
             </div>
           </div>
@@ -80,8 +79,7 @@ const ShopComponent = () => {
                         autoComplete="off"
                         onChange={(e) => {
                           setSearchInputValue(e.target.value);
-                        }}
-                      ></input>
+                        }}></input>
                     </div>
                   </div>
                 </div>
@@ -93,8 +91,7 @@ const ShopComponent = () => {
                           className="shop-product-boxes"
                           onClick={() => {
                             getBlogProductById(products._id);
-                          }}
-                        >
+                          }}>
                           <img src={products.blogSelectedImage} alt="" />
                           <div className="shop-title">
                             <p>

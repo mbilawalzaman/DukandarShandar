@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
   import "./editBlogProduct.css";
   import { useNavigate, useParams } from "react-router-dom";
   import { toast } from "react-toastify";
@@ -20,13 +20,13 @@
 
     const { id } = useParams();
 
-    const getData = async () => {
+    const getData = useCallback(async () => {
       const getSingleProduct = await fetch(
         `http://localhost:4000/getBlogProductById/${id}`,
       );
       const response = await getSingleProduct.json();
       setRetrieveData(response);
-    };
+    }, [id]);
 
     let name, value;
     const handleChange = (event) => {
@@ -83,7 +83,7 @@
 
     useEffect(() => {
       getData();
-    }, []);
+    }, [getData]);
     return (
       <div>
         <div className="addProductContainer">

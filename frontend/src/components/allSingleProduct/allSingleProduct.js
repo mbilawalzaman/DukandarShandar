@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import "./allSingleProduct.css"
 import Rating from '@mui/material/Rating';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,7 +19,7 @@ const AllSingleProduct = () => {
   const params = useParams();
 
 
-const getAllProductD = async () => {
+const getAllProductD = useCallback(async () => {
     const fetchAllD = await fetch(`http://localhost:4000/getAllProductById/${params.id}`, {
     method: "GET",
       headers:{
@@ -28,8 +28,11 @@ const getAllProductD = async () => {
   });
   const allData = await fetchAllD.json();
   setAllData(allData)
+  if (allData.rating) {
+    setValue(allData.rating);
+  }
   localStorage.setItem('productId', params.id);
-}
+}, [params.id]);
 
 const addtocart = (image , title, price, quantity) => {
   console.log("Actual qty: ", quantity)
@@ -67,7 +70,7 @@ const buyNow = (image , title, price, quantity) => {
 
 useEffect(() => {
   getAllProductD();
-});
+}, [getAllProductD]);
 
 
   return (
@@ -80,7 +83,14 @@ useEffect(() => {
         <div className="all-text-info-product">
           <p className='all-firstTitle'> {allData.alltitle}</p>
           <p className='all-secondTitle'>{allData.alltitle}</p>
-          <Rating name="read-only" id="rating-star" value={value} readOnly />
+          <Rating
+            name="all-controlled-rating"
+            id="rating-star"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+          />
           <p className='all-price-p'>PKR{allData.allprice}.00<sup className='super-tag'>per piece</sup></p>
           <p className='all-desc-paragraph'>{allData.alldescription} Cute MINI Unicorn School Bag for girls playgroup PICNIC BAG creative character designed backpack | Cute stationary items for girls</p>
           <div className='all-quantity-div'>
