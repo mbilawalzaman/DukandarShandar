@@ -9,6 +9,10 @@ const addProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
@@ -19,17 +23,16 @@ const addProductSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default:0
+    default: 0,
   },
   stock: {
     type: Number,
-    default:0
+    default: 0,
   },
   numOfRate: {
     type: Number,
-    default:0
+    default: 0,
   },
-
 });
 
 const Product = mongoose.model("product", addProductSchema);
